@@ -130,6 +130,12 @@ namespace Engine
         // Obtenemos el recorte del frame actual
         Rect sourceRect = anim.frames[currentFrameIndex];
 
+        if (targetSize.x != 0.0f && targetSize.y != 0.0f)
+        {
+            scale.x *= (targetSize.x / texture.size.x);
+            scale.y *= (targetSize.y / texture.size.y);
+        }
+
         // Llamamos a tu nueva sobrecarga maestra de Spritesheets
         renderer->SubmitSprite(layer, texture, sourceRect, position, rotation, scale, pivot, tint, flipX, flipY);
     }

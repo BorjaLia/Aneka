@@ -8,4 +8,4 @@
 
 #include <string>
 
-void AddObstacle(Engine::SceneBuilder& builder, std::string name, Engine::Texture2D tex, Engine::Vector2f pos, bool hurt);
+void AddObstacle(Engine::SceneBuilder& builder, std::string name, Engine::Texture2D tex, Engine::Vector2f pos, Engine::Vector2f size, bool hurt);

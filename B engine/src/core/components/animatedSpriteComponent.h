@@ -29,6 +29,8 @@ namespace Engine
         bool flipX = false;
         bool flipY = false;
 
+        Vector2f targetSize = { 0.0f, 0.0f };
+
     public:
         Texture2D texture;
         Color tint;
@@ -67,5 +69,8 @@ namespace Engine
         void SetFlipY(bool flip) { flipY = flip; }
         bool GetFlipX() const { return flipX; }
         bool GetFlipY() const { return flipY; }
+    
+        void SetTargetSize(const Vector2f& size) { targetSize = size; }
+        Vector2f GetTargetSize() const { return targetSize; }
     };
 }

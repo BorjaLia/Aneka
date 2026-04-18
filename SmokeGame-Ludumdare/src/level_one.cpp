@@ -25,8 +25,6 @@ public:
 
         Engine::Vector2f center = app.GetWindow()->GetSize() / 2;
 
-        std::cout << "center: " << center << '\n';
-
-        AddObstacle(builder, "obsacle_one", rm.GetTexture("res/sprites/plant2.png"), center - Engine::Vector2f(50.0f, 10.0f), false);
+        AddObstacle(builder, "obsacle_one", rm.GetTexture("res/sprites/plant2.png"), center - Engine::Vector2f(50.0f, 10.0f), Engine::Vector2f(200.0f,200.0f ), true);
     }
 };
