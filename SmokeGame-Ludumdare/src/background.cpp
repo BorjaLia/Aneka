@@ -3,7 +3,7 @@
 #include "../src/core/components/spriteComponent.h"
 #include "../src/core/components/scriptComponent.h"
 
-#include "backgroundScript.cpp"
+#include "backgroundScript.h"
 
 void AddBackground(Engine::SceneBuilder& builder)
 {

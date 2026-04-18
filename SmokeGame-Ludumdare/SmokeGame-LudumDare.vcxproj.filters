@@ -78,5 +78,8 @@
     <ClInclude Include="src\level_one.h">
       <Filter>Source Files\Prefabs\Scenes\Levels</Filter>
     </ClInclude>
+    <ClInclude Include="src\backgroundScript.h">
+      <Filter>Source Files\Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
