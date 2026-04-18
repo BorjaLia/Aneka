@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\core\application.cpp" />
+    <ClCompile Include="src\core\components\animatedSpriteComponent.cpp" />
+    <ClCompile Include="src\core\components\audioComponent.cpp" />
+    <ClCompile Include="src\core\components\buttonComponent.cpp" />
+    <ClCompile Include="src\core\components\cameraComponent.cpp" />
+    <ClCompile Include="src\core\components\colliderComponent.cpp" />
+    <ClCompile Include="src\core\components\component.cpp" />
+    <ClCompile Include="src\core\components\debugTrackingComponent.cpp" />
+    <ClCompile Include="src\core\components\followComponent.cpp" />
+    <ClCompile Include="src\core\components\physicsPlayerMovementComponent.cpp" />
+    <ClCompile Include="src\core\components\playerMovementComponent.cpp" />
+    <ClCompile Include="src\core\components\rigidBodyComponent.cpp" />
+    <ClCompile Include="src\core\components\scriptComponent.cpp" />
+    <ClCompile Include="src\core\components\spriteComponent.cpp" />
+    <ClCompile Include="src\core\components\textComponent.cpp" />
+    <ClCompile Include="src\core\components\transformComponent.cpp" />
+    <ClCompile Include="src\core\components\triggerAreaComponent.cpp" />
+    <ClCompile Include="src\core\components\uiAnchorComponent.cpp" />
+    <ClCompile Include="src\core\font.cpp" />
+    <ClCompile Include="src\core\memoryTracker.cpp" />
+    <ClCompile Include="src\core\node.cpp" />
+    <ClCompile Include="src\core\resourceManager.cpp" />
+    <ClCompile Include="src\core\sceneBuilder.cpp" />
+    <ClCompile Include="src\core\scenes\sceneManager.cpp" />
+    <ClCompile Include="src\core\time.cpp" />
+    <ClCompile Include="src\input\raylibInput.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\physics\physics.cpp" />
+    <ClCompile Include="src\physics\physicsSystem.cpp" />
+    <ClCompile Include="src\platform\rayLib\raylibAudio.cpp" />
+    <ClCompile Include="src\renderer\raylibRenderer.cpp" />
+    <ClCompile Include="src\window\raylibWindow.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\core\application.h" />
+    <ClInclude Include="src\core\component.h" />
+    <ClInclude Include="src\core\components\animatedSpriteComponent.h" />
+    <ClInclude Include="src\core\components\audioComponent.h" />
+    <ClInclude Include="src\core\components\audioListenerComponent.h" />
+    <ClInclude Include="src\core\components\buttonComponent.h" />
+    <ClInclude Include="src\core\components\cameraComponent.h" />
+    <ClInclude Include="src\core\components\colliderComponent.h" />
+    <ClInclude Include="src\core\components\debugTrackingComponent.h" />
+    <ClInclude Include="src\core\components\followComponent.h" />
+    <ClInclude Include="src\core\components\physicsPlayerMovementComponent.h" />
+    <ClInclude Include="src\core\components\playerMovementComponent.h" />
+    <ClInclude Include="src\core\components\rigidBodyComponent.h" />
+    <ClInclude Include="src\core\components\scriptComponent.h" />
+    <ClInclude Include="src\core\components\spriteComponent.h" />
+    <ClInclude Include="src\core\components\textComponent.h" />
+    <ClInclude Include="src\core\components\transformComponent.h" />
+    <ClInclude Include="src\core\components\triggerAreaComponent.h" />
+    <ClInclude Include="src\core\components\uiAnchorComponent.h" />
+    <ClInclude Include="src\core\debug.h" />
+    <ClInclude Include="src\core\events\animationEvents.h" />
+    <ClInclude Include="src\core\events\applicationEvents.h" />
+    <ClInclude Include="src\core\events\audioEvents.h" />
+    <ClInclude Include="src\core\events\event.h" />
+    <ClInclude Include="src\core\events\eventBus.h" />
+    <ClInclude Include="src\core\events\gameEvents.h" />
+    <ClInclude Include="src\core\events\inputEvents.h" />
+    <ClInclude Include="src\core\font.h" />
+    <ClInclude Include="src\core\IAudio.h" />
+    <ClInclude Include="src\core\IWindow.h" />
+    <ClInclude Include="src\core\math.h" />
+    <ClInclude Include="src\core\memoryTracker.h" />
+    <ClInclude Include="src\core\node.h" />
+    <ClInclude Include="src\core\resourceManager.h" />
+    <ClInclude Include="src\core\sceneBuilder.h" />
+    <ClInclude Include="src\core\scenes\scene.h" />
+    <ClInclude Include="src\core\scenes\sceneManager.h" />
+    <ClInclude Include="src\core\scripts\script.h" />
+    <ClInclude Include="src\core\time.h" />
+    <ClInclude Include="src\core\types.h" />
+    <ClInclude Include="src\input\IInput.h" />
+    <ClInclude Include="src\input\keyCodes.h" />
+    <ClInclude Include="src\input\raylibInput.h" />
+    <ClInclude Include="src\physics\ICollisionListener.h" />
+    <ClInclude Include="src\physics\physics.h" />
+    <ClInclude Include="src\physics\physicsSystem.h" />
+    <ClInclude Include="src\platform\rayLib\raylibAudio.h" />
+    <ClInclude Include="src\renderer\IRenderer.h" />
+    <ClInclude Include="src\renderer\raylibRenderer.h" />
+    <ClInclude Include="src\window\raylibWindow.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{b6f2703b-104c-47c6-8259-e20f1b23ec3d}</ProjectGuid>
+    <RootNamespace>Bengine</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)B engine\bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)B engine\obj\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)B engine\bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)B engine\obj\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)B engine\src;$(SolutionDir)B engine\lib\raylib-5.5_win64_msvc16\include;$(SolutionDir)B engine\lib\sigil-vc2015-win64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)src;$(SolutionDir)lib\raylib-5.5_win64_msvc16\lib;$(SolutionDir)lib\sigil-vc2015-win64\lib;%(AdditionalIncludeDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>raylib.lib;winmm.lib;sigil.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)B engine\src;$(SolutionDir)B engine\lib\raylib-5.5_win64_msvc16\include;$(SolutionDir)B engine\lib\sigil-vc2015-win64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)src;$(SolutionDir)lib\raylib-5.5_win64_msvc16\lib;$(SolutionDir)lib\sigil-vc2015-win64\lib;$(SolutionDir)lib\BorjaLib\lib\Release;%(AdditionalIncludeDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>raylib.lib;winmm.lib;sigil.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy "$(SolutionDir)lib\sigil-vc2015-win64\lib\*.dll" "$(OutDir)" /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
