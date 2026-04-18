@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\background.cpp" />
+    <ClCompile Include="src\backgroundScript.cpp" />
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\level_one.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -32,6 +34,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\background.h" />
     <ClInclude Include="src\game.h" />
     <ClInclude Include="src\player.h" />
     <ClInclude Include="src\prefabs\brother.h" />

@@ -9,6 +9,8 @@
 #include "core/components/uiAnchorComponent.h"
 #include "core/components/textComponent.h"
 
+#include "background.h"
+
 class MainMenuScene : public Engine::IScene
 {
 public:
@@ -18,6 +20,8 @@ public:
         auto& rm = *app.GetResourceManager();
 
         Engine::Font* font = rm.GetFont("res/fonts/ReemKufiFunRegular.ttf", 48);
+
+        AddBackground(builder);
 
         /*Engine::Node* camNode = */builder.CreateNode("MenuCamera");
 

@@ -10,7 +10,7 @@ int game()
     if (!app.Initialize({ 1600, 900 }, "Smoke Game")) return -1;
 
 
-    app.GetSceneManager().LoadScene(std::make_unique<LevelOne>());
+    app.GetSceneManager().LoadScene(std::make_unique<MainMenuScene>());
 
     app.Run();
     app.Shutdown();
