@@ -38,6 +38,8 @@
   <ItemGroup>
     <ClInclude Include="src\background.h" />
     <ClInclude Include="src\game.h" />
+    <ClInclude Include="src\level_one.h" />
+    <ClInclude Include="src\main_menu_scene.h" />
     <ClInclude Include="src\player.h" />
     <ClInclude Include="src\prefabs\brother.h" />
     <ClInclude Include="src\prefabs\level_prefab.h" />

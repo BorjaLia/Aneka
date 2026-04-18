@@ -8,14 +8,17 @@
     <Filter Include="Source Files\Game">
       <UniqueIdentifier>{b0ff3531-cd50-4124-bc01-1e10ebd712c0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Scenes">
-      <UniqueIdentifier>{250b92ab-204e-4577-9282-c16c61a16576}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Scenes\Levels">
-      <UniqueIdentifier>{86325347-eb60-42eb-b487-20bb771aad3d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Prefabs">
       <UniqueIdentifier>{6d9d7691-ede7-433a-915f-fff0dcaf26bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scripts">
+      <UniqueIdentifier>{e9a226b9-2d50-4572-b3db-7f917b9f47fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Prefabs\Scenes">
+      <UniqueIdentifier>{250b92ab-204e-4577-9282-c16c61a16576}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Prefabs\Scenes\Levels">
+      <UniqueIdentifier>{86325347-eb60-42eb-b487-20bb771aad3d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -26,10 +29,10 @@
       <Filter>Source Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="src\main_menu_scene.cpp">
-      <Filter>Source Files\Scenes</Filter>
+      <Filter>Source Files\Prefabs\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="src\level_one.cpp">
-      <Filter>Source Files\Scenes\Levels</Filter>
+      <Filter>Source Files\Prefabs\Scenes\Levels</Filter>
     </ClCompile>
     <ClCompile Include="src\player.cpp">
       <Filter>Source Files\Prefabs</Filter>
@@ -41,6 +44,12 @@
       <Filter>Source Files\Prefabs</Filter>
     </ClCompile>
     <ClCompile Include="src\prefabs\obstacle_prefab.cpp">
+      <Filter>Source Files\Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\backgroundScript.cpp">
+      <Filter>Source Files\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="src\background.cpp">
       <Filter>Source Files\Prefabs</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,6 +68,15 @@
     </ClInclude>
     <ClInclude Include="src\prefabs\obstacle_prefab.h">
       <Filter>Source Files\Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\background.h">
+      <Filter>Source Files\Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\main_menu_scene.h">
+      <Filter>Source Files\Prefabs\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\level_one.h">
+      <Filter>Source Files\Prefabs\Scenes\Levels</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
