@@ -1,8 +1,8 @@
 #include "game.h"
 
 #include "core/application.h"
-#include "main_menu_scene.cpp"
-#include "level_one.cpp"
+#include "main_menu_scene.h"
+#include "level_one.h"
 
 int game()
 {
