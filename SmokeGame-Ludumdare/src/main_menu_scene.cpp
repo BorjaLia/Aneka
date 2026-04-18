@@ -17,13 +17,13 @@ public:
         auto& app = Engine::Application::Get();
         auto& rm = *app.GetResourceManager();
 
-        Engine::Font* font = rm.GetFont("res/fonts/ReemKufiFunRegular.ttf", 72);
+        Engine::Font* font = rm.GetFont("res/fonts/ReemKufiFunRegular.ttf", 48);
 
         /*Engine::Node* camNode = */builder.CreateNode("MenuCamera");
 
         {
             Engine::Node* node = builder.CreateNode("TitleText");
-            node->AddComponent<Engine::UIAnchorComponent>(Engine::AnchorPreset::TopCenter, Engine::Vector2f(0.0f, -150.0f));
+            node->AddComponent<Engine::UIAnchorComponent>(Engine::AnchorPreset::TopCenter, Engine::Vector2f(0.0f, 150.0f));
             Engine::TextComponent* txt = node->AddComponent<Engine::TextComponent>(
                 font, "SmokeGame", 72.0f,
                 Engine::Color{ 255, 255, 255, 255 },

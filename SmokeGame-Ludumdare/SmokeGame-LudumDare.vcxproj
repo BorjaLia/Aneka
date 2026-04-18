@@ -20,8 +20,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\game.cpp" />
+    <ClCompile Include="src\level_one.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\main_menu_scene.cpp" />
+    <ClCompile Include="src\player.cpp" />
+    <ClCompile Include="src\prefabs\brother.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\B engine\B engine.vcxproj">
@@ -30,6 +33,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game.h" />
+    <ClInclude Include="src\player.h" />
+    <ClInclude Include="src\prefabs\brother.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

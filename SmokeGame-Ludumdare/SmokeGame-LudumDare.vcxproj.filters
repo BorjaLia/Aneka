@@ -11,6 +11,12 @@
     <Filter Include="Source Files\Scenes">
       <UniqueIdentifier>{250b92ab-204e-4577-9282-c16c61a16576}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Scenes\Levels">
+      <UniqueIdentifier>{86325347-eb60-42eb-b487-20bb771aad3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Prefabs">
+      <UniqueIdentifier>{6d9d7691-ede7-433a-915f-fff0dcaf26bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -22,10 +28,25 @@
     <ClCompile Include="src\main_menu_scene.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="src\level_one.cpp">
+      <Filter>Source Files\Scenes\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="src\player.cpp">
+      <Filter>Source Files\Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prefabs\brother.cpp">
+      <Filter>Source Files\Prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game.h">
       <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\player.h">
+      <Filter>Source Files\Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\prefabs\brother.h">
+      <Filter>Source Files\Prefabs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

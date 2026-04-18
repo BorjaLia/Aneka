@@ -227,7 +227,7 @@
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)lib\sigil-vc2015-win64\lib\*.dll" "$(OutDir)" /y</Command>
+      <Command>copy "$(SolutionDir)B engine\lib\sigil-vc2015-win64\lib\*.dll" "$(OutDir)" /y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
