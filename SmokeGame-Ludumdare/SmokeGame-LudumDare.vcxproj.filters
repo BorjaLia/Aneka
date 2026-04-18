@@ -37,6 +37,12 @@
     <ClCompile Include="src\prefabs\brother.cpp">
       <Filter>Source Files\Prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="src\prefabs\level_prefab.cpp">
+      <Filter>Source Files\Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prefabs\obstacle_prefab.cpp">
+      <Filter>Source Files\Prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game.h">
@@ -46,6 +52,12 @@
       <Filter>Source Files\Prefabs</Filter>
     </ClInclude>
     <ClInclude Include="src\prefabs\brother.h">
+      <Filter>Source Files\Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\prefabs\level_prefab.h">
+      <Filter>Source Files\Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\prefabs\obstacle_prefab.h">
       <Filter>Source Files\Prefabs</Filter>
     </ClInclude>
   </ItemGroup>

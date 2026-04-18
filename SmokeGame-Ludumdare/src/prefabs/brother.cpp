@@ -14,7 +14,6 @@ void AddBrother(Engine::SceneBuilder& builder, Engine::Vector2f pos)
 
     brother->transform->SetPosition(pos);
 
-    brother->AddComponent<Engine::SpriteComponent>(playerTex);
-    brother->AddComponent<Engine::SpriteComponent>(playerTex);
+    brother->AddComponent<Engine::SpriteComponent>(playerTex,Engine::Pivot::Center);
     brother->AddComponent<Engine::ColliderComponent>();
 }

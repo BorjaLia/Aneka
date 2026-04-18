@@ -25,6 +25,8 @@
     <ClCompile Include="src\main_menu_scene.cpp" />
     <ClCompile Include="src\player.cpp" />
     <ClCompile Include="src\prefabs\brother.cpp" />
+    <ClCompile Include="src\prefabs\level_prefab.cpp" />
+    <ClCompile Include="src\prefabs\obstacle_prefab.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\B engine\B engine.vcxproj">
@@ -35,6 +37,8 @@
     <ClInclude Include="src\game.h" />
     <ClInclude Include="src\player.h" />
     <ClInclude Include="src\prefabs\brother.h" />
+    <ClInclude Include="src\prefabs\level_prefab.h" />
+    <ClInclude Include="src\prefabs\obstacle_prefab.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
