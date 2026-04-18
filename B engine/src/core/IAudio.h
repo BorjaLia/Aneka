@@ -38,6 +38,8 @@ namespace Engine
         /// Stop all currently playing instances of this clip.
         virtual void Stop(AudioClip clip) = 0;
 
+        virtual bool IsPlaying(AudioClip clip) = 0;
+
         /// Pause / resume all audio.
         virtual void SetMasterMuted(bool muted) = 0;
 

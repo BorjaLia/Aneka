@@ -2,6 +2,7 @@
 
 #include "../src/core/components/spriteComponent.h"
 #include "../src/core/components/colliderComponent.h"
+#include "../src/core/components/audioListenerComponent.h"
 
 #include "brother.h"
 #include "player.h"
@@ -11,12 +12,13 @@ void StartLevel(Engine::SceneBuilder& builder)
     auto& app = Engine::Application::Get();
     //auto& rm = *app.GetResourceManager();
 
-    Engine::Node* camera = builder.CreateNode("Camera");
+    Engine::Node* node = builder.CreateNode("MainView");
 
-    /*Engine::CameraComponent* cam = */camera->AddComponent<Engine::CameraComponent>(app.GetInput());
+    /*Engine::CameraComponent* cam = */node->AddComponent<Engine::CameraComponent>(app.GetInput());
 
     Engine::Vector2f center = app.GetWindow()->GetSize();
-    camera->transform->SetPosition(center/2.0f);
+    node->transform->SetPosition(center/2.0f);
+
 
     Engine::Node* floor = builder.CreateNode("Floor");
 

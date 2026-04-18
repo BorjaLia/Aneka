@@ -15,13 +15,15 @@ namespace Engine
         /// @param positional   If true, volume is attenuated by distance to the listener.
         /// @param maxDistance  World-space distance at which the sound becomes inaudible (positional only).
         AudioComponent(AudioClip clip,
-                       bool       playOnStart  = false,
-                       bool       positional   = false,
-                       float      maxDistance  = 500.0f);
+            bool       playOnStart = false,
+            bool       loop = false,
+            bool       positional = false,
+            float      maxDistance = 500.0f);
 
         ~AudioComponent() override;
 
         void Start()  override;
+        void Update(float deltaTime) override;
 
         /// Plays the clip with the component's current params.
         void Play();
@@ -31,6 +33,10 @@ namespace Engine
 
         void SetClip(AudioClip newClip)              { clip = newClip; }
         void SetParams(AudioPlayParams p)         { params = p; }
+
+        void SetLoop(bool l) { params.loop = l; }
+        bool GetLoop() const { return params.loop; }
+
         void SetPositional(bool p)               { positional = p; }
         void SetMaxDistance(float d)             { maxDistance = d; }
 
@@ -45,6 +51,8 @@ namespace Engine
         bool            playOnStart  = false;
         bool            positional   = false;
         float           maxDistance  = 500.0f;
+
+        bool isPlaying = false;
 
         uint32_t playEventId = 0;
         uint32_t stopEventId = 0;
