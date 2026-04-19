@@ -10,7 +10,6 @@ void GameManagerScript::GetSmokeButtons()
 	Engine::Node* inventory = ui->FindChild("Inventory");;
 	if (!inventory) return;
 
-
 	yellowSmoke = inventory->FindChild("YellowDust")->GetComponent<Engine::ButtonComponent>();
 	greenSmoke = inventory->FindChild("GreenDust")->GetComponent<Engine::ButtonComponent>();
 	redSmoke = inventory->FindChild("RedDust")->GetComponent<Engine::ButtonComponent>();
@@ -32,8 +31,14 @@ void GameManagerScript::OnStart()
 	MoveEvent moveEvent(testNode, MoveType::Jump);
 	Engine::Application::Get().GetEventBus().Publish(moveEvent);
 }
-GameManagerScript::GameManagerScript()
+
+void GameManagerScript::OnUpdate(float)
 {
+	MoveEvent moveEvent();
+	if (brother)
+	{
+		
+	}
 }
 //
 //enum class Smokes

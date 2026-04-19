@@ -37,14 +37,16 @@ void StartLevel(Engine::SceneBuilder& builder)
 
 	//floor->AddComponent<Engine::SpriteComponent>(rm.GetTexture("res/sprites/plant2.png"));
 
-    AddGrid(builder, Engine::Vector2f(100.f,100.f), Engine::Vector2f(150.f,150.f), Engine::Vector2f(1,1));
-    AddBrother(builder,Engine::Vector2f(250.0f,450.0f));
+    
+    std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> gridBody = AddGrid(builder, Engine::Vector2f(300.f, 300.f), Engine::Vector2f(150.f, 150.f), Engine::Vector2f(1, 1));
+   
+    AddBrother(builder,gridBody[0][0]->transform->GetGlobalPosition());
     AddPlayer(builder,Engine::Vector2f(center .x - 250.0f,250.0f));
 
     AddCursor(builder, cam);
 
     Engine::Node* gameManager = builder.CreateNode("GameManager");
-    /*Engine::ScriptComponent* scriptComponent = */gameManager->AddComponent<Engine::ScriptComponent>(new GameManagerScript);
+    /*Engine::ScriptComponent* scriptComponent = */gameManager->AddComponent<Engine::ScriptComponent>(new GameManagerScript(gridBody));
     //GameManagerScript* managerScript = scriptComponent->GetScript<GameManagerScript>();
 
 }

@@ -17,3 +17,4 @@ GridScript::GridScript(std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> body
 	this->dist = dist;
 	this->iter = iter;
 }
+
