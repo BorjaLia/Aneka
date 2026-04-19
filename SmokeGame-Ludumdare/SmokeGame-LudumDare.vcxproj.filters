@@ -133,7 +133,10 @@
     <ClInclude Include="src\events\move_event.h">
       <Filter>Source\Event</Filter>
     </ClInclude>
-    <ClInclude Include="src\events\action_queue_event.h">
+    <ClInclude Include="src\scripts\obstacle_script.h">
+      <Filter>Source\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="src\events\hit_player.h">
       <Filter>Source\Event</Filter>
     </ClInclude>
     <ClInclude Include="src\smokes.h">

@@ -25,5 +25,5 @@ void LevelOne::Build(Engine::SceneBuilder& builder)
 
 	Engine::Vector2f center = app.GetWindow()->GetSize() / 2;
 
-	AddObstacle(builder, "obsacle_one", rm.GetTexture("res/sprites/plant2.png"), center - Engine::Vector2f(50.0f, 10.0f), Engine::Vector2f(200.0f, 200.0f), true);
+	AddObstacle(builder, "obsacle_one", rm.GetTexture("res/sprites/plant2.png"), center - Engine::Vector2f(600.0f, 100.0f), Engine::Vector2f(200.0f, 200.0f), true);
 }

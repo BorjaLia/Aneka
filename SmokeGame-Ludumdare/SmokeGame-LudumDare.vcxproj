@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\events\hit_player.cpp" />
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\prefabs\background_prefab.cpp" />
@@ -47,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\events\action_queue_event.h" />
+    <ClInclude Include="src\events\hit_player.h" />
     <ClInclude Include="src\events\move_event.h" />
     <ClInclude Include="src\game.h" />
     <ClInclude Include="src\prefabs\background_prefab.h" />
