@@ -1,7 +1,5 @@
 #include "brother_script.h"
 
-#include "events/move_event.h"
-
 void BrotherScript::OnStart()
 {
 	eventBus = &Engine::Application::Get().GetEventBus();
@@ -9,7 +7,7 @@ void BrotherScript::OnStart()
 	listenerId = eventBus->Subscribe<MoveEvent>([this](MoveEvent& e)
 		{
 			//Move();
-
+			DoAction(e.GetTarget(), e.GetMoveType());
 			ENGINE_LOG("Brother recieved event");
 		});
 
@@ -23,9 +21,6 @@ void BrotherScript::OnStart()
 
 void BrotherScript::OnUpdate(float)
 {
-	dir = Engine::Vector2f(1.f, 0.f);
-	//Move(delta);
-	PlayAnim();
 }
 
 void BrotherScript::OnDestroy()
@@ -36,61 +31,61 @@ void BrotherScript::OnDestroy()
 	}
 }
 
-void BrotherScript::Move(float delta)
-{
-	if (state == STATE::WALK)
-	{
-		trs->SetPosition(trs->GetPosition() + dir * (speed * delta));
-	}
-}
+//void BrotherScript::Move(float delta)
+//{
+//	if (state == State::Walk)
+//	{
+//		trs->SetPosition(trs->GetPosition() + dir * (speed * delta));
+//	}
+//}
 
-void BrotherScript::DoAction(Engine::Node* end, STATE state)
+void BrotherScript::DoAction(Engine::Node* target, MoveType move)
 {
-	this->state = state;
-	if (this->state != STATE::CROUCH && this->state != STATE::WAIT)
-	{
-		followComp->SetTarget(end);
-		followComp->SetStarted(true);
-	}
-	else
-	{
-		followComp->SetStarted(false);
-	}
-}
+	followComp->SetTarget(target);
 
-void BrotherScript::PlayAnim()
-{
-	if (dir.x != 0.f || dir.y != 0.f)
+	switch (move)
 	{
-		if (dir.y >= 0.f)
-		{
-			state = STATE::JUMP;
-		}
-		else if (dir.y < 0.f)
-		{
-			state = STATE::AIR;
-		}
-		else if (state != STATE::CROUCH)
-		{
-			state = STATE::WALK;
-		}
-	}
-
-	if (!animation) return;
-	switch (state)
-	{
-	case BrotherScript::STATE::IDLE:
+	case MoveType::Idle:
+		animation->Play("Idle");
+		animation->speedMultiplier = 1.0f;
 		break;
-	case BrotherScript::STATE::WALK:
+	case MoveType::Walk:
 		animation->Play("Walk");
+		animation->speedMultiplier = 1.0f;
+		//animation->speedMultiplier = (this->speed / this->baseSpeed);
 		break;
-	case BrotherScript::STATE::JUMP:
+	case MoveType::Jump:
+		animation->Play("Jump");
+		animation->speedMultiplier = 1.0f;
 		break;
-	case BrotherScript::STATE::AIR:
-		break;
-	case BrotherScript::STATE::CROUCH:
+	case MoveType::Crouch:
+		animation->Play("Crouch");
+		animation->speedMultiplier = 1.0f;
 		break;
 	default:
 		break;
 	}
+
 }
+
+//void BrotherScript::PlayAnim()
+//{
+//
+//	if (!animation) return;
+//	switch (state)
+//	{
+//	case BrotherScript::State::Idle:
+//		break;
+//	case BrotherScript::State::Walk:
+//		animation->Play("Walk");
+//		break;
+//	case BrotherScript::State::Jump:
+//		break;
+//	case BrotherScript::State::Air:
+//		break;
+//	case BrotherScript::State::Crouch:
+//		break;
+//	default:
+//		break;
+//	}
+//}
