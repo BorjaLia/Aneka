@@ -42,6 +42,8 @@ private:
 	void Walk();
 	void Jump();
 	void Crouch();
+	void Fall();
+	void Death();
 
 	void DoAction(Engine::Node* target, MoveType move);
 public:

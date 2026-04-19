@@ -2,9 +2,9 @@
 
 void GridScript::OnStart()
 {
-	for (int i = 0; i < iter.y; i++)
+	for (int i = 0; i < iter.x; i++)
 	{
-		for (int j = 0; j < iter.x; j++)
+		for (int j = 0; j < iter.y; j++)
 		{
 			body[i][j]->transform->SetPosition(Engine::Vector2f(dist.x * i, dist.y * j));
 		}
