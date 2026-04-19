@@ -55,6 +55,6 @@ void StartLevel(Engine::SceneBuilder& builder)
     /*Engine::ScriptComponent* scriptComponent = */gameManager->AddComponent<Engine::ScriptComponent>(new GameManagerScript(gridBody, gridIter));
     //GameManagerScript* managerScript = scriptComponent->GetScript<GameManagerScript>();
 
-    AddObstacle(props, builder, "o1", rm.GetTexture("res/sprites/plant2.png"), Engine::Vector2f(0.f, 0.f), Engine::Vector2f(200.0f, 200.0f), true);
+    AddObstacle(props, builder, "o1", rm.GetTexture("res/sprites/cactus.png"), Engine::Vector2f(0.f, 0.f), Engine::Vector2f(150.0f, 150.0f), true);
 }
 
