@@ -62,7 +62,7 @@ void BrotherScript::OnUpdate(float)
 	if ((target->GetGlobalPosition() - owner->transform->GetGlobalPosition()).MagnitudeSquared() <= 5.0f)
 	{
 		Idle();
-		FinishMoveEvent finishMoveEvent;
+		FinishMoveEvent finishMoveEvent(owner->transform->GetGlobalPosition());
 		ENGINE_LOG("Brother publishesd finished move event");
 		followComp->SetMode(Engine::FollowMode::Linear);
 		moving = false;

@@ -113,21 +113,12 @@ void GameManagerScript::OnStart()
 	MoveEvent moveEvent(gridBody[0][0], MoveType::Walk);
 	Engine::Application::Get().GetEventBus().Publish(moveEvent);
 
-	moveQueue.push(SmokeType::Jump);
+	//moveQueue.push(SmokeType::Jump);
 }
-
-//	MoveEvent moveEvent(gridBody[0][0], MoveType::Walk);
-//	//brotherGridX = 0;
-//	//brotherGridY = 0;
-//
-//	moveQueue.push(SmokeType::Jump);
-//
-//	Engine::Application::Get().GetEventBus().Publish(moveEvent);
-//}
 
 void GameManagerScript::OnUpdate(float)
 {
-	for (int i = 0; i < moveQueue.size(); i++)
+	/*for (int i = 0; i < moveQueue.size(); i++)
 	{
 		SmokeType currentMove = moveQueue.front();
 		moveQueue.pop();
@@ -164,7 +155,7 @@ void GameManagerScript::OnUpdate(float)
 			MoveEvent moveEvent(gridNodeTowards, MoveType::Walk);
 			Engine::Application::Get().GetEventBus().Publish(moveEvent);
 		}
-	}
+	}*/
 }
 
 void GameManagerScript::ReceiveMove(SmokeType move)

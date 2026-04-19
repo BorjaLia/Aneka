@@ -44,6 +44,7 @@ private:
 	void GetSmokeButtons();
 
 	std::queue<SmokeType> moveQueue;
+
 	void OnStart() override;
 	void OnUpdate(float) override;
 	void ReceiveMove(SmokeType move);
