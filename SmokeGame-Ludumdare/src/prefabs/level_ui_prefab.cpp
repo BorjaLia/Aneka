@@ -6,6 +6,9 @@
 #include "core/components/textComponent.h"
 #include "core/components/uiAnchorComponent.h"
 #include "core/components/buttonComponent.h"
+#include "core/components/scriptComponent.h"
+
+#include "scripts/ui_inventory_script.h"
 
 #include "scenes/main_menu_scene.h"
 
@@ -102,4 +105,50 @@ void AddLevelUI(Engine::SceneBuilder& builder)
 		{
 			ENGINE_LOG("reset selected");
 		});
+
+	Engine::Node* powders = builder.CreateChildNode(movementInventoryNode,"Powders");
+	
+	powders->AddComponent<Engine::ScriptComponent>(new UiPowdersScript());
+	
+	{
+		Engine::Node* currentPowder = builder.CreateChildNode(powders, "SlotOne");
+		currentPowder->AddComponent<Engine::SpriteComponent>(rm.GetTexture(""));
+	}
+	
+	{
+		Engine::Node* currentPowder = builder.CreateChildNode(powders, "SlotTwo");
+		currentPowder->AddComponent<Engine::SpriteComponent>(rm.GetTexture(""));
+	}
+	{
+		Engine::Node* currentPowder = builder.CreateChildNode(powders, "SlotThree");
+			currentPowder->AddComponent<Engine::SpriteComponent>(rm.GetTexture(""));
+	}
+	{
+		Engine::Node* currentPowder = builder.CreateChildNode(powders, "SlotFour");
+			currentPowder->AddComponent<Engine::SpriteComponent>(rm.GetTexture(""));
+	}
+	{
+		Engine::Node* currentPowder = builder.CreateChildNode(powders, "SlotFive");
+		currentPowder->AddComponent<Engine::SpriteComponent>(rm.GetTexture(""));
+	}
+	{
+		Engine::Node* currentPowder = builder.CreateChildNode(powders, "SlotSix");
+			currentPowder->AddComponent<Engine::SpriteComponent>(rm.GetTexture(""));
+	}
+	{
+		Engine::Node* currentPowder = builder.CreateChildNode(powders, "SlotSeven");
+			currentPowder->AddComponent<Engine::SpriteComponent>(rm.GetTexture(""));
+	}
+	{
+		Engine::Node* currentPowder = builder.CreateChildNode(powders, "SlotEight");
+			currentPowder->AddComponent<Engine::SpriteComponent>(rm.GetTexture(""));
+	}
+	{
+		Engine::Node* currentPowder = builder.CreateChildNode(powders, "SlotNine");
+			currentPowder->AddComponent<Engine::SpriteComponent>(rm.GetTexture(""));
+	}
+	{
+		Engine::Node* currentPowder = builder.CreateChildNode(powders, "SlotTen");
+			currentPowder->AddComponent<Engine::SpriteComponent>(rm.GetTexture(""));
+	}
 }

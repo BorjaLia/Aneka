@@ -17,6 +17,8 @@ void ObstacleScript::OnStart()
 				HitPlayer hitPlayer(owner);
 
 				eventBus.Publish(hitPlayer);
+				owner->GetComponent<Engine::TriggerAreaComponent>()->SetActive(false);
+				ENGINE_LOG("Hit: " << owner->name);
 			}
 		});
 }

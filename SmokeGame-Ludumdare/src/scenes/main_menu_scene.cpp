@@ -18,6 +18,7 @@
 #include "prefabs/cursor_prefab.h"
 
 #include "core/debug.h"
+#include "credits.h"
 
 void MainMenuScene::Build(Engine::SceneBuilder& builder)
 {
@@ -31,6 +32,16 @@ void MainMenuScene::Build(Engine::SceneBuilder& builder)
 	AddBackground(builder);
 
 	Engine::Vector2f center = app.GetWindow()->GetSize() / 2;
+
+	Engine::Texture2D buttonHolderTex = rm.GetTexture("res/sprites/MenuBackground.png");
+
+	Engine::Node* buttonHolder = builder.CreateNode("ButtonHolder");
+	auto* spriteHolder = buttonHolder->AddComponent<Engine::SpriteComponent>(buttonHolderTex, Engine::Pivot::Center, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::UI);
+	auto* anchorHolder = buttonHolder->AddComponent<Engine::UIAnchorComponent>();
+
+	spriteHolder->SetTargetSize(Engine::Vector2f(492.0f, 547.0f));
+
+	anchorHolder->SetOffset(Engine::Vector2f(center.x, center.y + 120.0f));
 
 	Engine::Node* camNode = builder.CreateNode("MenuCamera");
 	camNode->transform->SetPosition(center);
@@ -48,14 +59,14 @@ void MainMenuScene::Build(Engine::SceneBuilder& builder)
 
 	playButton->GetComponent<Engine::ButtonComponent>()->SetOnClick([]()
 		{
-			Engine::Application::Get().GetSceneManager().LoadScene(std::make_unique<LevelOne>());
+			Engine::Application::Get().LoadScene<LevelOne>();
 		});
 
 	Engine::Node* creditsButton = AddButton(builder, center + Engine::Vector2f(0.0f, 150.0f), "Credits", "CreditsButton", Engine::Vector2f(0.2f, 0.2f), rm.GetTexture("res/sprites/hoveredButton.png"), rm.GetTexture("res/sprites/button.png"), rm.GetAudioClip("res/audio/button_click.wav"), Engine::Pivot::Center,
 		-15.0f, nullptr);
 	creditsButton->GetComponent<Engine::ButtonComponent>()->SetOnClick([]()
 		{
-			ENGINE_LOG("Credits called");
+			Engine::Application::Get().GetSceneManager().LoadScene(std::make_unique<Credits>());
 		});
 	
 	Engine::Node* exitButton = AddButton(builder, center + Engine::Vector2f(0.0f, 300.0f), "Exit", "ExitButton", Engine::Vector2f(0.2f, 0.2f), rm.GetTexture("res/sprites/hoveredButton.png"), rm.GetTexture("res/sprites/button.png"), rm.GetAudioClip("res/audio/button_click.wav"),Engine::Pivot::Center,

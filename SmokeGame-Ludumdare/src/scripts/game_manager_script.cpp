@@ -11,16 +11,33 @@ GameManagerScript::GameManagerScript(std::shared_ptr<std::shared_ptr<Engine::Nod
 
 void GameManagerScript::GetSmokeButtons()
 {
-	Engine::Node* ui = owner->FindChild("UI");
-	if (!ui) return;
-
-	Engine::Node* inventory = ui->FindChild("Inventory");;
-	if (!inventory) return;
+	Engine::Node* uiNode = owner->GetParent()->FindChild("UI");
+	if (!uiNode)
+	{
+		ENGINE_LOG("NO UI");
+		return;
+	}
+	Engine::Node* inventory = uiNode->FindChild("Inventory");
+	if (!inventory)
+	{
+		ENGINE_LOG("NO INVENTORY");
+		return;
+	}
 
 	yellowSmoke = inventory->FindChild("YellowDust")->GetComponent<Engine::ButtonComponent>();
 	greenSmoke = inventory->FindChild("GreenDust")->GetComponent<Engine::ButtonComponent>();
 	redSmoke = inventory->FindChild("RedDust")->GetComponent<Engine::ButtonComponent>();
 	blueSmoke = inventory->FindChild("BlueDust")->GetComponent<Engine::ButtonComponent>();
+
+	Engine::Node* controls = uiNode->FindChild("MovementInventory");
+	if (!controls)
+	{
+		ENGINE_LOG("NO CONTROLS");
+		return;
+	}
+
+	playButton = controls->FindChild("Play")->GetComponent<Engine::ButtonComponent>();
+	resetButton = controls->FindChild("Reset")->GetComponent<Engine::ButtonComponent>();
 
 	yellowSmoke->SetOnClick([this]()
 		{
@@ -30,31 +47,54 @@ void GameManagerScript::GetSmokeButtons()
 		{
 			AddQueueMove(SmokeType::Right);
 		});
-	greenSmoke->SetOnClick([this]()
+	redSmoke->SetOnClick([this]()
 		{
 			AddQueueMove(SmokeType::Jump);
 		});
-	greenSmoke->SetOnClick([this]()
+	blueSmoke->SetOnClick([this]()
 		{
 			AddQueueMove(SmokeType::Crouch);
+		});
+
+	playButton->SetOnClick([this]()
+		{
+			ENGINE_LOG("Play called");
+			startActions = true;
+			playButton->SetOnClick([this]()
+				{
+					ENGINE_LOG("Play called - running");
+				});
+		});
+	resetButton->SetOnClick([this]()
+		{
+			ENGINE_LOG("Reset called");
+
+			Engine::Application::Get().ReloadCurrentScene();
 		});
 }
 
 void GameManagerScript::AddQueueMove(SmokeType type)
 {
+	if (moveQueue.size() >= 10)
+	{
+		ENGINE_LOG("queue full!");
+		return;
+	}
+
 	moveQueue.push(type);
 	ENGINE_LOG("Pushing queue event - Game Manager");
 	QueueChangeEvent addQueueEvent(moveQueue);
 	eventBus->Publish(addQueueEvent);
+
 }
 
 void GameManagerScript::OnWin()
 {
-	ENGINE_LOG("Win registered");
+	//ENGINE_LOG("Win registered");
 }
 void GameManagerScript::OnLose()
 {
-	ENGINE_LOG("Loss registered");
+	//ENGINE_LOG("Loss registered");
 }
 
 void GameManagerScript::OnStart()
@@ -64,7 +104,7 @@ void GameManagerScript::OnStart()
 	listenerId = eventBus->Subscribe<FinishMoveEvent>([this](FinishMoveEvent& e)
 		{
 			ENGINE_LOG("Manager recieved finish move event");
-			
+
 			brotherPos = e.GetPos();
 			e.handled = true;
 
@@ -73,36 +113,36 @@ void GameManagerScript::OnStart()
 					pendingAction = true;
 				});
 
-		//	Engine::Node* target = nullptr;
+			//	Engine::Node* target = nullptr;
 
-		//	switch (move)
-		//	{
-		//	case 1:
-		//		target = gridBody[2][0];
-		//		break;
+			//	switch (move)
+			//	{
+			//	case 1:
+			//		target = gridBody[2][0];
+			//		break;
 
-		//	case 2:
-		//		target = gridBody[4][0];
-		//		break;
-		//	case 3:
-		//		target = gridBody[0][0];
-		//		break;
-		//	default:
-		//		break;
-		//	}
+			//	case 2:
+			//		target = gridBody[4][0];
+			//		break;
+			//	case 3:
+			//		target = gridBody[0][0];
+			//		break;
+			//	default:
+			//		break;
+			//	}
 
-		//	if (!target)
-		//	{
-		//		ENGINE_LOG("Manager to publish move NO TARGET");
-		//		return;
-		//	}
+			//	if (!target)
+			//	{
+			//		ENGINE_LOG("Manager to publish move NO TARGET");
+			//		return;
+			//	}
 
-		//	ENGINE_LOG("Manager to publish move " << std::to_string( move));
+			//	ENGINE_LOG("Manager to publish move " << std::to_string( move));
 
-		//	MoveEvent moveEvent(target, MoveType::Walk);
-		//	Engine::Application::Get().GetEventBus().Publish(moveEvent);
-		//	
-		//	move++;
+			//	MoveEvent moveEvent(target, MoveType::Walk);
+			//	Engine::Application::Get().GetEventBus().Publish(moveEvent);
+			//	
+			//	move++;
 		});
 
 	GetSmokeButtons();
@@ -129,57 +169,46 @@ void GameManagerScript::OnUpdate(float)
 		return;
 	}
 
-	if (pendingAction)
+	if (pendingAction && startActions)
 	{
 		pendingAction = false;
 
 		SmokeType type = moveQueue.front();
 		moveQueue.pop();
 
-		if (type == SmokeType::Crouch)
-		{
+		Engine::Node* gridNodeTowards;
 
+		Engine::Vector2f closestCell = GetClosestNode(brotherPos);
+		Engine::Vector2f nextCell = closestCell;
+		switch (type)
+		{
+		case SmokeType::Left:
+			nextCell.x--;
+			gridNodeTowards = gridBody[closestCell.x - 1][closestCell.y];
+			break;
+
+		case SmokeType::Right:
+			nextCell.x++;
+			gridNodeTowards = gridBody[closestCell.x + 1][closestCell.y];
+			break;
+
+		case SmokeType::Jump:
+			nextCell.y++;
+			gridNodeTowards = gridBody[closestCell.x][closestCell.y + 1];
+			break;
+
+		default:
+			break;
+		}
+
+		if (IterExists(nextCell))
+		{
+			gridNodeTowards = gridBody[nextCell.x][nextCell.y];
+
+			MoveEvent moveEvent(gridNodeTowards, MoveType::Walk);
+			Engine::Application::Get().GetEventBus().Publish(moveEvent);
 		}
 	}
-
-	//for (int i = 0; i < moveQueue.size(); i++)
-	//{
-	//	SmokeType currentMove = moveQueue.front();
-	//	moveQueue.pop();
-
-	//	Engine::Node* gridNodeTowards;
-
-	//	Engine::Vector2f closestCell = GetClosestNode(brotherPos);
-	//	Engine::Vector2f nextCell = closestCell;
-	//	switch (currentMove)
-	//	{
-	//	case SmokeType::Left:
-	//		nextCell.x--;
-	//		gridNodeTowards = gridBody[closestCell.x - 1][closestCell.y];
-	//		break;
-
-	//	case SmokeType::Right:
-	//		nextCell.x++;
-	//		gridNodeTowards = gridBody[closestCell.x + 1][closestCell.y];
-	//		break;
-
-	//	case SmokeType::Jump:
-	//		nextCell.y++;
-	//		gridNodeTowards = gridBody[closestCell.x][closestCell.y + 1];
-	//		break;
-
-	//	default:
-	//		break;
-	//	}
-
-	//	if (IterExists(nextCell))
-	//	{
-	//		gridNodeTowards = gridBody[nextCell.x][nextCell.y];
-
-	//		MoveEvent moveEvent(gridNodeTowards, MoveType::Walk);
-	//		Engine::Application::Get().GetEventBus().Publish(moveEvent);
-	//	}
-	//}
 }
 
 void GameManagerScript::ReceiveMove(SmokeType move)

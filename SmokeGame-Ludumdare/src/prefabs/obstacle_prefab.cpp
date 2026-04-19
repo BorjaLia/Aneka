@@ -14,6 +14,7 @@ Engine::Node* AddObstacle(Engine::Node* props, Engine::SceneBuilder& builder, st
 	//auto& app = Engine::Application::Get();
 	//auto& rm = *app.GetResourceManager();
 
+	Engine::Node* node = builder.CreateNode(name);
 	Engine::Node* node = builder.CreateChildNode(props, name);
 
 	node->AddComponent<Engine::ScriptComponent>(new ObstacleScript);
