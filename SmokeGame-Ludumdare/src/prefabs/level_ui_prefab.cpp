@@ -7,9 +7,9 @@
 #include "core/components/uiAnchorComponent.h"
 #include "core/components/buttonComponent.h"
 
-#include "main_menu_scene.h"
+#include "scenes/main_menu_scene.h"
 
-#include "button.h"
+#include "button_prefab.h"
 
 void AddLevelUI(Engine::SceneBuilder& builder)
 {
@@ -23,7 +23,7 @@ void AddLevelUI(Engine::SceneBuilder& builder)
 	node->transform->SetPosition(center);
 	//Engine::SpriteComponent* sprite = node->AddComponent<Engine::SpriteComponent>(rm.GetTexture("res/ui_overlay.png"), Engine::Pivot::Center, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::UI);
 
-	Engine::Node* menuButton = AddButton(builder, Engine::Vector2f(), "     Go  Back", "MenuButton", Engine::Vector2f(0.125f, 0.125f), rm.GetTexture("res/sprites/hoveredButton.png"), rm.GetTexture("res/sprites/button.png"), Engine::Pivot::TopLeft, 5.0f);
+	Engine::Node* menuButton = AddButton(builder, Engine::Vector2f(), "Go  Back", "MenuButton", Engine::Vector2f(0.125f, 0.125f), rm.GetTexture("res/sprites/hoveredButton.png"), rm.GetTexture("res/sprites/button.png"), Engine::Pivot::TopLeft, 5.0f);
 	auto* anchor = menuButton->AddComponent<Engine::UIAnchorComponent>(Engine::AnchorPreset::TopLeft);
 	anchor->SetOffset(Engine::Vector2f(50.0f, 50.0f));
 
