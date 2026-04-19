@@ -60,6 +60,30 @@ namespace Engine
         void MarkSceneDirty()       { isSceneDirty = true; }
         void MarkScenePendingStart(){ isScenePendingStart = true; }
 
+        template<typename T>
+        void LoadScene()
+        {
+            // Guardamos la receta de cómo fabricar esta escena
+            sceneFactory = []() { return std::make_unique<T>(); };
+
+            // Fabricamos la primera y se la mandamos al manager
+            sceneManager.LoadScene(sceneFactory());
+        }
+
+        // 2. El método de recarga
+        void ReloadCurrentScene()
+        {
+            if (sceneFactory)
+            {
+                // Fabricamos un clon idéntico y nuevo
+                sceneManager.LoadScene(sceneFactory());
+            }
+            else
+            {
+                ENGINE_WARN("No loaded scene");
+            }
+        }
+
         /// Walks the scene tree looking for an AudioListenerComponent. Returns the first node found.
         Node* FindAudioListener() const;
 
@@ -75,6 +99,8 @@ namespace Engine
         SceneBuilder sceneBuilder;
         SceneManager sceneManager;
         TimerManager timerManager;
+
+        std::function<std::unique_ptr<IScene>()> sceneFactory;
 
         std::unique_ptr<Node> rootScene;
         std::unique_ptr<Node> debugNode;

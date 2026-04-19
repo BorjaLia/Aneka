@@ -58,6 +58,10 @@
     <ClCompile Include="src\scenes\main_menu_scene.cpp">
       <Filter>Source\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="src\scripts\ui_inventory_script.cpp">
+      <Filter>Source\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="src\events\hit_player.cpp" />
     <ClCompile Include="src\scripts\obstacle_script.cpp">
       <Filter>Source\Script</Filter>
     </ClCompile>
@@ -130,6 +134,16 @@
     <ClInclude Include="src\events\move_event.h">
       <Filter>Source\Event</Filter>
     </ClInclude>
+    <ClInclude Include="src\events\hit_player.h">
+      <Filter>Source\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\smokes.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scripts\ui_inventory_script.h">
+      <Filter>Source\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="src\events\action_queue_event.h" />
     <ClInclude Include="src\scripts\obstacle_script.h">
       <Filter>Source\Script</Filter>
     </ClInclude>
