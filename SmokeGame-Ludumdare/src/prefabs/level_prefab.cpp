@@ -16,7 +16,10 @@
 #include "cursor_prefab.h"
 #include "scripts/props_setter.h"
 #include "../src/prefabs/obstacle_prefab.h"
-#include "../src/prefabs/floor1_prefab.h"
+#include "../src/instantRes/floor1_prefab.h"
+#include "../src/instantRes/floor2_prefab.h"
+#include "../src/instantRes/floor3_prefab.h"
+#include "../src/instantRes/floor4_prefab.h"
 
 void StartLevel(Engine::SceneBuilder& builder)
 {
@@ -40,9 +43,17 @@ void StartLevel(Engine::SceneBuilder& builder)
 
 	floor->AddComponent<Engine::SpriteComponent>(rm.GetTexture("res/sprites/plant2.png"));
 
-    Engine::Vector2f gridIter = Engine::Vector2f(10, 3);
-    std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> gridBody = AddGrid(builder, Engine::Vector2f(300.f, 300.f), Engine::Vector2f(150.f, 150.f), gridIter);
+    Engine::Vector2f gridIter = Engine::Vector2f(15, 5);
+
+    Engine::Vector2f scaler = Engine::Vector2f(125.f,125.f);
+
+    std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> gridBody = AddGrid(builder, Engine::Vector2f(75.f, 350.f), scaler, gridIter);
    
+    Engine::Node* props = builder.CreateNode("Props");
+
+    AddFloor1(props, builder, "f1", rm.GetTexture("res/sprites/floor2.png"), Engine::Vector2f(0.f, 0.f), Engine::Vector2f(1200.f, 1000.f), true);
+    AddFloor1(props, builder, "f2", rm.GetTexture("res/sprites/floor2.png"), Engine::Vector2f(0.f, 0.f), Engine::Vector2f(1200.f, 1000.f), true);
+
     AddBrother(builder);
     AddPlayer(builder,Engine::Vector2f(center .x - 250.0f,250.0f));
 
@@ -50,13 +61,16 @@ void StartLevel(Engine::SceneBuilder& builder)
 
     Engine::Node* gameManager = builder.CreateNode("GameManager");
 
-    Engine::Node* props = builder.CreateChildNode(gameManager, "Props");
 
     gameManager->AddComponent<Engine::ScriptComponent>(new PropsSetter(gridBody));
     /*Engine::ScriptComponent* scriptComponent = */gameManager->AddComponent<Engine::ScriptComponent>(new GameManagerScript(gridBody, gridIter));
     //GameManagerScript* managerScript = scriptComponent->GetScript<GameManagerScript>();
 
-    AddObstacle(props, builder, "o1", rm.GetTexture("res/sprites/cactus.png"), Engine::Vector2f(0.f, 0.f), Engine::Vector2f(150.0f, 150.0f), true);
-    AddFloor(props, builder, "f1", rm.GetTexture("res/sprites/floor1.png"), Engine::Vector2f(0.f, 0.f), Engine::Vector2f(150.0f, 150.0f), true);
+   
+    AddObstacle(props, builder, "o1", rm.GetTexture("res/sprites/cactus.png"), Engine::Vector2f(0.f, 0.f), scaler, true);
+
+    //AddFloor2(props, builder, "f2", rm.GetTexture("res/sprites/floor2.png"), Engine::Vector2f(0.f, 0.f), Engine::Vector2f(132.f,125.f ), true);
+    //AddFloor3(props, builder, "f3", rm.GetTexture("res/sprites/floor2.png"), Engine::Vector2f(0.f, 0.f), Engine::Vector2f(132.f,125.f ), true);
+    //AddFloor4(props, builder, "f4", rm.GetTexture("res/sprites/floor2.png"), Engine::Vector2f(0.f, 0.f), Engine::Vector2f(132.f,125.f ), true);
 }
 

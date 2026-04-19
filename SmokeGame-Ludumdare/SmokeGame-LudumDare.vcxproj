@@ -21,12 +21,15 @@
   <ItemGroup>
     <ClCompile Include="src\events\hit_player.cpp" />
     <ClCompile Include="src\game.cpp" />
+    <ClCompile Include="src\instantRes\floor1_prefab.cpp" />
+    <ClCompile Include="src\instantRes\floor2_prefab.cpp" />
+    <ClCompile Include="src\instantRes\floor3_prefab.cpp" />
+    <ClCompile Include="src\instantRes\floor4_prefab.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\prefabs\background_prefab.cpp" />
     <ClCompile Include="src\prefabs\brother_prefab.cpp" />
     <ClCompile Include="src\prefabs\button_prefab.cpp" />
     <ClCompile Include="src\prefabs\cursor_prefab.cpp" />
-    <ClCompile Include="src\prefabs\floor1_prefab.cpp" />
     <ClCompile Include="src\prefabs\grid_prefab.cpp" />
     <ClCompile Include="src\prefabs\level_prefab.cpp" />
     <ClCompile Include="src\prefabs\level_ui_prefab.cpp" />
@@ -55,11 +58,14 @@
     <ClInclude Include="src\events\hit_player.h" />
     <ClInclude Include="src\events\move_event.h" />
     <ClInclude Include="src\game.h" />
+    <ClInclude Include="src\instantRes\floor1_prefab.h" />
+    <ClInclude Include="src\instantRes\floor2_prefab.h" />
+    <ClInclude Include="src\instantRes\floor3_prefab.h" />
+    <ClInclude Include="src\instantRes\floor4_prefab.h" />
     <ClInclude Include="src\prefabs\background_prefab.h" />
     <ClInclude Include="src\prefabs\brother_prefab.h" />
     <ClInclude Include="src\prefabs\button_prefab.h" />
     <ClInclude Include="src\prefabs\cursor_prefab.h" />
-    <ClInclude Include="src\prefabs\floor1_prefab.h" />
     <ClInclude Include="src\prefabs\grid_prefab.h" />
     <ClInclude Include="src\prefabs\level_prefab.h" />
     <ClInclude Include="src\prefabs\level_ui_prefab.h" />
