@@ -23,11 +23,13 @@
     <ClCompile Include="src\backgroundScript.cpp" />
     <ClCompile Include="src\brother_script.cpp" />
     <ClCompile Include="src\game.cpp" />
+    <ClCompile Include="src\grid_script.cpp" />
     <ClCompile Include="src\level_one.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\main_menu_scene.cpp" />
     <ClCompile Include="src\player.cpp" />
     <ClCompile Include="src\prefabs\brother.cpp" />
+    <ClCompile Include="src\prefabs\grid_prefab.cpp" />
     <ClCompile Include="src\prefabs\level_prefab.cpp" />
     <ClCompile Include="src\prefabs\obstacle_prefab.cpp" />
   </ItemGroup>
@@ -41,10 +43,12 @@
     <ClInclude Include="src\backgroundScript.h" />
     <ClInclude Include="src\brother_script.h" />
     <ClInclude Include="src\game.h" />
+    <ClInclude Include="src\grid_script.h" />
     <ClInclude Include="src\level_one.h" />
     <ClInclude Include="src\main_menu_scene.h" />
     <ClInclude Include="src\player.h" />
     <ClInclude Include="src\prefabs\brother.h" />
+    <ClInclude Include="src\prefabs\grid_prefab.h" />
     <ClInclude Include="src\prefabs\level_prefab.h" />
     <ClInclude Include="src\prefabs\obstacle_prefab.h" />
   </ItemGroup>
