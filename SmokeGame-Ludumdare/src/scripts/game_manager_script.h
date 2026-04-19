@@ -11,8 +11,18 @@
 
 #include <queue>
 
+enum class SmokeType
+{
+	None,
+	Left,
+	Right,
+	Jump,
+	Crouch
+};
+
 class GameManagerScript : public Engine::Script
 {
+
 private:
 	//Engine::ScriptComponent* grid;
 	
@@ -26,18 +36,28 @@ private:
 
 	Engine::Node* brother;
 	std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> gridBody;
+	Engine::Vector2f gridIter;
 
 	float startTime = 0.0f;
 	float actionInterval = 0.0f;
 
 	void GetSmokeButtons();
 
-	std::queue<MoveType> moveQueue;
+	std::queue<SmokeType> moveQueue;
 	void OnStart() override;
 	void OnUpdate(float) override;
+	void ReceiveMove(SmokeType move);
+	bool IterExists(Engine::Vector2f iter);
+	Engine::Vector2i GetClosestNode(Engine::Vector2f pos);
+
+	void AddYellow();
+	void AddGreen();
+	void AddRed();
+	void AddBlue();
+
 	void OnDestroy() override;
 public:
-	GameManagerScript(std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> gridBody);
+	GameManagerScript(std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> gridBody, Engine::Vector2f gridIter);
 
 };
 
