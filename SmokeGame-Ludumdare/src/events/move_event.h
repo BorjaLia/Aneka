@@ -23,3 +23,17 @@ public:
 
 	const char* GetName() const override { return "MoveEvent"; }
 };
+
+class FinishMoveEvent : public Engine::EventBase<FinishMoveEvent>
+{
+private:
+
+	Engine::Vector2f pos;
+
+public:
+	FinishMoveEvent(Engine::Vector2f pos) {}
+
+	Engine::Vector2f GetPos() { return pos; }
+
+	const char* GetName() const override { return "FinishMoveEvent"; }
+};

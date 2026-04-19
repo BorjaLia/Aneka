@@ -6,4 +6,4 @@
 
 #include "core/types.h"
 
-void AddBrother(Engine::SceneBuilder& builder, Engine::Vector2f pos);
+void AddBrother(Engine::SceneBuilder& builder, Engine::Vector2f pos = Engine::Vector2f());

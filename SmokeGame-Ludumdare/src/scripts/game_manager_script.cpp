@@ -2,6 +2,12 @@
 
 #include "core/time.h"
 
+GameManagerScript::GameManagerScript(std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> gridBody, Engine::Vector2f gridIter)
+{
+	this->gridBody = gridBody;
+	this->gridIter = gridIter;
+}
+
 void GameManagerScript::GetSmokeButtons()
 {
 	Engine::Node* ui = owner->FindChild("UI");
@@ -14,38 +20,180 @@ void GameManagerScript::GetSmokeButtons()
 	greenSmoke = inventory->FindChild("GreenDust")->GetComponent<Engine::ButtonComponent>();
 	redSmoke = inventory->FindChild("RedDust")->GetComponent<Engine::ButtonComponent>();
 	blueSmoke = inventory->FindChild("BlueDust")->GetComponent<Engine::ButtonComponent>();
+
+	yellowSmoke->SetOnClick([this]()
+		{
+			AddYellow();
+		});
+	greenSmoke->SetOnClick([this]()
+		{
+			AddGreen();
+		});
+	greenSmoke->SetOnClick([this]()
+		{
+			AddRed();
+		});
+	greenSmoke->SetOnClick([this]()
+		{
+			AddBlue();
+		});
+}
+
+void GameManagerScript::AddYellow()
+{
+	moveQueue.push(SmokeType::Left);
+}
+
+void GameManagerScript::AddGreen()
+{
+	moveQueue.push(SmokeType::Right);
+}
+
+void GameManagerScript::AddRed()
+{
+	moveQueue.push(SmokeType::Crouch);
+}
+
+void GameManagerScript::AddBlue()
+{
+	moveQueue.push(SmokeType::Jump);
 }
 
 void GameManagerScript::OnStart()
 {
+	eventBus = &Engine::Application::Get().GetEventBus();
+
+	listenerId = eventBus->Subscribe<FinishMoveEvent>([this](FinishMoveEvent& e)
+		{
+			e.handled = true;
+			ENGINE_LOG("Manager recieved finish move event");
+
+		//	Engine::Node* target = nullptr;
+
+		//	switch (move)
+		//	{
+		//	case 1:
+		//		target = gridBody[2][0];
+		//		break;
+
+		//	case 2:
+		//		target = gridBody[4][0];
+		//		break;
+		//	case 3:
+		//		target = gridBody[0][0];
+		//		break;
+		//	default:
+		//		break;
+		//	}
+
+		//	if (!target)
+		//	{
+		//		ENGINE_LOG("Manager to publish move NO TARGET");
+		//		return;
+		//	}
+
+		//	ENGINE_LOG("Manager to publish move " << std::to_string( move));
+
+		//	MoveEvent moveEvent(target, MoveType::Walk);
+		//	Engine::Application::Get().GetEventBus().Publish(moveEvent);
+		//	
+		//	move++;
+		});
+
 	GetSmokeButtons();
 
 	if (!yellowSmoke || !greenSmoke || !redSmoke || !blueSmoke)
 	{
-		ENGINE_ERROR("Smoke button not found! - Game manager");
+		ENGINE_ERROR("Smoke buttons not found! - Game manager");
 	}
 
-	Engine::Node* testNode = Engine::Application::Get().GetSceneBuilder().CreateNode();
-	testNode->transform->SetPosition(Engine::Vector2f(500.0f, 450.0f));
+	//Engine::Node* testNode = Engine::Application::Get().GetSceneBuilder().CreateNode();
+	//testNode->transform->SetPosition(Engine::Vector2f(500.0f, 450.0f));
 
-	MoveEvent moveEvent(testNode, MoveType::Jump);
+	MoveEvent moveEvent(gridBody[0][0], MoveType::Walk);
 	Engine::Application::Get().GetEventBus().Publish(moveEvent);
-}
 
-GameManagerScript::GameManagerScript(std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> gridBody)
-
-{
-	this->gridBody = gridBody;
+	//moveQueue.push(SmokeType::Jump);
 }
 
 void GameManagerScript::OnUpdate(float)
 {
-	MoveEvent moveEvent();
-	if (brother)
+	/*for (int i = 0; i < moveQueue.size(); i++)
 	{
-		
+		SmokeType currentMove = moveQueue.front();
+		moveQueue.pop();
+
+		Engine::Node* gridNodeTowards;
+
+		Engine::Vector2f closestCell = GetClosestNode(brother->transform->GetPosition());
+		Engine::Vector2f nextCell = closestCell;
+		switch (currentMove)
+		{
+		case SmokeType::Left:
+			nextCell.x--;
+			gridNodeTowards = gridBody[closestCell.x - 1][closestCell.y];
+			break;
+
+		case SmokeType::Right:
+			nextCell.x++;
+			gridNodeTowards = gridBody[closestCell.x + 1][closestCell.y];
+			break;
+
+		case SmokeType::Jump:
+			nextCell.y++;
+			gridNodeTowards = gridBody[closestCell.x][closestCell.y + 1];
+			break;
+
+		default:
+			break;
+		}
+
+		if (IterExists(nextCell))
+		{
+			gridNodeTowards = gridBody[nextCell.x][nextCell.y];
+
+			MoveEvent moveEvent(gridNodeTowards, MoveType::Walk);
+			Engine::Application::Get().GetEventBus().Publish(moveEvent);
+		}
+	}*/
+}
+
+void GameManagerScript::ReceiveMove(SmokeType move)
+{
+	moveQueue.push(move);
+}
+
+void GameManagerScript::OnDestroy()
+{
+	if (eventBus)
+	{
+		eventBus->Unsubscribe(FinishMoveEvent::GetStaticType(), listenerId);
 	}
 }
+bool GameManagerScript::IterExists(Engine::Vector2f iter)
+{
+	return (iter.x >= 0 && iter.x < gridIter.x &&
+		iter.y >= 0 && iter.y < gridIter.y);
+}
+
+Engine::Vector2i GameManagerScript::GetClosestNode(Engine::Vector2f pos)
+{
+	Engine::Vector2i closest = Engine::Vector2i(0, 0);
+
+	for (int i = 0; i < gridIter.x; i++)
+	{
+		for (int j = 0; j < gridIter.y; j++)
+		{
+			if ((pos - gridBody[i][j]->transform->GetGlobalPosition()).MagnitudeSquared() < (pos - gridBody[closest.x][closest.y]->transform->GetGlobalPosition()).MagnitudeSquared())
+			{
+				closest.x = i;
+				closest.y = j;
+			}
+		}
+	}
+	return closest;
+}
+
 //
 //enum class Smokes
 //{
