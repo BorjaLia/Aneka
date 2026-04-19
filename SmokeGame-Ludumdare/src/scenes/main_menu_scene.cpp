@@ -13,9 +13,9 @@
 #include "core/components/buttonComponent.h"
 #include "core/components/audioComponent.h"
 
-#include "background.h"
-#include "button.h"
-#include "cursor.h"
+#include "prefabs/background_prefab.h"
+#include "prefabs/button_prefab.h"
+#include "prefabs/cursor_prefab.h"
 
 #include "core/debug.h"
 

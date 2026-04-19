@@ -1,4 +1,4 @@
-#include "backgroundScript.h"
+#include "background_script.h"
 
 void BackgroundScript::OnStart() 
 {
