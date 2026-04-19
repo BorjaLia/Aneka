@@ -14,5 +14,4 @@ void AddPlayer(Engine::SceneBuilder& builder, Engine::Vector2f pos)
     player->transform->SetPosition(pos);
 
     player->AddComponent<Engine::SpriteComponent>(playerTex);
-
 }

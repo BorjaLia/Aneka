@@ -27,7 +27,7 @@ void StartLevel(Engine::SceneBuilder& builder)
 
     //Add background
 
-    AddBrother(builder,Engine::Vector2f(250.0f,250.0f));
+    AddBrother(builder,Engine::Vector2f(100.0f,500.0f));
     AddPlayer(builder,Engine::Vector2f(center .x - 250.0f,250.0f));
 
     AddObstacle(builder,"obsacle_one",rm.GetTexture("res/plant2.png"), center + Engine::Vector2f(50.0f, 10.0f), false);

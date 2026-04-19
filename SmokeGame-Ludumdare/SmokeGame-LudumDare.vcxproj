@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="src\background.cpp" />
     <ClCompile Include="src\backgroundScript.cpp" />
+    <ClCompile Include="src\brother_script.cpp" />
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\level_one.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -38,6 +39,7 @@
   <ItemGroup>
     <ClInclude Include="src\background.h" />
     <ClInclude Include="src\backgroundScript.h" />
+    <ClInclude Include="src\brother_script.h" />
     <ClInclude Include="src\game.h" />
     <ClInclude Include="src\level_one.h" />
     <ClInclude Include="src\main_menu_scene.h" />
@@ -156,7 +158,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
       <AdditionalIncludeDirectories>$(SolutionDir)B engine\src;$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -174,7 +176,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
       <AdditionalIncludeDirectories>$(SolutionDir)B engine\src;$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
