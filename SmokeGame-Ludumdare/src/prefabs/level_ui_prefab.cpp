@@ -19,9 +19,10 @@ static void AssignSlots(Engine::SceneBuilder& builder, Engine::Node* node, int p
 	auto* rm = Engine::Application::Get().GetResourceManager();
 	Engine::Node* slot = builder.CreateChildNode(node, std::to_string(place));
 
-	slot->AddComponent<Engine::SpriteComponent>(rm->GetTexture(""), Engine::Pivot::Center, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::UI);
+	auto* sprite = slot->AddComponent<Engine::SpriteComponent>(rm->GetTexture("res/sprites/empty.png"), Engine::Pivot::Center, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::UI);
+	sprite->SetTargetSize(Engine::Vector2f(41.75f, 47.75f));
 
-	slot->transform->SetPosition(Engine::Vector2f(place * 40.0f, 0.0f));
+	slot->transform->SetPosition(Engine::Vector2f(place * 57.5f, 0.0f));
 }
 
 void AddLevelUI(Engine::SceneBuilder& builder)
@@ -118,7 +119,7 @@ void AddLevelUI(Engine::SceneBuilder& builder)
 
 	Engine::Node* powders = builder.CreateChildNode(movementInventoryNode, "Powders");
 
-	powders->transform->SetPosition(Engine::Vector2f(0.0f, 0.0f));
+	powders->transform->SetPosition(Engine::Vector2f(-260.0f, 0.0f));
 
 	for (int i = 0; i < 10; i++)
 	{
