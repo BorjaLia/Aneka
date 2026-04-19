@@ -9,7 +9,7 @@ void BrotherScript::OnStart()
 void BrotherScript::OnUpdate(float delta)
 {
 	dir = Engine::Vector2f(1.f, 0.f);
-	Move(delta);
+	//Move(delta);
 	PlayAnim();
 }
 

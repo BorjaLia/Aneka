@@ -1,15 +1,20 @@
 #pragma once
 
-#include <vector>
+#include <memory>
 
+#include "core/scripts/script.h"
 #include "core/scenes/Scene.h"
 
-class grid_script
+class GridScript : public Engine::Script
 {
 private:
-	std::vector<Engine::Node**> grid;
+	Engine::Vector2f iter;
+	Engine::Vector2f dist;
+	std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> body;
+
+	void OnStart() override;
 
 public:
-	
+	GridScript(std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> body, Engine::Vector2f dist, Engine::Vector2f iter);
 };
 

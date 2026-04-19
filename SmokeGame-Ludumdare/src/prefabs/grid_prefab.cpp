@@ -2,6 +2,9 @@
 
 #include <memory>
 
+#include "../src/core/components/scriptComponent.h"
+#include "grid_script.h"
+
 std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> AddGrid(Engine::SceneBuilder& builder, Engine::Vector2f pos, Engine::Vector2f dist, Engine::Vector2f iter)
 {
 	Engine::Node* grid = builder.CreateNode("Grid");
@@ -18,10 +21,11 @@ std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> AddGrid(Engine::SceneBuilde
 		for (int j = 0; j < iter.y; j++)
 		{
 			body[i][j] = builder.CreateChildNode(grid, " " + i + j);
-			body[i][j]->transform->SetPosition(pos + Engine::Vector2f(dist.x * i, dist.y * j));
 			body[i][j]->AddComponent<Engine::ColliderComponent>(Engine::Shape(Engine::RectangleShape(dist)));
 		}
 	}
+
+	grid->AddComponent < Engine::ScriptComponent>(new GridScript(body, dist, iter));
 
 	return body;
 }

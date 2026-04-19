@@ -6,31 +6,40 @@
 
 #include "background.h"
 
+#include "../src/prefabs/grid_prefab.h"
+#include "../src/core/components/scriptComponent.h"
 #include "brother.h"
 #include "player.h"
+#include "game_manager_script.h"
 
 void StartLevel(Engine::SceneBuilder& builder)
 {
-    auto& app = Engine::Application::Get();
-    //auto& rm = *app.GetResourceManager();
+	auto& app = Engine::Application::Get();
+	//auto& rm = *app.GetResourceManager();
 
-    Engine::Node* cam = builder.CreateNode("MainView");
+	Engine::Node* gameManager = builder.CreateNode("GameManager");
+	//gameManager->AddComponent<Engine::ScriptComponent<GameM>>
 
-    /*Engine::CameraComponent* cam = */cam->AddComponent<Engine::CameraComponent>(app.GetInput());
+	Engine::Node* cam = builder.CreateNode("MainView");
 
-    Engine::Vector2f center = app.GetWindow()->GetSize();
-    cam->transform->SetPosition(center/2.0f);
+	/*Engine::CameraComponent* cam = */cam->AddComponent<Engine::CameraComponent>(app.GetInput());
 
-    AddBackground(builder);
+	Engine::Vector2f center = app.GetWindow()->GetSize();
+	cam->transform->SetPosition(center / 2.0f);
 
-    Engine::Node* floor = builder.CreateNode("Floor");
+	AddBackground(builder);
 
-    floor->transform->SetPosition(center - Engine::Vector2f(0.0f,-100.0f));
-    
-    //floor->AddComponent<Engine::SpriteComponent>(rm.GetTexture("res/sprites/plant2.png"));
+	Engine::Node* floor = builder.CreateNode("Floor");
 
-    //Add background
-    
-    AddBrother(builder,Engine::Vector2f(250.0f,450.0f));
-    AddPlayer(builder,Engine::Vector2f(center .x - 250.0f,250.0f));
+	floor->transform->SetPosition(center - Engine::Vector2f(0.0f, -100.0f));
+
+	//floor->AddComponent<Engine::SpriteComponent>(rm.GetTexture("res/sprites/plant2.png"));
+
+	//Add background
+
+	std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> grid = AddGrid(builder, Engine::Vector2f(300.f, 300.f), Engine::Vector2f(100.f, 100.f), Engine::Vector2f(2, 2));
+	AddBrother(builder, grid[0][0]->transform->GetPosition());
+	Engine::Vector2f pos = grid[0][0]->transform->GetPosition();
+	ENGINE_LOG(pos);
+	AddPlayer(builder, Engine::Vector2f(center.x - 250.0f, 250.0f));
 }
