@@ -33,6 +33,4 @@ void StartLevel(Engine::SceneBuilder& builder)
 
     AddBrother(builder,Engine::Vector2f(250.0f,450.0f));
     AddPlayer(builder,Engine::Vector2f(center .x - 250.0f,250.0f));
-
-
 }
