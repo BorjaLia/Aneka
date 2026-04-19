@@ -4,22 +4,26 @@
 #include "../src/core/components/colliderComponent.h"
 #include "../src/core/components/audioListenerComponent.h"
 
+#include "level_ui_prefab.h"
 #include "background.h"
-
 #include "brother.h"
 #include "player.h"
+
+#include "cursor.h"
 
 void StartLevel(Engine::SceneBuilder& builder)
 {
     auto& app = Engine::Application::Get();
     //auto& rm = *app.GetResourceManager();
 
-    Engine::Node* cam = builder.CreateNode("MainView");
+    Engine::Node* camNode = builder.CreateNode("MainView");
 
-    /*Engine::CameraComponent* cam = */cam->AddComponent<Engine::CameraComponent>(app.GetInput());
+    Engine::CameraComponent* cam = camNode->AddComponent<Engine::CameraComponent>(app.GetInput());
 
     Engine::Vector2f center = app.GetWindow()->GetSize();
-    cam->transform->SetPosition(center/2.0f);
+    camNode->transform->SetPosition(center/2.0f);
+
+    AddLevelUI(builder);
 
     AddBackground(builder);
 
@@ -31,4 +35,6 @@ void StartLevel(Engine::SceneBuilder& builder)
 
     AddBrother(builder,Engine::Vector2f(250.0f,450.0f));
     AddPlayer(builder,Engine::Vector2f(center .x - 250.0f,250.0f));
+
+    AddCursor(builder, cam);
 }
