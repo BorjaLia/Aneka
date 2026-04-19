@@ -12,13 +12,13 @@ std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> AddGrid(Engine::SceneBuilde
 	grid->transform->SetPosition(pos);
 	std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> body;
 
-	body = std::make_unique<std::shared_ptr<Engine::Node * []>[]>(static_cast<const size_t>(iter.x));
+	body = std::make_unique<std::shared_ptr<Engine::Node * []>[]>(static_cast<const size_t>(iter.y));
 
-	for (int i = 0; i < iter.x; i++)
+	for (int i = 0; i < iter.y; i++)
 	{
-		body[i] = std::make_unique<Engine::Node * []>(static_cast<const size_t>(iter.y));
+		body[i] = std::make_unique<Engine::Node * []>(static_cast<const size_t>(iter.x));
 
-		for (int j = 0; j < iter.y; j++)
+		for (int j = 0; j < iter.x; j++)
 		{
 			body[i][j] = builder.CreateChildNode(grid, " " + i + j);
 			body[i][j]->AddComponent<Engine::ColliderComponent>(Engine::Shape(Engine::RectangleShape(dist)));
