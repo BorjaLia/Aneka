@@ -3,13 +3,16 @@
 #include "core/application.h"
 #include "core/scripts/script.h"
 
+
 #include "../src/core/components/animatedSpriteComponent.h"
+#include "../src/core/components/followComponent.h"
 
 class BrotherScript : public Engine::Script
 {
 	enum class STATE
 	{
 		IDLE,
+		WAIT,
 		WALK,
 		JUMP,
 		AIR,
@@ -23,8 +26,10 @@ private:
 
 	Engine::TransformComponent* trs;
 	Engine::AnimatedSpriteComponent* animation;
+	Engine::FollowComponent* followComp;
 
 	void Move(float delta);
+	void DoAction(Engine::Node* end, STATE state);
 	void PlayAnim();
 public:
 	void OnStart() override;
