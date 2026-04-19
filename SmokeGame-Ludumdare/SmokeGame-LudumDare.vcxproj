@@ -39,6 +39,7 @@
     <ClCompile Include="src\scripts\game_manager_script.cpp" />
     <ClCompile Include="src\scripts\grid_script.cpp" />
     <ClCompile Include="src\scripts\mouse_script.cpp" />
+    <ClCompile Include="src\scripts\obstacle_script.cpp" />
     <ClCompile Include="src\scripts\ui_inventory_script.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +69,7 @@
     <ClInclude Include="src\scripts\game_manager_script.h" />
     <ClInclude Include="src\scripts\grid_script.h" />
     <ClInclude Include="src\scripts\mouse_script.h" />
+    <ClInclude Include="src\scripts\obstacle_script.h" />
     <ClInclude Include="src\scripts\ui_inventory_script.h" />
     <ClInclude Include="src\smokes.h" />
   </ItemGroup>

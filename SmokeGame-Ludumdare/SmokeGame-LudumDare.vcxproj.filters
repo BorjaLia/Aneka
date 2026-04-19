@@ -61,18 +61,13 @@
     <ClCompile Include="src\scripts\ui_inventory_script.cpp">
       <Filter>Source\Script</Filter>
     </ClCompile>
+    <ClCompile Include="src\events\hit_player.cpp" />
+    <ClCompile Include="src\scripts\obstacle_script.cpp">
+      <Filter>Source\Script</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\background.h" />
-    <ClInclude Include="src\backgroundScript.h" />
-    <ClInclude Include="src\brother_script.h" />
-    <ClInclude Include="src\button.h" />
-    <ClInclude Include="src\button_script.h" />
     <ClInclude Include="src\game.h" />
-    <ClInclude Include="src\level_one.h" />
-    <ClInclude Include="src\main_menu_scene.h" />
-    <ClInclude Include="src\player.h" />
-    <ClInclude Include="src\prefabs\brother.h" />
     <ClInclude Include="src\prefabs\level_prefab.h" />
     <ClInclude Include="src\prefabs\level_ui_prefab.h" />
     <ClInclude Include="src\prefabs\obstacle_prefab.h" />
@@ -133,9 +128,6 @@
     <ClInclude Include="src\events\move_event.h">
       <Filter>Source\Event</Filter>
     </ClInclude>
-    <ClInclude Include="src\scripts\obstacle_script.h">
-      <Filter>Source\Script</Filter>
-    </ClInclude>
     <ClInclude Include="src\events\hit_player.h">
       <Filter>Source\Event</Filter>
     </ClInclude>
@@ -143,6 +135,10 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="src\scripts\ui_inventory_script.h">
+      <Filter>Source\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="src\events\action_queue_event.h" />
+    <ClInclude Include="src\scripts\obstacle_script.h">
       <Filter>Source\Script</Filter>
     </ClInclude>
   </ItemGroup>

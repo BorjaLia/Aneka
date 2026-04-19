@@ -17,7 +17,8 @@ void ObstacleScript::OnStart()
 				HitPlayer hitPlayer(owner);
 
 				eventBus.Publish(hitPlayer);
-				ENGINE_LOG("SUI");
+				owner->GetComponent<Engine::TriggerAreaComponent>()->SetActive(false);
+				ENGINE_LOG("Hit: " << owner->name);
 			}
 		});
 }
