@@ -239,9 +239,9 @@ Engine::Vector2i GameManagerScript::GetClosestNode(Engine::Vector2f pos)
 {
 	Engine::Vector2i closest = Engine::Vector2i(0, 0);
 
-	for (int i = 0; i < gridIter.x; i++)
+	for (int i = 0; i < gridIter.y; i++)
 	{
-		for (int j = 0; j < gridIter.y; j++)
+		for (int j = 0; j < gridIter.x; j++)
 		{
 			if ((pos - gridBody[i][j]->transform->GetGlobalPosition()).MagnitudeSquared() < (pos - gridBody[closest.x][closest.y]->transform->GetGlobalPosition()).MagnitudeSquared())
 			{

@@ -49,10 +49,10 @@ void BrotherScript::OnStart()
 			e.handled = true;
 		});
 
-	listenerId = eventBus->Subscribe<HitPlayer>([this](Engine::Node* enemy, HitType hit)
-		{
-			ENGINE_LOG("ASD");
-		});
+	//listenerId = eventBus->Subscribe<HitPlayer>([this](Engine::Node* enemy, HitType hit)
+	//	{
+	//		ENGINE_LOG("ASD");
+	//	});
 
 	animation = owner->FindChild("TextureNode")->GetComponent<Engine::AnimatedSpriteComponent>();
 	trs = owner->transform;
