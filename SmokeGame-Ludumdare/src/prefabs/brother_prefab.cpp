@@ -30,9 +30,9 @@ void AddBrother(Engine::SceneBuilder& builder, Engine::Vector2f pos)
     auto* deathSprite = deathSpriteNode->AddComponent<Engine::AnimatedSpriteComponent>(death_sprite_sheet,Engine::Pivot::Center);
 
     sprite->AddAnimationGrid("Idle",0,2,2,670,1100,1.0f);
-    sprite->AddAnimationGrid("Jump",0,0,8,670,1100,0.125f);
+    sprite->AddAnimationGrid("Jump",0,1,3,670,1100,0.5f, false);
     sprite->AddAnimationGrid("Walk",0,0,8,670,1100,0.125f);
-    sprite->AddAnimationGrid("Fall",0,1,3,576,1100,0.125f, false);
+    sprite->AddAnimationGrid("Fall",0,1,3,670,1100,0.5f, false);
 
     deathSprite->AddAnimationGrid("Death", 0, 0, 12, 1300, 1100, 0.225f, false);
     brother->AddComponent<Engine::FollowComponent>(brother,Engine::FollowMode::Strict);

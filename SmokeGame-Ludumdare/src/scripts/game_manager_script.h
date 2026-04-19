@@ -34,6 +34,7 @@ private:
 	Engine::Vector2f gridIter;
 
 	Engine::Vector2f brotherPos;
+	bool onAir = false;
 
 	bool startActions = false;
 	bool pendingAction = false;

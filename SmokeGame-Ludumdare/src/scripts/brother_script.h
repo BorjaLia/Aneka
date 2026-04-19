@@ -29,7 +29,9 @@ private:
 	float speed = baseSpeed;
 
 	bool moving = false;
+	int height = 0;
 
+	MoveType lastMove = MoveType::Idle;
 	State state = State::Idle;
 
 	Engine::TransformComponent* trs;

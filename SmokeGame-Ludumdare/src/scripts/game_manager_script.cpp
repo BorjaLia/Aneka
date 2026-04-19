@@ -1,6 +1,7 @@
 #include "game_manager_script.h"
 
 #include "events/action_queue_event.h"
+#include "events/hit_player.h"
 #include "smokes.h"
 
 #include "scenes/main_menu_scene.h"
@@ -60,8 +61,17 @@ void GameManagerScript::GetSmokeButtons()
 
 	playButton->SetOnClick([this]()
 		{
-			ENGINE_LOG("Play called");
-			startActions = true;
+			ENGINE_LOG("Play called - showing smokes");
+			QueueChangeEvent addQueueEvent(moveQueue,true);
+			eventBus->Publish(addQueueEvent);
+			
+			Engine::Application::Get().GetTimerManager().SetTimeout(moveQueue.size() * 0.3f, [this]()
+				{
+					ENGINE_LOG("Finished showing smokes");
+					startActions = true;
+				});
+
+
 			playButton->SetOnClick([this]()
 				{
 					ENGINE_LOG("Play called - running");
@@ -143,12 +153,31 @@ void GameManagerScript::OnStart()
 			ENGINE_LOG("Manager recieved finish move event");
 
 			brotherPos = e.GetPos();
+			onAir = e.OnAir();
+
 			e.handled = true;
 
 			Engine::Application::Get().GetTimerManager().SetTimeout(1.0f, [this]()
 				{
 					pendingAction = true;
 				});
+
+		});
+
+	listenerId = eventBus->Subscribe<HitPlayer>([this](HitPlayer& e)
+		{
+			switch (e.GetType())
+			{
+			case HitType::Death:
+				//OnLose();
+				break;
+
+			case HitType::Win:
+				OnWin();
+				break;
+			default:
+				break;
+			}
 		});
 
 	GetSmokeButtons();
@@ -171,10 +200,34 @@ void GameManagerScript::OnUpdate(float)
 {
 	if (!startActions || gameEnded) return;
 
-
-
 	if (pendingAction)
 	{
+		if (onAir)
+		{
+			Engine::Node* gridNodeTowards;
+
+			Engine::Vector2f closestCell = GetClosestNode(brotherPos);
+			Engine::Vector2f nextCell = closestCell;
+			nextCell.y--;
+
+			if (IterExists(nextCell))
+			{
+				gridNodeTowards = gridBody[nextCell.x][nextCell.y];
+				ENGINE_LOG("[ITER EXISTS]: moving to: " << gridNodeTowards->transform->GetPosition());
+				MoveEvent moveEvent(gridNodeTowards, MoveType::Fall);
+				Engine::Application::Get().GetEventBus().Publish(moveEvent);
+			}
+			else
+			{
+				Engine::Application::Get().GetTimerManager().SetTimeout(0.5f, [this]()
+					{
+						pendingAction = true;
+					});
+			}
+			pendingAction = false;
+			return;
+		}
+
 		if (moveQueue.empty())
 		{
 			OnLose();
@@ -185,6 +238,8 @@ void GameManagerScript::OnUpdate(float)
 		SmokeType type = moveQueue.front();
 		moveQueue.pop();
 
+		MoveType moveType;
+
 		Engine::Node* gridNodeTowards;
 
 		Engine::Vector2f closestCell = GetClosestNode(brotherPos);
@@ -192,15 +247,21 @@ void GameManagerScript::OnUpdate(float)
 		switch (type)
 		{
 		case SmokeType::Left:
+			moveType = MoveType::Walk;
 			nextCell.x--;
 			break;
 
 		case SmokeType::Right:
+			moveType = MoveType::Walk;
 			nextCell.x++;
 			break;
 
 		case SmokeType::Jump:
+			moveType = MoveType::Jump;
 			nextCell.y++;
+			break;
+		case SmokeType::Crouch:
+			moveType = MoveType::Crouch;
 			break;
 
 		default:
@@ -211,8 +272,15 @@ void GameManagerScript::OnUpdate(float)
 		{
 			gridNodeTowards = gridBody[nextCell.x][nextCell.y];
 			ENGINE_LOG("[ITER EXISTS]: moving to: " << gridNodeTowards->transform->GetPosition());
-			MoveEvent moveEvent(gridNodeTowards, MoveType::Walk);
+			MoveEvent moveEvent(gridNodeTowards, moveType);
 			Engine::Application::Get().GetEventBus().Publish(moveEvent);
+		}
+		else
+		{
+			Engine::Application::Get().GetTimerManager().SetTimeout(0.5f, [this]()
+				{
+					pendingAction = true;
+				});
 		}
 	}
 }
@@ -227,6 +295,7 @@ void GameManagerScript::OnDestroy()
 	if (eventBus)
 	{
 		eventBus->Unsubscribe(FinishMoveEvent::GetStaticType(), listenerId);
+		eventBus->Unsubscribe(HitPlayer::GetStaticType(), listenerId);
 	}
 }
 bool GameManagerScript::IterExists(Engine::Vector2f iter)
