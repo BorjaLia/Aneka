@@ -6,7 +6,7 @@ void GameManagerScript::GetSmokeButtons()
 {
 	Engine::Node* ui = owner->FindChild("UI");
 	if (!ui) return;
-	
+
 	Engine::Node* inventory = ui->FindChild("Inventory");;
 	if (!inventory) return;
 
@@ -30,6 +30,12 @@ void GameManagerScript::OnStart()
 
 	MoveEvent moveEvent(testNode, MoveType::Jump);
 	Engine::Application::Get().GetEventBus().Publish(moveEvent);
+}
+
+GameManagerScript::GameManagerScript(std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> gridBody)
+
+{
+	this->gridBody = gridBody;
 }
 
 void GameManagerScript::OnUpdate(float)
