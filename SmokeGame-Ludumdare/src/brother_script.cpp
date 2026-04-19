@@ -2,8 +2,8 @@
 
 void BrotherScript::OnStart()
 {
-	animation = owner->GetComponent<Engine::AnimatedSpriteComponent>();
-	trs = owner->GetComponent<Engine::TransformComponent>();
+	animation = owner->FindChild("TextureNode")->GetComponent<Engine::AnimatedSpriteComponent>();
+	trs = owner->FindChild("TextureNode")->transform;
 }
 
 void BrotherScript::OnUpdate(float delta)
@@ -23,6 +23,7 @@ void BrotherScript::Move(float delta)
 
 void BrotherScript::PlayAnim()
 {
+	if (!animation) return;
 	switch (state)
 	{
 	case BrotherScript::STATE::IDLE:

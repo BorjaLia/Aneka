@@ -55,6 +55,9 @@
     <ClCompile Include="src\brother_script.cpp">
       <Filter>Source Files\Scripts</Filter>
     </ClCompile>
+    <ClCompile Include="src\prefabs\level_ui_prefab.cpp">
+      <Filter>Source Files\Prefabs</Filter>
+    </ClCompile>
     <ClCompile Include="src\button_script.cpp">
       <Filter>Source Files\Scripts</Filter>
     </ClCompile>
@@ -92,6 +95,9 @@
     </ClInclude>
     <ClInclude Include="src\brother_script.h">
       <Filter>Source Files\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="src\prefabs\level_ui_prefab.h">
+      <Filter>Source Files\Prefabs</Filter>
     </ClInclude>
     <ClInclude Include="src\button_script.h">
       <Filter>Source Files\Scripts</Filter>

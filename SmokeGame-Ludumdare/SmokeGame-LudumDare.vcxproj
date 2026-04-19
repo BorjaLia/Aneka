@@ -31,6 +31,7 @@
     <ClCompile Include="src\player.cpp" />
     <ClCompile Include="src\prefabs\brother.cpp" />
     <ClCompile Include="src\prefabs\level_prefab.cpp" />
+    <ClCompile Include="src\prefabs\level_ui_prefab.cpp" />
     <ClCompile Include="src\prefabs\obstacle_prefab.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -50,6 +51,7 @@
     <ClInclude Include="src\player.h" />
     <ClInclude Include="src\prefabs\brother.h" />
     <ClInclude Include="src\prefabs\level_prefab.h" />
+    <ClInclude Include="src\prefabs\level_ui_prefab.h" />
     <ClInclude Include="src\prefabs\obstacle_prefab.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
