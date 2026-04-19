@@ -10,7 +10,8 @@ namespace Engine
     enum class FollowMode
     {
         Strict,
-        Lerp
+        Lerp,
+        Linear
     };
 
     class FollowComponent : public Component

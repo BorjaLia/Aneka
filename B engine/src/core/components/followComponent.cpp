@@ -44,36 +44,60 @@ namespace Engine
             diff = targetPos - currentPos;
         }
 
-        // 3. Aplicar el Movimiento
-        if (mode == FollowMode::Strict)
+        switch (mode)
+        {
+        case FollowMode::Strict:
         {
             owner->transform->SetPosition(targetPos);
+            break;
         }
-        else if (mode == FollowMode::Lerp)
+        case FollowMode::Lerp:
         {
-            // Fórmula mágica de Lerp independiente del Framerate:
-            // position += diff * (1.0 - exp(-speed * deltaTime))
+            // Fórmula mágica de Lerp independiente del Framerate
             float t = 1.0f - std::exp(-lerpSpeed * deltaTime);
-
             Vector2f newPos = currentPos + (diff * t);
             owner->transform->SetPosition(newPos);
+            break;
+        }
+        case FollowMode::Linear:
+        {
+            // Distancia real al objetivo
+            float dist = std::sqrt(distSq);
+            // Distancia máxima que podemos recorrer en este frame
+            float step = lerpSpeed * deltaTime;
+
+            if (dist <= step)
+            {
+                owner->transform->SetPosition(targetPos);
+            }
+            else
+            {
+                Vector2f dir = diff / dist;
+                Vector2f newPos = currentPos + (dir * step);
+                owner->transform->SetPosition(newPos);
+            }
+            break;
+        }
         }
     }
+
     std::string FollowComponent::ToString() const
     {
         std::stringstream ss;
         ss << "Follow [Speed " << lerpSpeed;
 
-
-        if (mode == FollowMode::Strict)
+        switch (mode)
         {
+        case FollowMode::Strict:
             ss << " | Follow mode: ( Strict )";
-        }
-        else if (mode == FollowMode::Lerp)
-        {
+            break;
+        case FollowMode::Lerp:
             ss << " | Follow mode: ( Lerp )";
+            break;
+        case FollowMode::Linear:
+            ss << " | Follow mode: ( Linear )";
+            break;
         }
-
 
         ss << "]";
         return ss.str();

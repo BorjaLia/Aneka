@@ -25,15 +25,15 @@ void GameManagerScript::OnStart()
 		ENGINE_ERROR("Smoke button not found! - Game manager");
 	}
 
-	brother = owner->GetParent()->FindChild("Brother");
+	Engine::Node* testNode = Engine::Application::Get().GetSceneBuilder().CreateNode();
+	testNode->transform->SetPosition(Engine::Vector2f(500.0f, 450.0f));
 
-	ENGINE_LOG("bas");
-	ENGINE_LOG(gridBody[0][0]->transform->GetPosition());
+	MoveEvent moveEvent(testNode, MoveType::Jump);
+	Engine::Application::Get().GetEventBus().Publish(moveEvent);
+}
 
-	//MoveEvent moveEvent(gridBody[0][0], MoveType::Walk);
-	//Engine::Application::Get().GetEventBus().Publish(moveEvent);
-}	
 GameManagerScript::GameManagerScript(std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> gridBody)
+
 {
 	this->gridBody = gridBody;
 }

@@ -25,11 +25,13 @@ void AddBrother(Engine::SceneBuilder& builder, Engine::Vector2f pos)
 
     auto* sprite = spriteNode->AddComponent<Engine::AnimatedSpriteComponent>(brother_sprite_sheet,Engine::Pivot::Center);
 
+    sprite->AddAnimationGrid("Idle",0,0,8,670,1100,0.125f);
+    sprite->AddAnimationGrid("Jump",0,0,8,670,1100,0.125f);
     sprite->AddAnimationGrid("Walk",0,0,8,670,1100,0.125f);
     sprite->AddAnimationGrid("Fall",0,1,3,576,1100,0.125f, false);
     sprite->AddAnimationGrid("Death",0,2,3,670,1100,0.125f, false);
 
-    brother->AddComponent<Engine::FollowComponent>();
+    brother->AddComponent<Engine::FollowComponent>(brother,Engine::FollowMode::Linear);
 	brother->AddComponent<Engine::ScriptComponent>(new BrotherScript);
 
     //sprite->Play("Walk");
