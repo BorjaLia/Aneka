@@ -126,6 +126,8 @@ void GameManagerScript::OnLose()
 {
 	ENGINE_LOG("Loss registered");
 	gameEnded = true;
+	MoveEvent moveEvent(nullptr, MoveType::Death);
+	Engine::Application::Get().GetEventBus().Publish(moveEvent);
 	Engine::Application::Get().GetTimerManager().SetTimeout(5.0f, [this]()
 		{
 			Engine::Application::Get().ReloadCurrentScene();

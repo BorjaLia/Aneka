@@ -39,7 +39,7 @@ void AddBrother(Engine::SceneBuilder& builder, Engine::Vector2f pos)
 	brother->AddComponent<Engine::ScriptComponent>(new BrotherScript);
 
     //deathSprite->Play("Death");
-    //sprite->Play("Walk");
+    sprite->Play("Idle");
 
     brother->AddComponent<Engine::ColliderComponent>(Engine::RectangleShape(Engine::Vector2f(100.0f,250.0f)));
 }

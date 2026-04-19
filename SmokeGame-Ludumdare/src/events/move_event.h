@@ -8,7 +8,8 @@ enum class MoveType
 	Idle,
 	Walk,
 	Jump,
-	Crouch
+	Crouch,
+	Death
 };
 
 class MoveEvent : public Engine::EventBase<MoveEvent>

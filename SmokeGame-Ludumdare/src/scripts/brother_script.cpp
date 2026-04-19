@@ -38,6 +38,29 @@ void BrotherScript::Crouch()
 	animation->speedMultiplier = 1.0f;
 }
 
+void BrotherScript::Fall()
+{
+	animation->Play("Fall");
+	ENGINE_LOG("Brother is Falling");
+	animation->speedMultiplier = 1.0f;
+}
+
+void BrotherScript::Death()
+{
+	animation->SetActive(false);
+	animation = owner->FindChild("DeathSprite")->GetComponent<Engine::AnimatedSpriteComponent>();
+	animation->Play("Death");
+	ENGINE_LOG("Brother is Dead :(");
+	animation->speedMultiplier = 1.0f;
+	Engine::Application::Get().GetTimerManager().SetTimeout(2.0f, [this]()
+		{
+			Engine::Node* heaven = Engine::Application::Get().GetSceneBuilder().CreateChildNode(this->owner, "Heaven");
+			heaven->transform->SetPosition(Engine::Vector2f(0.0f,1000.0f));
+			this->target = heaven;
+			this->speed = this->speed / 4.0f;
+		});
+}
+
 void BrotherScript::OnStart()
 {
 	eventBus = &Engine::Application::Get().GetEventBus();
@@ -114,6 +137,10 @@ void BrotherScript::DoAction(Engine::Node* target, MoveType move)
 		break;
 	case MoveType::Crouch:
 		Crouch();
+		break;
+	case MoveType::Death:
+		Death();
+
 		break;
 	default:
 		break;
