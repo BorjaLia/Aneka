@@ -7,6 +7,8 @@
 #include "core/components/uiAnchorComponent.h"
 #include "core/components/buttonComponent.h"
 
+#include "main_menu_scene.h"
+
 #include "button.h"
 
 void AddLevelUI(Engine::SceneBuilder& builder)
@@ -27,6 +29,6 @@ void AddLevelUI(Engine::SceneBuilder& builder)
 
     menuButton->GetComponent<Engine::ButtonComponent>()->SetOnClick([]()
         {
-            ENGINE_LOG("MENU CALLED");
+            Engine::Application::Get().GetSceneManager().LoadScene(std::make_unique<MainMenuScene>());
         });
 }
