@@ -7,7 +7,7 @@
 #include "../src/core/components/buttonComponent.h"
 #include "../src/core/components/textComponent.h"
 
-Engine::Node* AddButton(Engine::SceneBuilder& builder, Engine::Vector2f pos, std::string buttonText, std::string mainNodeName, Engine::Vector2f scale, Engine::Texture2D hoverTex, Engine::Texture2D normalTex,Engine::Pivot pivot, float rotation)
+Engine::Node* AddButton(Engine::SceneBuilder& builder, Engine::Vector2f pos, std::string buttonText, std::string mainNodeName, Engine::Vector2f scale, Engine::Texture2D hoverTex, Engine::Texture2D normalTex,Engine::Pivot pivot, float rotation, Engine::Node* parent)
 {
 	auto& app = Engine::Application::Get();
 	auto& rm = *app.GetResourceManager();
@@ -15,7 +15,22 @@ Engine::Node* AddButton(Engine::SceneBuilder& builder, Engine::Vector2f pos, std
 	Engine::Texture2D buttonTex = normalTex;
 	Engine::Font* font = rm.GetFont("res/fonts/ReemKufiFunRegular.ttf", 200);
 
-	Engine::Node* button = builder.CreateNode(mainNodeName);
+	Engine::Node* button = nullptr;
+
+	if (parent)
+	{
+		button = builder.CreateChildNode(parent,mainNodeName);
+	}
+	else
+	{
+		button = builder.CreateNode(mainNodeName);
+	}
+
+	if (!button)
+	{
+		ENGINE_ERROR("NO BUTTON CREATED! - Button prefab");
+		return button;
+	}
 
 	button->transform->SetPosition(pos);
 

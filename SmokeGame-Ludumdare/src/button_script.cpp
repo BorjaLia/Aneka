@@ -32,13 +32,13 @@ void ButtonScript::OnUpdate(float)
 
 	if (button->IsHovered())
 	{
-		sprite->SetTexture(rm->GetTexture("res/sprites/hoveredButton.png"));
+		sprite->SetTexture(textureHover);
 		owner->transform->SetRotation(rotation);
 		owner->FindChild("ButtonText")->transform->SetRotation(15);
 	}
 	else
 	{
-		sprite->SetTexture(rm->GetTexture("res/sprites/button.png"));
+		sprite->SetTexture(texture);
 		owner->transform->SetRotation(0);
 		owner->FindChild("ButtonText")->transform->SetRotation(0);
 	}
