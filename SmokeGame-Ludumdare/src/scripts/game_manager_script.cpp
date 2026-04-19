@@ -115,7 +115,7 @@ void GameManagerScript::OnWin()
 {
 	ENGINE_LOG("Win registered");
 	gameEnded = true;
-	Engine::Application::Get().GetTimerManager().SetTimeout(5.0f, [this]()
+	Engine::Application::Get().GetTimerManager().SetTimeout(2.5f, [this]()
 		{
 			//--------------------------------
 			Engine::Application::Get().LoadScene<MainMenuScene>(); //CAMBIAR A PROXIMO NIVEL!!!
@@ -128,7 +128,7 @@ void GameManagerScript::OnLose()
 	gameEnded = true;
 	MoveEvent moveEvent(nullptr, MoveType::Death);
 	Engine::Application::Get().GetEventBus().Publish(moveEvent);
-	Engine::Application::Get().GetTimerManager().SetTimeout(5.0f, [this]()
+	Engine::Application::Get().GetTimerManager().SetTimeout(2.5f, [this]()
 		{
 			Engine::Application::Get().ReloadCurrentScene();
 		});
@@ -145,7 +145,7 @@ void GameManagerScript::OnStart()
 			brotherPos = e.GetPos();
 			e.handled = true;
 
-			Engine::Application::Get().GetTimerManager().SetTimeout(3.0f, [this]()
+			Engine::Application::Get().GetTimerManager().SetTimeout(1.0f, [this]()
 				{
 					pendingAction = true;
 				});
@@ -171,14 +171,15 @@ void GameManagerScript::OnUpdate(float)
 {
 	if (!startActions || gameEnded) return;
 
-	if (moveQueue.empty())
-	{
-		OnLose();
-		return;
-	}
+
 
 	if (pendingAction)
 	{
+		if (moveQueue.empty())
+		{
+			OnLose();
+			return;
+		}
 		pendingAction = false;
 
 		SmokeType type = moveQueue.front();
@@ -212,10 +213,6 @@ void GameManagerScript::OnUpdate(float)
 			ENGINE_LOG("[ITER EXISTS]: moving to: " << gridNodeTowards->transform->GetPosition());
 			MoveEvent moveEvent(gridNodeTowards, MoveType::Walk);
 			Engine::Application::Get().GetEventBus().Publish(moveEvent);
-		}
-		else
-		{
-			pendingAction = true;
 		}
 	}
 }

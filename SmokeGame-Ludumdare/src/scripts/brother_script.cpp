@@ -48,16 +48,18 @@ void BrotherScript::Fall()
 void BrotherScript::Death()
 {
 	animation->SetActive(false);
-	animation = owner->FindChild("DeathSprite")->GetComponent<Engine::AnimatedSpriteComponent>();
+	Engine::Node* deathSprite = owner->FindChild("DeathSprite");
+	deathSprite->transform->SetPosition(owner->transform->GetPosition());
+	animation = deathSprite->GetComponent<Engine::AnimatedSpriteComponent>();
 	animation->Play("Death");
 	ENGINE_LOG("Brother is Dead :(");
 	animation->speedMultiplier = 1.0f;
-	Engine::Application::Get().GetTimerManager().SetTimeout(2.0f, [this]()
+	Engine::Application::Get().GetTimerManager().SetTimeout(0.3f, [this]()
 		{
 			Engine::Node* heaven = Engine::Application::Get().GetSceneBuilder().CreateChildNode(this->owner, "Heaven");
-			heaven->transform->SetPosition(Engine::Vector2f(0.0f,1000.0f));
-			this->target = heaven;
-			this->speed = this->speed / 4.0f;
+			heaven->transform->SetPosition(Engine::Vector2f(20.0f,100.0f));
+			this->speed = 5.0f;
+			this->owner->GetComponent<Engine::FollowComponent>()->SetTarget(heaven);
 		});
 }
 
