@@ -3,7 +3,7 @@
 void BrotherScript::OnStart()
 {
 	animation = owner->FindChild("TextureNode")->GetComponent<Engine::AnimatedSpriteComponent>();
-	trs = owner->FindChild("TextureNode")->transform;
+	trs = owner->transform;
 }
 
 void BrotherScript::OnUpdate(float delta)
