@@ -7,7 +7,7 @@
 #include "../src/core/components/buttonComponent.h"
 #include "../src/core/components/textComponent.h"
 
-void AddButton(Engine::SceneBuilder& builder, Engine::Vector2f pos, std::string buttonText, std::string mainNodeName, Engine::Vector2f scale, Engine::Texture2D hoverTex, Engine::Texture2D normalTex, float rotation)
+Engine::Node* AddButton(Engine::SceneBuilder& builder, Engine::Vector2f pos, std::string buttonText, std::string mainNodeName, Engine::Vector2f scale, Engine::Texture2D hoverTex, Engine::Texture2D normalTex, float rotation)
 {
 	auto& app = Engine::Application::Get();
 	auto& rm = *app.GetResourceManager();
@@ -31,4 +31,6 @@ void AddButton(Engine::SceneBuilder& builder, Engine::Vector2f pos, std::string 
 	text->pivot = Engine::Pivot::Center;
 
 	button->AddComponent<Engine::ScriptComponent>(new ButtonScript(normalTex, hoverTex, scale, rotation));
+
+	return button;
 }

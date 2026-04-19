@@ -6,4 +6,4 @@
 
 #include "core/types.h"
 
-void AddBackground(Engine::SceneBuilder& builder);
+void AddBackground(Engine::SceneBuilder& builder,Engine::RenderLayer layer = Engine::RenderLayer::World);

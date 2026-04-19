@@ -33,6 +33,7 @@ namespace Engine
         // 1. ¡La Ventana pide permiso al Sistema Operativo!
         ::InitWindow(size.x, size.y, title.c_str());
 
+        ::HideCursor();
         ::SetExitKey(KEY_NULL);
 
         // Validamos si el SO nos dio la ventana
