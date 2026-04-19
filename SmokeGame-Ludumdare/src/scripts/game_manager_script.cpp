@@ -6,10 +6,9 @@ void GameManagerScript::GetSmokeButtons()
 {
 	Engine::Node* ui = owner->FindChild("UI");
 	if (!ui) return;
-	
+
 	Engine::Node* inventory = ui->FindChild("Inventory");;
 	if (!inventory) return;
-
 
 	yellowSmoke = inventory->FindChild("YellowDust")->GetComponent<Engine::ButtonComponent>();
 	greenSmoke = inventory->FindChild("GreenDust")->GetComponent<Engine::ButtonComponent>();
@@ -26,11 +25,26 @@ void GameManagerScript::OnStart()
 		ENGINE_ERROR("Smoke button not found! - Game manager");
 	}
 
-	MoveEvent moveEvent(owner->FindChild("UI"),MoveType::Walk);
-	Engine::Application::Get().GetEventBus().Publish(moveEvent);
-}
-GameManagerScript::GameManagerScript()
+	brother = owner->GetParent()->FindChild("Brother");
+
+	ENGINE_LOG("bas");
+	ENGINE_LOG(gridBody[0][0]->transform->GetPosition());
+
+	//MoveEvent moveEvent(gridBody[0][0], MoveType::Walk);
+	//Engine::Application::Get().GetEventBus().Publish(moveEvent);
+}	
+GameManagerScript::GameManagerScript(std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> gridBody)
 {
+	this->gridBody = gridBody;
+}
+
+void GameManagerScript::OnUpdate(float)
+{
+	MoveEvent moveEvent();
+	if (brother)
+	{
+		
+	}
 }
 //
 //enum class Smokes

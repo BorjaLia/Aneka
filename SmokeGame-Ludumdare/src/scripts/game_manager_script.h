@@ -21,13 +21,16 @@ private:
 	Engine::ButtonComponent* redSmoke;
 	Engine::ButtonComponent* blueSmoke;
 
+	Engine::Node* brother;
+	std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> gridBody;
+
 	void GetSmokeButtons();
 
 	std::queue<MoveType> moveQueue;
-
 	void OnStart() override;
+	void OnUpdate(float) override;
 public:
-	GameManagerScript();
+	GameManagerScript(std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> gridBody);
 
 };
 
