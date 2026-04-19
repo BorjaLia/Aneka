@@ -24,7 +24,7 @@ void AddBrother(Engine::SceneBuilder& builder, Engine::Vector2f pos)
 
     auto* sprite = spriteNode->AddComponent<Engine::AnimatedSpriteComponent>(brother_sptite_sheet,Engine::Pivot::Center);
 
-    sprite->AddAnimationGrid("Walk",0,0,8,670,1100,0.15f);
+    sprite->AddAnimationGrid("Walk",0,0,8,670,1100,0.125f);
 
 	brother->AddComponent<Engine::ScriptComponent>(new BrotherScript);
 
