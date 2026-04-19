@@ -5,12 +5,17 @@
 
 namespace Engine
 {
-    AudioComponent::AudioComponent(AudioClip clip, bool playOnStart, bool positional, float maxDistance)
+    AudioComponent::AudioComponent(AudioClip clip, bool playOnStart, bool loop, bool positional, float maxDistance)
         : clip(clip), playOnStart(playOnStart), positional(positional), maxDistance(maxDistance)
-    {}
+    {
+        // Guardamos el valor directamente en los parámetros de reproducción
+        params.loop = loop;
+    }
 
     AudioComponent::~AudioComponent()
     {
+        Stop();
+
         auto& bus = Application::Get().GetEventBus();
         bus.Unsubscribe(AudioPlayEvent::GetStaticType(),   playEventId);
         bus.Unsubscribe(AudioStopEvent::GetStaticType(),   stopEventId);
@@ -42,6 +47,23 @@ namespace Engine
         muteEventId = bus.Subscribe<AudioMuteEvent>([](AudioMuteEvent&) {});
 
         if (playOnStart) Play();
+    }
+
+    void AudioComponent::Update(float)
+    {
+        // 1. Verificamos si las banderas de nuestra lógica están vivas
+        if (isPlaying || !params.loop) return;
+
+        IAudio* audio = Application::Get().GetAudio();
+        if (!audio) return;
+
+        // --- EL LOG DEL DETECTIVE ---
+        bool rlPlaying = audio->IsPlaying(clip);
+
+        if (!rlPlaying)
+        {
+            Play();
+        }
     }
 
     void AudioComponent::Play()

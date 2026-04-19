@@ -17,6 +17,7 @@ namespace Engine
 
         void Play(AudioClip clip, const AudioPlayParams& params = {}) override;
         void Stop(AudioClip clip)                                      override;
+        bool IsPlaying(AudioClip clip)                                 override;
 
         void SetMasterMuted(bool muted)      override;
         void SetMasterVolume(float volume)   override;
@@ -29,7 +30,7 @@ namespace Engine
     private:
         // Maps our opaque AudioClip id → the raw Raylib Sound struct (stored by id)
         // We store only the id and reconstruct the Sound when needed.
-        struct SoundEntry { unsigned int raylibId = 0; };
+        struct SoundEntry { void* internalData = nullptr; };
         std::unordered_map<unsigned int, SoundEntry> loadedSounds;
         unsigned int nextId = 1;
 

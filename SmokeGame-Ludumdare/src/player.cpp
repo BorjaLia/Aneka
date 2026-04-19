@@ -1,6 +1,8 @@
 #include "player.h"
 
 #include "../src/core/components/spriteComponent.h"
+#include "../src/core/components/audioComponent.h"
+
 
 void AddPlayer(Engine::SceneBuilder& builder, Engine::Vector2f pos)
 {
@@ -14,4 +16,9 @@ void AddPlayer(Engine::SceneBuilder& builder, Engine::Vector2f pos)
     player->transform->SetPosition(pos);
 
     player->AddComponent<Engine::SpriteComponent>(playerTex);
+<<<<<<< HEAD
+=======
+
+    //player->AddComponent<Engine::AudioComponent>(rm.GetAudioClip("res/audio/NoNoise.wav"),true, true);
+>>>>>>> refs/remotes/origin/main
 }

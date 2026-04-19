@@ -1,5 +1,5 @@
 #include "raylibAudio.h"
-#include <raylib.h>   // Only file in the audio system that touches Raylib
+#include <raylib.h>   // Único archivo que toca Raylib
 #include <cmath>
 #include <algorithm>
 
@@ -16,10 +16,9 @@ namespace Engine
         // Unload all sounds still in the map
         for (auto& [id, entry] : loadedSounds)
         {
-            
-            ::Sound s = { 0 };
-            s.stream.buffer = reinterpret_cast<rAudioBuffer*>(static_cast<uintptr_t>(entry.raylibId));
-            //::UnloadSound(s); //ERROR!!!
+            ::Sound* s = static_cast<::Sound*>(entry.internalData);
+            ::UnloadSound(*s);
+            delete s; // Liberamos la memoria de C++
         }
         loadedSounds.clear();
         ::CloseAudioDevice();
@@ -27,14 +26,20 @@ namespace Engine
 
     AudioClip RaylibAudio::LoadClip(const char* filepath)
     {
-        ::Sound rlSound = ::LoadSound(filepath);
-        if (rlSound.frameCount == 0) return AudioClip{}; // Failed — id stays 0
+        // 1. Creamos el struct completo en el Heap
+        ::Sound* rlSound = new ::Sound;
+        *rlSound = ::LoadSound(filepath);
+
+        if (rlSound->frameCount == 0)
+        {
+            delete rlSound; // Limpiamos si falló
+            return AudioClip{};
+        }
 
         unsigned int ourId = nextId++;
-        // We re-identify Raylib's Sound by casting its internal buffer pointer to an integer.
-        // This avoids storing the full Raylib Sound struct (which would require the header elsewhere).
-        loadedSounds[ourId] = { static_cast<unsigned int>(
-            reinterpret_cast<uintptr_t>(rlSound.stream.buffer)) };
+
+        // 2. Guardamos el puntero en nuestro void*
+        loadedSounds[ourId] = { rlSound };
 
         AudioClip clip;
         clip.id = ourId;
@@ -46,20 +51,12 @@ namespace Engine
         auto it = loadedSounds.find(clip.id);
         if (it == loadedSounds.end()) return;
 
-        ::Sound s = { 0 };
-        s.stream.buffer = s.stream.buffer = reinterpret_cast<rAudioBuffer*>(static_cast<uintptr_t>(
-            static_cast<uintptr_t>(it->second.raylibId)));
-        ::UnloadSound(s);
-        loadedSounds.erase(it);
-    }
+        // 3. Recuperamos el puntero, lo descargamos de la GPU/RAM de audio y lo borramos
+        ::Sound* s = static_cast<::Sound*>(it->second.internalData);
+        ::UnloadSound(*s);
+        delete s;
 
-    // Internal helper: reconstruct a Raylib Sound from our stored pointer
-    static ::Sound MakeRaylibSound(unsigned int raylibId)
-    {
-        ::Sound s = { 0 };
-        s.stream.buffer = s.stream.buffer = reinterpret_cast<rAudioBuffer*>(static_cast<uintptr_t>(
-            static_cast<uintptr_t>(raylibId)));
-        return s;
+        loadedSounds.erase(it);
     }
 
     void RaylibAudio::Play(AudioClip clip, const AudioPlayParams& params)
@@ -67,11 +64,12 @@ namespace Engine
         auto it = loadedSounds.find(clip.id);
         if (it == loadedSounds.end()) return;
 
-        ::Sound s = MakeRaylibSound(it->second.raylibId);
+        ::Sound* s = static_cast<::Sound*>(it->second.internalData);
         float effectiveVolume = masterMuted ? 0.0f : params.volume * masterVolume;
-        ::SetSoundVolume(s, effectiveVolume);
-        ::SetSoundPitch(s, params.pitch);
-        ::PlaySound(s);
+
+        ::SetSoundVolume(*s, effectiveVolume);
+        ::SetSoundPitch(*s, params.pitch);
+        ::PlaySound(*s);
     }
 
     void RaylibAudio::Stop(AudioClip clip)
@@ -79,8 +77,17 @@ namespace Engine
         auto it = loadedSounds.find(clip.id);
         if (it == loadedSounds.end()) return;
 
-        ::Sound s = MakeRaylibSound(it->second.raylibId);
-        ::StopSound(s);
+        ::Sound* s = static_cast<::Sound*>(it->second.internalData);
+        ::StopSound(*s);
+    }
+
+    bool RaylibAudio::IsPlaying(AudioClip clip)
+    {
+        auto it = loadedSounds.find(clip.id);
+        if (it == loadedSounds.end()) return false;
+
+        ::Sound* s = static_cast<::Sound*>(it->second.internalData);
+        return ::IsSoundPlaying(*s);
     }
 
     void RaylibAudio::SetMasterMuted(bool muted)
@@ -96,19 +103,16 @@ namespace Engine
     }
 
     void RaylibAudio::PlayPositional(AudioClip clip, const AudioPlayParams& params,
-                                     const Vector2f& listenerPos,
-                                     const Vector2f& sourcePos,
-                                     float           maxDistance)
+        const Vector2f& listenerPos,
+        const Vector2f& sourcePos,
+        float           maxDistance)
     {
         if (maxDistance <= 0.0f) return;
 
-        // Distance attenuation: linear falloff from 1.0 at distance=0 to 0.0 at maxDistance.
-        // This is the simplest model — good enough for 2D. More sophisticated models
-        // (inverse square, logarithmic) can be swapped in here later without touching callers.
-        float dx   = sourcePos.x - listenerPos.x;
-        float dy   = sourcePos.y - listenerPos.y;
+        float dx = sourcePos.x - listenerPos.x;
+        float dy = sourcePos.y - listenerPos.y;
         float dist = std::sqrt(dx * dx + dy * dy);
-        float t    = std::clamp(1.0f - dist / maxDistance, 0.0f, 1.0f);
+        float t = std::clamp(1.0f - dist / maxDistance, 0.0f, 1.0f);
 
         if (t <= 0.0f) return; // Too far to hear
 

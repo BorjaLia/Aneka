@@ -29,12 +29,23 @@ namespace Engine
             if (animator)
             {
                 pivot = animator->pivot;
-                baseSize = animator->GetCurrentFrameSize(); // Usamos la nueva función
+
+                Vector2f target = animator->GetTargetSize();
+
+                if (target.x != 0.0f && target.y != 0.0f)
+                    baseSize = target; // Usamos el tamaño forzado
+                else
+                    baseSize = animator->GetCurrentFrameSize(); // Usamos el tamaño original del frame
             }
             else
             {
                 pivot = sprite->pivot;
-                baseSize = { static_cast<float>(sprite->texture.size.x), static_cast<float>(sprite->texture.size.y) };
+                Vector2f target = sprite->GetTargetSize();
+
+                if (target.x != 0.0f && target.y != 0.0f)
+                    baseSize = target; // Usamos el tamaño forzado
+                else
+                    baseSize = { static_cast<float>(sprite->texture.size.x), static_cast<float>(sprite->texture.size.y) };
             }
 
             // 1. Obtenemos la escala final del Transform
@@ -54,11 +65,9 @@ namespace Engine
                 shape = CircleShape{ std::max(finalWidth, finalHeight) / 2.0f };
             }
 
-            // 4. ¡LA MAGIA DEL PIVOTE!
             Vector2f pivotMult = GetPivotMultiplier(pivot);
 
             offset.x = (0.5f - pivotMult.x) * finalWidth;
-            // ¡CORREGIDO!: Sin el signo negativo para 2D Y-Down
             offset.y = (0.5f - pivotMult.y) * finalHeight;
         }
     }
