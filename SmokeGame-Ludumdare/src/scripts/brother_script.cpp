@@ -6,7 +6,7 @@ void BrotherScript::OnStart()
 	trs = owner->transform;
 }
 
-void BrotherScript::OnUpdate(float delta)
+void BrotherScript::OnUpdate(float)
 {
 	dir = Engine::Vector2f(1.f, 0.f);
 	//Move(delta);

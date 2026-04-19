@@ -1,9 +1,9 @@
-#include "background.h"
+#include "background_prefab.h"
 
 #include "../src/core/components/spriteComponent.h"
 #include "../src/core/components/scriptComponent.h"
 
-#include "backgroundScript.h"
+#include "scripts/background_script.h"
 
 void AddBackground(Engine::SceneBuilder& builder, Engine::RenderLayer layer)
 {

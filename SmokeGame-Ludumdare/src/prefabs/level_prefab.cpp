@@ -5,15 +5,15 @@
 #include "../src/core/components/audioListenerComponent.h"
 
 #include "level_ui_prefab.h"
-#include "background.h"
+#include "background_prefab.h"
 
 #include "../src/prefabs/grid_prefab.h"
 #include "../src/core/components/scriptComponent.h"
-#include "brother.h"
-#include "player.h"
-#include "game_manager_script.h"
+#include "brother_prefab.h"
+#include "player_prefab.h"
+#include "scripts/game_manager_script.h"
 
-#include "cursor.h"
+#include "cursor_prefab.h"
 
 void StartLevel(Engine::SceneBuilder& builder)
 {

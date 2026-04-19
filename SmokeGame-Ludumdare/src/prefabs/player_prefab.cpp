@@ -1,4 +1,4 @@
-#include "player.h"
+#include "player_prefab.h"
 
 #include "../src/core/components/spriteComponent.h"
 #include "../src/core/components/audioComponent.h"

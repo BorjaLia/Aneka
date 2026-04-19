@@ -1,5 +1,5 @@
-#include "button.h"
-#include "button_script.h"
+#include "button_prefab.h"
+#include "scripts/button_script.h"
 
 #include "../src/core/components/spriteComponent.h"
 #include "../src/core/components/audioComponent.h"

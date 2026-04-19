@@ -1,8 +1,8 @@
-#include "cursor.h"
+#include "cursor_prefab.h"
 
 #include "../src/core/components/spriteComponent.h"
 #include "../src/core/components/scriptComponent.h"
-#include "mouse_script.h"
+#include "scripts/mouse_script.h"
 
 void AddCursor(Engine::SceneBuilder& builder, Engine::CameraComponent* camera)
 {

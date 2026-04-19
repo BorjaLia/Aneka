@@ -1,11 +1,11 @@
-#include "brother.h"
+#include "brother_prefab.h"
 
 #include "../src/core/components/spriteComponent.h"
 #include "../src/core/components/animatedSpriteComponent.h"
 #include "../src/core/components/colliderComponent.h"
 #include "../src/core/components/scriptComponent.h"
 
-#include "brother_script.h"
+#include "scripts/brother_script.h"
 
 void AddBrother(Engine::SceneBuilder& builder, Engine::Vector2f pos)
 {
