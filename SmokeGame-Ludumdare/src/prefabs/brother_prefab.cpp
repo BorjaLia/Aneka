@@ -31,7 +31,7 @@ void AddBrother(Engine::SceneBuilder& builder, Engine::Vector2f pos)
     sprite->AddAnimationGrid("Fall",0,1,3,576,1100,0.125f, false);
     sprite->AddAnimationGrid("Death",0,2,3,670,1100,0.125f, false);
 
-    brother->AddComponent<Engine::FollowComponent>(brother,Engine::FollowMode::Linear);
+    brother->AddComponent<Engine::FollowComponent>(brother,Engine::FollowMode::Strict);
 	brother->AddComponent<Engine::ScriptComponent>(new BrotherScript);
 
     //sprite->Play("Walk");

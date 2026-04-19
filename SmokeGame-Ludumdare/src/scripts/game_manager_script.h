@@ -16,6 +16,9 @@ class GameManagerScript : public Engine::Script
 private:
 	//Engine::ScriptComponent* grid;
 	
+	Engine::EventBus* eventBus;
+	Engine::EventListenerID listenerId;
+
 	Engine::ButtonComponent* yellowSmoke;
 	Engine::ButtonComponent* greenSmoke;
 	Engine::ButtonComponent* redSmoke;
@@ -24,11 +27,15 @@ private:
 	Engine::Node* brother;
 	std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> gridBody;
 
+	float startTime = 0.0f;
+	float actionInterval = 0.0f;
+
 	void GetSmokeButtons();
 
 	std::queue<MoveType> moveQueue;
 	void OnStart() override;
 	void OnUpdate(float) override;
+	void OnDestroy() override;
 public:
 	GameManagerScript(std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> gridBody);
 

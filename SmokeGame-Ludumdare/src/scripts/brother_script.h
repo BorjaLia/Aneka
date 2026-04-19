@@ -28,15 +28,22 @@ private:
 	float baseSpeed = 250.0f;
 	float speed = baseSpeed;
 
-	State state = State::Walk;
+	bool moving = false;
+
+	State state = State::Idle;
 
 	Engine::TransformComponent* trs;
 	Engine::AnimatedSpriteComponent* animation;
 	Engine::FollowComponent* followComp;
 
-	//void Move(float delta);
+	Engine::Node* target = nullptr;
+
+	void Idle();
+	void Walk();
+	void Jump();
+	void Crouch();
+
 	void DoAction(Engine::Node* target, MoveType move);
-	//void PlayAnim();
 public:
 	void OnStart() override;
 	void OnUpdate(float delta) override;

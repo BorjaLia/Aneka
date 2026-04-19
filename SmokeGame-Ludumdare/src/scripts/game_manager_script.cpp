@@ -2,6 +2,14 @@
 
 #include "core/time.h"
 
+static int move = 1;
+
+GameManagerScript::GameManagerScript(std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> gridBody)
+
+{
+	this->gridBody = gridBody;
+}
+
 void GameManagerScript::GetSmokeButtons()
 {
 	Engine::Node* ui = owner->FindChild("UI");
@@ -18,34 +26,71 @@ void GameManagerScript::GetSmokeButtons()
 
 void GameManagerScript::OnStart()
 {
+	eventBus = &Engine::Application::Get().GetEventBus();
+
+	listenerId = eventBus->Subscribe<FinishMoveEvent>([this](FinishMoveEvent& e)
+		{
+			e.handled = true;
+			ENGINE_LOG("Manager recieved finish move event");
+
+			Engine::Node* target = nullptr;
+
+			switch (move)
+			{
+			case 1:
+				target = gridBody[2][0];
+				break;
+
+			case 2:
+				target = gridBody[4][0];
+				break;
+			case 3:
+				target = gridBody[0][0];
+				break;
+			default:
+				break;
+			}
+
+			if (!target)
+			{
+				ENGINE_LOG("Manager to publish move NO TARGET");
+				return;
+			}
+
+			ENGINE_LOG("Manager to publish move " << std::to_string( move));
+
+			MoveEvent moveEvent(target, MoveType::Walk);
+			Engine::Application::Get().GetEventBus().Publish(moveEvent);
+			
+			move++;
+		});
+
 	GetSmokeButtons();
 
 	if (!yellowSmoke || !greenSmoke || !redSmoke || !blueSmoke)
 	{
-		ENGINE_ERROR("Smoke button not found! - Game manager");
+		ENGINE_ERROR("Smoke buttons not found! - Game manager");
 	}
 
-	Engine::Node* testNode = Engine::Application::Get().GetSceneBuilder().CreateNode();
-	testNode->transform->SetPosition(Engine::Vector2f(500.0f, 450.0f));
+	//Engine::Node* testNode = Engine::Application::Get().GetSceneBuilder().CreateNode();
+	//testNode->transform->SetPosition(Engine::Vector2f(500.0f, 450.0f));
 
-	MoveEvent moveEvent(testNode, MoveType::Jump);
+	MoveEvent moveEvent(gridBody[0][0], MoveType::Walk);
 	Engine::Application::Get().GetEventBus().Publish(moveEvent);
-}
-
-GameManagerScript::GameManagerScript(std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> gridBody)
-
-{
-	this->gridBody = gridBody;
 }
 
 void GameManagerScript::OnUpdate(float)
 {
-	MoveEvent moveEvent();
-	if (brother)
+}
+
+void GameManagerScript::OnDestroy()
+{
+	if (eventBus)
 	{
-		
+		eventBus->Unsubscribe(FinishMoveEvent::GetStaticType(), listenerId);
 	}
 }
+
 //
 //enum class Smokes
 //{

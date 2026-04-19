@@ -23,3 +23,13 @@ public:
 
 	const char* GetName() const override { return "MoveEvent"; }
 };
+
+class FinishMoveEvent : public Engine::EventBase<FinishMoveEvent>
+{
+private:
+
+public:
+	FinishMoveEvent() {}
+
+	const char* GetName() const override { return "FinishMoveEvent"; }
+};
