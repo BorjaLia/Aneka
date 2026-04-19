@@ -8,10 +8,10 @@ PropsSetter::PropsSetter(std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> gr
 void PropsSetter::OnStart()
 {
 	propsVec.push_back(owner->FindChild("Props")->FindChild("o1"));
+	propsVec.push_back(owner->FindChild("Props")->FindChild("f1"));
 
 	ENGINE_LOG("re");
-	ENGINE_LOG(gridBody[0][0]->transform->GetGlobalPosition());
-	propsVec[0]->transform->SetPosition(gridBody[0][0]->transform->GetPosition());
+	ENGINE_LOG(gridBody[0][1]->transform->GetGlobalPosition());
 }
 
 void PropsSetter::OnUpdate(float)
@@ -20,7 +20,8 @@ void PropsSetter::OnUpdate(float)
 	{
 		ENGINE_LOG("re");
 		ENGINE_LOG(gridBody[0][0]->transform->GetGlobalPosition());
-		propsVec[0]->transform->SetPosition(gridBody[0][0]->transform->GetGlobalPosition());
+		propsVec[0]->transform->SetPosition(gridBody[5][0]->transform->GetGlobalPosition());
+		propsVec[1]->transform->SetPosition(gridBody[5][0]->transform->GetGlobalPosition());
 
 		firstFrame = false;
 	}

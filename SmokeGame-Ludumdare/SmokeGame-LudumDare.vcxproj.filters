@@ -70,10 +70,13 @@
     <ClCompile Include="src\events\hit_player.cpp">
       <Filter>Source\Event</Filter>
     </ClCompile>
-    <ClCompile Include="src\scripts\props_setter.cpp">
-      <Filter>Source\Script</Filter>
-    </ClCompile>
     <ClCompile Include="src\scripts\props_setter.cpp" />
+    <ClCompile Include="src\prefabs\floor1_prefab.cpp">
+      <Filter>Source\Prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scripts\props_setter.cpp">
+      <Filter>Source\Prefab</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\events\action_queue_event.h" />
@@ -176,6 +179,9 @@
     </ClInclude>
     <ClInclude Include="src\scenes\credits.h" />
     <ClInclude Include="src\scripts\props_setter.h" />
+    <ClInclude Include="src\prefabs\floor1_prefab.h">
+      <Filter>Source\Prefab</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">

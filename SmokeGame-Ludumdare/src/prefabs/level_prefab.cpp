@@ -16,6 +16,7 @@
 #include "cursor_prefab.h"
 #include "scripts/props_setter.h"
 #include "../src/prefabs/obstacle_prefab.h"
+#include "../src/prefabs/floor1_prefab.h"
 
 void StartLevel(Engine::SceneBuilder& builder)
 {
@@ -37,7 +38,7 @@ void StartLevel(Engine::SceneBuilder& builder)
 
 	floor->transform->SetPosition(center - Engine::Vector2f(0.0f, -100.0f));
 
-	//floor->AddComponent<Engine::SpriteComponent>(rm.GetTexture("res/sprites/plant2.png"));
+	floor->AddComponent<Engine::SpriteComponent>(rm.GetTexture("res/sprites/plant2.png"));
 
     Engine::Vector2f gridIter = Engine::Vector2f(10, 3);
     std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> gridBody = AddGrid(builder, Engine::Vector2f(300.f, 300.f), Engine::Vector2f(150.f, 150.f), gridIter);
@@ -56,5 +57,6 @@ void StartLevel(Engine::SceneBuilder& builder)
     //GameManagerScript* managerScript = scriptComponent->GetScript<GameManagerScript>();
 
     AddObstacle(props, builder, "o1", rm.GetTexture("res/sprites/cactus.png"), Engine::Vector2f(0.f, 0.f), Engine::Vector2f(150.0f, 150.0f), true);
+    AddFloor(props, builder, "f1", rm.GetTexture("res/sprites/floor1.png"), Engine::Vector2f(0.f, 0.f), Engine::Vector2f(150.0f, 150.0f), true);
 }
 

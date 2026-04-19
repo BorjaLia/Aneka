@@ -23,7 +23,7 @@ Engine::Node* AddObstacle(Engine::Node* props, Engine::SceneBuilder& builder, st
 
 	sprite->SetTargetSize(size);
 
-	node->AddComponent<Engine::TriggerAreaComponent>(Engine::RectangleShape{ {50.0f, 50.0f} }, Engine::Vector2f(0.0f), true);
+	node->AddComponent<Engine::TriggerAreaComponent>(Engine::RectangleShape{ {150.0f, 150.0f} }, Engine::Vector2f(0.0f), false);
 
 	return node;
 }

@@ -26,6 +26,7 @@
     <ClCompile Include="src\prefabs\brother_prefab.cpp" />
     <ClCompile Include="src\prefabs\button_prefab.cpp" />
     <ClCompile Include="src\prefabs\cursor_prefab.cpp" />
+    <ClCompile Include="src\prefabs\floor1_prefab.cpp" />
     <ClCompile Include="src\prefabs\grid_prefab.cpp" />
     <ClCompile Include="src\prefabs\level_prefab.cpp" />
     <ClCompile Include="src\prefabs\level_ui_prefab.cpp" />
@@ -58,6 +59,7 @@
     <ClInclude Include="src\prefabs\brother_prefab.h" />
     <ClInclude Include="src\prefabs\button_prefab.h" />
     <ClInclude Include="src\prefabs\cursor_prefab.h" />
+    <ClInclude Include="src\prefabs\floor1_prefab.h" />
     <ClInclude Include="src\prefabs\grid_prefab.h" />
     <ClInclude Include="src\prefabs\level_prefab.h" />
     <ClInclude Include="src\prefabs\level_ui_prefab.h" />
