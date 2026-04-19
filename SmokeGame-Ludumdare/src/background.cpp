@@ -37,13 +37,13 @@ void AddBackground(Engine::SceneBuilder& builder)
 
 	background->AddComponent <Engine::ScriptComponent>(new BackgroundScript);
 
-	backgroundFar->AddComponent <Engine::SpriteComponent>(backgroundTex, Engine::Pivot::Center, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::UI);
-	clouds->AddComponent <Engine::SpriteComponent>(cloudTex, Engine::Pivot::Center, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::UI);
-	mountainNear->AddComponent <Engine::SpriteComponent>(mountainNearTex, Engine::Pivot::Center, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::UI);
-	mountainFar->AddComponent <Engine::SpriteComponent>(mountainFarTex, Engine::Pivot::Center, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::UI);
+	backgroundFar->AddComponent <Engine::SpriteComponent>(backgroundTex, Engine::Pivot::Center, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::World);
+	clouds->AddComponent <Engine::SpriteComponent>(cloudTex, Engine::Pivot::Center, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::World);
+	mountainNear->AddComponent <Engine::SpriteComponent>(mountainNearTex, Engine::Pivot::Center, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::World);
+	mountainFar->AddComponent <Engine::SpriteComponent>(mountainFarTex, Engine::Pivot::Center, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::World);
 
-	backgroundFar2->AddComponent <Engine::SpriteComponent>(backgroundTex, Engine::Pivot::Center, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::UI);
-	clouds2->AddComponent <Engine::SpriteComponent>(cloudTex, Engine::Pivot::Center, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::UI);
-	mountainNear2->AddComponent <Engine::SpriteComponent>(mountainNearTex, Engine::Pivot::Center, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::UI);
-	mountainFar2->AddComponent <Engine::SpriteComponent>(mountainFarTex, Engine::Pivot::Center, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::UI);
+	backgroundFar2->AddComponent <Engine::SpriteComponent>(backgroundTex, Engine::Pivot::Center, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::World);
+	clouds2->AddComponent <Engine::SpriteComponent>(cloudTex, Engine::Pivot::Center, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::World);
+	mountainNear2->AddComponent <Engine::SpriteComponent>(mountainNearTex, Engine::Pivot::Center, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::World);
+	mountainFar2->AddComponent <Engine::SpriteComponent>(mountainFarTex, Engine::Pivot::Center, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::World);
 }
