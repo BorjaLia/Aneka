@@ -1,9 +1,13 @@
 #include "obstacle_prefab.h"
 
+#include <string>
+
 #include "../src/core/components/spriteComponent.h"
 #include "../src/core/components/colliderComponent.h"
+#include "../src/core/components/scriptComponent.h"
 
-#include <string>
+#include "events/hit_player.h"
+#include "scripts/obstacle_script.h"
 
 void AddObstacle(Engine::SceneBuilder& builder,std::string name,Engine::Texture2D tex, Engine::Vector2f pos, Engine::Vector2f size, bool hurt)
 {
@@ -12,13 +16,12 @@ void AddObstacle(Engine::SceneBuilder& builder,std::string name,Engine::Texture2
 
     Engine::Node* node = builder.CreateNode(name);
 
+    node->AddComponent<Engine::ScriptComponent>(new ObstacleScript);
+
     node->transform->SetPosition(pos);
     Engine::SpriteComponent* sprite =  node->AddComponent<Engine::SpriteComponent>(tex, Engine::Pivot::Center);
 
     sprite->SetTargetSize(size);
-
-    if (hurt)
-    {
-        node->AddComponent<Engine::ColliderComponent>(Engine::RectangleShape{ {50.0f, 50.0f} }, Engine::Vector2f(0.0f),true);
-    }
+        
+        node->AddComponent<Engine::TriggerAreaComponent>(Engine::RectangleShape{ {50.0f, 50.0f} }, Engine::Vector2f(0.0f),true);
 }
