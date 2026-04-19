@@ -14,6 +14,16 @@
 
 #include "button_prefab.h"
 
+static void AssignSlots(Engine::SceneBuilder& builder, Engine::Node* node, int place)
+{
+	auto* rm = Engine::Application::Get().GetResourceManager();
+	Engine::Node* slot = builder.CreateChildNode(node, std::to_string(place));
+
+	slot->AddComponent<Engine::SpriteComponent>(rm->GetTexture(""), Engine::Pivot::Center, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::UI);
+
+	slot->transform->SetPosition(Engine::Vector2f(place * 40.0f, 0.0f));
+}
+
 void AddLevelUI(Engine::SceneBuilder& builder)
 {
 	auto& app = Engine::Application::Get();
@@ -46,7 +56,7 @@ void AddLevelUI(Engine::SceneBuilder& builder)
 
 	handbagSprite->SetTargetSize({ 316.5f, 520.0f });
 
-	Engine::Node* yellowDust = AddButton(builder, Engine::Vector2f() , " ", "YellowDust", Engine::Vector2f(0.35f, 0.4f), rm.GetTexture("res/sprites/YellowDust.png"), rm.GetTexture("res/sprites/YellowDust.png"), rm.GetAudioClip("res/audio/dust_hover.wav"), Engine::Pivot::Center, 0.0f, inventoryNode);
+	Engine::Node* yellowDust = AddButton(builder, Engine::Vector2f(), " ", "YellowDust", Engine::Vector2f(0.35f, 0.4f), rm.GetTexture("res/sprites/YellowDust.png"), rm.GetTexture("res/sprites/YellowDust.png"), rm.GetAudioClip("res/audio/dust_hover.wav"), Engine::Pivot::Center, 0.0f, inventoryNode);
 	auto* yellowDustAnchot = yellowDust->AddComponent<Engine::UIAnchorComponent>();
 	yellowDustAnchot->SetOffset(Engine::Vector2f(-225.0, -120.0f));
 
@@ -55,7 +65,7 @@ void AddLevelUI(Engine::SceneBuilder& builder)
 			ENGINE_LOG("yellow dust selected");
 		});
 
-	Engine::Node* blueDust = AddButton(builder, Engine::Vector2f() , " ", "BlueDust", Engine::Vector2f(0.35f, 0.35f), rm.GetTexture("res/sprites/BlueDust.png"), rm.GetTexture("res/sprites/BlueDust.png"), rm.GetAudioClip("res/audio/dust_hover.wav"), Engine::Pivot::Center, 0.0f, inventoryNode);
+	Engine::Node* blueDust = AddButton(builder, Engine::Vector2f(), " ", "BlueDust", Engine::Vector2f(0.35f, 0.35f), rm.GetTexture("res/sprites/BlueDust.png"), rm.GetTexture("res/sprites/BlueDust.png"), rm.GetAudioClip("res/audio/dust_hover.wav"), Engine::Pivot::Center, 0.0f, inventoryNode);
 	auto* blueDustAnchor = blueDust->AddComponent<Engine::UIAnchorComponent>();
 	blueDustAnchor->SetOffset(Engine::Vector2f(-115.0f, -125.0f));
 
@@ -64,7 +74,7 @@ void AddLevelUI(Engine::SceneBuilder& builder)
 			ENGINE_LOG("blue dust selected");
 		});
 
-	Engine::Node* redDust = AddButton(builder, Engine::Vector2f() , " ", "RedDust", Engine::Vector2f(0.35f, 0.35f), rm.GetTexture("res/sprites/RedDust.png"), rm.GetTexture("res/sprites/RedDust.png"), rm.GetAudioClip("res/audio/dust_hover.wav"), Engine::Pivot::Center, 0.0f, inventoryNode);
+	Engine::Node* redDust = AddButton(builder, Engine::Vector2f(), " ", "RedDust", Engine::Vector2f(0.35f, 0.35f), rm.GetTexture("res/sprites/RedDust.png"), rm.GetTexture("res/sprites/RedDust.png"), rm.GetAudioClip("res/audio/dust_hover.wav"), Engine::Pivot::Center, 0.0f, inventoryNode);
 	auto* redDustAnchor = redDust->AddComponent<Engine::UIAnchorComponent>();
 	redDustAnchor->SetOffset(Engine::Vector2f(-225.0, -35.0f));
 
@@ -73,7 +83,7 @@ void AddLevelUI(Engine::SceneBuilder& builder)
 			ENGINE_LOG("red dust selected");
 		});
 
-	Engine::Node* greenDust = AddButton(builder, Engine::Vector2f() , " ", "GreenDust", Engine::Vector2f(0.35f, 0.4f), rm.GetTexture("res/sprites/GreenDust.png"), rm.GetTexture("res/sprites/GreenDust.png"), rm.GetAudioClip("res/audio/dust_hover.wav"), Engine::Pivot::Center, 0.0f, inventoryNode);
+	Engine::Node* greenDust = AddButton(builder, Engine::Vector2f(), " ", "GreenDust", Engine::Vector2f(0.35f, 0.4f), rm.GetTexture("res/sprites/GreenDust.png"), rm.GetTexture("res/sprites/GreenDust.png"), rm.GetAudioClip("res/audio/dust_hover.wav"), Engine::Pivot::Center, 0.0f, inventoryNode);
 	auto* greenDustAnchor = greenDust->AddComponent<Engine::UIAnchorComponent>();
 	greenDustAnchor->SetOffset(Engine::Vector2f(-115.0f, -35.0f));
 
@@ -85,7 +95,7 @@ void AddLevelUI(Engine::SceneBuilder& builder)
 	Engine::Node* movementInventoryNode = builder.CreateChildNode(node, "MovementInventory");
 	auto* movementInventoryAnchor = movementInventoryNode->AddComponent<Engine::UIAnchorComponent>(Engine::AnchorPreset::BottomLeft);
 	auto* movementSprite = movementInventoryNode->AddComponent<Engine::SpriteComponent>(rm.GetTexture("res/sprites/movement_inventory.png"), Engine::Pivot::Center, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::UI);
-	movementSprite->SetTargetSize({590.0f, 130.0f});
+	movementSprite->SetTargetSize({ 590.0f, 130.0f });
 	movementInventoryAnchor->SetOffset(Engine::Vector2f(300.0f, -100.0f));
 
 	Engine::Node* play = AddButton(builder, Engine::Vector2f(), " ", "Play", Engine::Vector2f(0.3f, 0.3f), rm.GetTexture("res/sprites/play.png"), rm.GetTexture("res/sprites/play.png"), rm.GetAudioClip("res/audio/button_click.wav"), Engine::Pivot::RightCenter, 5.0f, movementInventoryNode);
@@ -106,49 +116,13 @@ void AddLevelUI(Engine::SceneBuilder& builder)
 			ENGINE_LOG("reset selected");
 		});
 
-	Engine::Node* powders = builder.CreateChildNode(movementInventoryNode,"Powders");
-	
+	Engine::Node* powders = builder.CreateChildNode(movementInventoryNode, "Powders");
+
+	powders->transform->SetPosition(Engine::Vector2f(0.0f, 0.0f));
+
+	for (int i = 0; i < 10; i++)
+	{
+		AssignSlots(builder, powders, i);
+	}
 	powders->AddComponent<Engine::ScriptComponent>(new UiPowdersScript());
-	
-	{
-		Engine::Node* currentPowder = builder.CreateChildNode(powders, "SlotOne");
-		currentPowder->AddComponent<Engine::SpriteComponent>(rm.GetTexture(""));
-	}
-	
-	{
-		Engine::Node* currentPowder = builder.CreateChildNode(powders, "SlotTwo");
-		currentPowder->AddComponent<Engine::SpriteComponent>(rm.GetTexture(""));
-	}
-	{
-		Engine::Node* currentPowder = builder.CreateChildNode(powders, "SlotThree");
-			currentPowder->AddComponent<Engine::SpriteComponent>(rm.GetTexture(""));
-	}
-	{
-		Engine::Node* currentPowder = builder.CreateChildNode(powders, "SlotFour");
-			currentPowder->AddComponent<Engine::SpriteComponent>(rm.GetTexture(""));
-	}
-	{
-		Engine::Node* currentPowder = builder.CreateChildNode(powders, "SlotFive");
-		currentPowder->AddComponent<Engine::SpriteComponent>(rm.GetTexture(""));
-	}
-	{
-		Engine::Node* currentPowder = builder.CreateChildNode(powders, "SlotSix");
-			currentPowder->AddComponent<Engine::SpriteComponent>(rm.GetTexture(""));
-	}
-	{
-		Engine::Node* currentPowder = builder.CreateChildNode(powders, "SlotSeven");
-			currentPowder->AddComponent<Engine::SpriteComponent>(rm.GetTexture(""));
-	}
-	{
-		Engine::Node* currentPowder = builder.CreateChildNode(powders, "SlotEight");
-			currentPowder->AddComponent<Engine::SpriteComponent>(rm.GetTexture(""));
-	}
-	{
-		Engine::Node* currentPowder = builder.CreateChildNode(powders, "SlotNine");
-			currentPowder->AddComponent<Engine::SpriteComponent>(rm.GetTexture(""));
-	}
-	{
-		Engine::Node* currentPowder = builder.CreateChildNode(powders, "SlotTen");
-			currentPowder->AddComponent<Engine::SpriteComponent>(rm.GetTexture(""));
-	}
 }

@@ -14,11 +14,13 @@
 #include "scripts/game_manager_script.h"
 
 #include "cursor_prefab.h"
+#include "scripts/props_setter.h"
+#include "../src/prefabs/obstacle_prefab.h"
 
 void StartLevel(Engine::SceneBuilder& builder)
 {
 	auto& app = Engine::Application::Get();
-	//auto& rm = *app.GetResourceManager();
+	auto& rm = *app.GetResourceManager();
 
     Engine::Node* camNode = builder.CreateNode("MainView");
 
@@ -46,7 +48,13 @@ void StartLevel(Engine::SceneBuilder& builder)
     AddCursor(builder, cam);
 
     Engine::Node* gameManager = builder.CreateNode("GameManager");
+
+    Engine::Node* props = builder.CreateChildNode(gameManager, "Props");
+
+    gameManager->AddComponent<Engine::ScriptComponent>(new PropsSetter(gridBody));
     /*Engine::ScriptComponent* scriptComponent = */gameManager->AddComponent<Engine::ScriptComponent>(new GameManagerScript(gridBody, gridIter));
     //GameManagerScript* managerScript = scriptComponent->GetScript<GameManagerScript>();
 
+    AddObstacle(props, builder, "o1", rm.GetTexture("res/sprites/plant2.png"), Engine::Vector2f(0.f, 0.f), Engine::Vector2f(200.0f, 200.0f), true);
 }
+

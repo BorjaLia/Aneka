@@ -10,27 +10,27 @@ void UiPowdersScript::UpdateSprites()
 {
 	Engine::ResourceManager* rm = Engine::Application::Get().GetResourceManager();
 
-
 	for (auto& child : owner->GetChildren())
 	{
 		Engine::Texture2D tex;
 
+		if (smokes.empty()) return;
 		SmokeType currentSmoke = smokes.front();
-		//smokes.pop();
+		smokes.pop();
 
 		switch (currentSmoke)
 		{
 		case SmokeType::None:
-			tex = rm->GetTexture("res/sprites/YellowDust.png");
+			tex = rm->GetWhitePixel();
 			break;
 		case SmokeType::Left:
-			tex = rm->GetTexture("res/sprites/YellowDust.png");
+			tex = rm->GetTexture("res/sprites/BlueDust.png");
 			break;
 		case SmokeType::Right:
-			tex = rm->GetTexture("res/sprites/YellowDust.png");
+			tex = rm->GetTexture("res/sprites/RedDust.png");
 			break;
 		case SmokeType::Jump:
-			tex = rm->GetTexture("res/sprites/YellowDust.png");
+			tex = rm->GetTexture("res/sprites/GreenDust.png");
 			break;
 		case SmokeType::Crouch:
 			tex = rm->GetTexture("res/sprites/YellowDust.png");

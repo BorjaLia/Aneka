@@ -4,7 +4,6 @@
 
 
 #include "../src/prefabs/level_prefab.h"
-#include "../src/prefabs/obstacle_prefab.h"
 #include "../src/prefabs/grid_prefab.h"
 #include "core/components/audioComponent.h"
 
@@ -24,6 +23,4 @@ void LevelOne::Build(Engine::SceneBuilder& builder)
 	StartLevel(builder);
 
 	Engine::Vector2f center = app.GetWindow()->GetSize() / 2;
-
-	AddObstacle(builder, "obsacle_one", rm.GetTexture("res/sprites/plant2.png"), center - Engine::Vector2f(600.0f, 100.0f), Engine::Vector2f(200.0f, 200.0f), true);
 }
