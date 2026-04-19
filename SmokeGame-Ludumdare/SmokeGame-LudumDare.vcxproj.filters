@@ -55,6 +55,9 @@
     <ClCompile Include="src\brother_script.cpp">
       <Filter>Source Files\Scripts</Filter>
     </ClCompile>
+    <ClCompile Include="src\prefabs\level_ui_prefab.cpp">
+      <Filter>Source Files\Prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game.h">
@@ -86,6 +89,9 @@
     </ClInclude>
     <ClInclude Include="src\brother_script.h">
       <Filter>Source Files\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="src\prefabs\level_ui_prefab.h">
+      <Filter>Source Files\Prefabs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
