@@ -7,9 +7,9 @@
 #include "core/components/uiAnchorComponent.h"
 #include "core/components/buttonComponent.h"
 
-#include "main_menu_scene.h"
+#include "scenes/main_menu_scene.h"
 
-#include "button.h"
+#include "button_prefab.h"
 
 void AddLevelUI(Engine::SceneBuilder& builder)
 {
