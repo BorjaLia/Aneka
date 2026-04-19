@@ -4,7 +4,6 @@
 #include "../src/core/components/audioComponent.h"
 #include "../src/core/components/animatedSpriteComponent.h"
 
-
 void AddPlayer(Engine::SceneBuilder& builder, Engine::Vector2f pos)
 {
     auto& app = Engine::Application::Get();
