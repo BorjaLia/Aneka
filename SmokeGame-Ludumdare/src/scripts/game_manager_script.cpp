@@ -3,6 +3,8 @@
 #include "events/action_queue_event.h"
 #include "smokes.h"
 
+#include "scenes/main_menu_scene.h"
+
 GameManagerScript::GameManagerScript(std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> gridBody, Engine::Vector2f gridIter)
 {
 	this->gridBody = gridBody;
@@ -41,19 +43,19 @@ void GameManagerScript::GetSmokeButtons()
 
 	yellowSmoke->SetOnClick([this]()
 		{
-			AddQueueMove(SmokeType::Left);
+			AddQueueMove(SmokeType::Crouch);
 		});
 	greenSmoke->SetOnClick([this]()
 		{
-			AddQueueMove(SmokeType::Right);
+			AddQueueMove(SmokeType::Jump);
 		});
 	redSmoke->SetOnClick([this]()
 		{
-			AddQueueMove(SmokeType::Jump);
+			AddQueueMove(SmokeType::Right);
 		});
 	blueSmoke->SetOnClick([this]()
 		{
-			AddQueueMove(SmokeType::Crouch);
+			AddQueueMove(SmokeType::Left);
 		});
 
 	playButton->SetOnClick([this]()
@@ -90,11 +92,23 @@ void GameManagerScript::AddQueueMove(SmokeType type)
 
 void GameManagerScript::OnWin()
 {
-	//ENGINE_LOG("Win registered");
+	ENGINE_LOG("Win registered");
+	gameEnded = true;
+	Engine::Application::Get().GetTimerManager().SetTimeout(5.0f, [this]()
+		{
+			//--------------------------------
+			Engine::Application::Get().LoadScene<MainMenuScene>(); //CAMBIAR A PROXIMO NIVEL!!!
+			//--------------------------------
+		});
 }
 void GameManagerScript::OnLose()
 {
-	//ENGINE_LOG("Loss registered");
+	ENGINE_LOG("Loss registered");
+	gameEnded = true;
+	Engine::Application::Get().GetTimerManager().SetTimeout(5.0f, [this]()
+		{
+			Engine::Application::Get().ReloadCurrentScene();
+		});
 }
 
 void GameManagerScript::OnStart()
@@ -112,37 +126,6 @@ void GameManagerScript::OnStart()
 				{
 					pendingAction = true;
 				});
-
-			//	Engine::Node* target = nullptr;
-
-			//	switch (move)
-			//	{
-			//	case 1:
-			//		target = gridBody[2][0];
-			//		break;
-
-			//	case 2:
-			//		target = gridBody[4][0];
-			//		break;
-			//	case 3:
-			//		target = gridBody[0][0];
-			//		break;
-			//	default:
-			//		break;
-			//	}
-
-			//	if (!target)
-			//	{
-			//		ENGINE_LOG("Manager to publish move NO TARGET");
-			//		return;
-			//	}
-
-			//	ENGINE_LOG("Manager to publish move " << std::to_string( move));
-
-			//	MoveEvent moveEvent(target, MoveType::Walk);
-			//	Engine::Application::Get().GetEventBus().Publish(moveEvent);
-			//	
-			//	move++;
 		});
 
 	GetSmokeButtons();
@@ -163,13 +146,15 @@ void GameManagerScript::OnStart()
 
 void GameManagerScript::OnUpdate(float)
 {
+	if (!startActions || gameEnded) return;
+
 	if (moveQueue.empty())
 	{
 		OnLose();
 		return;
 	}
 
-	if (pendingAction && startActions)
+	if (pendingAction)
 	{
 		pendingAction = false;
 
@@ -204,7 +189,7 @@ void GameManagerScript::OnUpdate(float)
 		if (IterExists(nextCell))
 		{
 			gridNodeTowards = gridBody[nextCell.x][nextCell.y];
-
+			ENGINE_LOG("[ITER EXISTS]: moving to: " << gridNodeTowards->transform->GetPosition());
 			MoveEvent moveEvent(gridNodeTowards, MoveType::Walk);
 			Engine::Application::Get().GetEventBus().Publish(moveEvent);
 		}
@@ -246,78 +231,3 @@ Engine::Vector2i GameManagerScript::GetClosestNode(Engine::Vector2f pos)
 	}
 	return closest;
 }
-
-//
-//enum class Smokes
-//{
-//
-//};
-//
-//class BrotherMoveEvent : public Engine::EventBase<BrotherMoveEvent>
-//{
-//private:
-//	int coinValue;
-//public:
-//	BrotherMoveEvent(int value = 1) : coinValue(value) {}
-//	int GetValue() const { return coinValue; }
-//
-//	const char* GetName() const override { return "CoinCollectedEvent"; }
-//};
-//
-//
-//class CoinScript : public Engine::Script
-//{
-//private:
-//	Engine::EventBus* eventBus;
-//public:
-//	CoinScript() = default;
-//
-//	void OnStart() override
-//	{
-//		auto* trigger = owner->GetComponent<Engine::TriggerAreaComponent>();
-//		if (trigger)
-//		{
-//			trigger->ConnectTriggerEnter([this](Engine::Node* other)
-//				{
-//					if (other->name == "Player")
-//					{
-//						BrotherMoveEvent coinEvent(1);
-//						Engine::Application::Get().GetEventBus().Publish(coinEvent);
-//
-//						owner->SetActive(false);
-//					}
-//				});
-//		}
-//	}
-//};
-//
-//class ScoreUIListener : public Engine::Script
-//{
-//private:
-//	Engine::EventBus* eventBus;
-//	Engine::EventListenerID listenerId;
-//
-//public:
-//	ScoreUIListener() = default;
-//
-//	void OnStart() override
-//	{
-//		eventBus = &Engine::Application::Get().GetEventBus();
-//
-//		listenerId = eventBus->Subscribe<BrotherMoveEvent>([this](BrotherMoveEvent& e)
-//			{
-//				currentCoins += e.GetValue();
-//
-//				ENGINE_LOG(currentCoins);
-//			});
-//	}
-//
-//	void OnDestroy() override
-//	{
-//		if (eventBus)
-//		{
-//			// Para desuscribirnos sí usamos el ID estático generado
-//			eventBus->Unsubscribe(BrotherMoveEvent::GetStaticType(), listenerId);
-//		}
-//	}
-//};

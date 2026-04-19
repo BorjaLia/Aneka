@@ -38,6 +38,8 @@ private:
 	bool startActions = false;
 	bool pendingAction = false;
 
+	bool gameEnded = false;
+
 	void GetSmokeButtons();
 
 	std::queue<SmokeType> moveQueue;
