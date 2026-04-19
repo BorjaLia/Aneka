@@ -44,20 +44,22 @@ void MainMenuScene::Build(Engine::SceneBuilder& builder)
 
 	title->transform->SetPosition(center + Engine::Vector2f(0.0f, -230.0f));
 
-	Engine::Node* playButton = AddButton(builder, center, "Play", "PlayButton", Engine::Vector2f(0.2f, 0.2f), rm.GetTexture("res/sprites/hoveredButton.png"), rm.GetTexture("res/sprites/button.png"),Engine::Pivot::Center, 15.0f);
+	Engine::Node* playButton = AddButton(builder, center, "Play", "PlayButton", Engine::Vector2f(0.2f, 0.2f), rm.GetTexture("res/sprites/hoveredButton.png"), rm.GetTexture("res/sprites/button.png"), rm.GetAudioClip("res/audio/button_click.wav"),Engine::Pivot::Center, 15.0f, nullptr);
 
 	playButton->GetComponent<Engine::ButtonComponent>()->SetOnClick([]()
 		{
 			Engine::Application::Get().GetSceneManager().LoadScene(std::make_unique<LevelOne>());
 		});
 
-	Engine::Node* creditsButton = AddButton(builder, center + Engine::Vector2f(0.0f, 150.0f), "Credits", "CreditsButton", Engine::Vector2f(0.2f, 0.2f), rm.GetTexture("res/sprites/hoveredButton.png"), rm.GetTexture("res/sprites/button.png"), Engine::Pivot::Center, -15.0f);
+	Engine::Node* creditsButton = AddButton(builder, center + Engine::Vector2f(0.0f, 150.0f), "Credits", "CreditsButton", Engine::Vector2f(0.2f, 0.2f), rm.GetTexture("res/sprites/hoveredButton.png"), rm.GetTexture("res/sprites/button.png"), rm.GetAudioClip("res/audio/button_click.wav"), Engine::Pivot::Center,
+		-15.0f, nullptr);
 	creditsButton->GetComponent<Engine::ButtonComponent>()->SetOnClick([]()
 		{
 			ENGINE_LOG("Credits called");
 		});
 	
-	Engine::Node* exitButton = AddButton(builder, center + Engine::Vector2f(0.0f, 300.0f), "Exit", "ExitButton", Engine::Vector2f(0.2f, 0.2f), rm.GetTexture("res/sprites/hoveredButton.png"), rm.GetTexture("res/sprites/button.png"),Engine::Pivot::Center, 15.0f);
+	Engine::Node* exitButton = AddButton(builder, center + Engine::Vector2f(0.0f, 300.0f), "Exit", "ExitButton", Engine::Vector2f(0.2f, 0.2f), rm.GetTexture("res/sprites/hoveredButton.png"), rm.GetTexture("res/sprites/button.png"), rm.GetAudioClip("res/audio/button_click.wav"),Engine::Pivot::Center,
+		15.0f, nullptr);
 
 	exitButton->GetComponent<Engine::ButtonComponent>()->SetOnClick([]()
 		{

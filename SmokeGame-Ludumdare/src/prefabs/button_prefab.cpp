@@ -7,7 +7,8 @@
 #include "../src/core/components/buttonComponent.h"
 #include "../src/core/components/textComponent.h"
 
-Engine::Node* AddButton(Engine::SceneBuilder& builder, Engine::Vector2f pos, std::string buttonText, std::string mainNodeName, Engine::Vector2f scale, Engine::Texture2D hoverTex, Engine::Texture2D normalTex,Engine::Pivot pivot, float rotation, Engine::Node* parent)
+Engine::Node* AddButton(Engine::SceneBuilder& builder, Engine::Vector2f pos, std::string buttonText, std::string mainNodeName, Engine::Vector2f scale, Engine::Texture2D hoverTex, Engine::Texture2D normalTex, Engine::AudioClip audio,Engine::Pivot pivot,
+	float rotation, Engine::Node* parent)
 {
 	auto& app = Engine::Application::Get();
 	auto& rm = *app.GetResourceManager();
@@ -36,7 +37,7 @@ Engine::Node* AddButton(Engine::SceneBuilder& builder, Engine::Vector2f pos, std
 
 	button->AddComponent<Engine::SpriteComponent>(buttonTex, pivot, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::UI);
 
-	button->AddComponent<Engine::AudioComponent>(rm.GetAudioClip("res/audio/NoNoise.wav"));
+	button->AddComponent<Engine::AudioComponent>(audio);
 
 	button->AddComponent<Engine::ButtonComponent>(Engine::RectangleShape(Engine::Vector2f(0.0f, 0.0f)), Engine::RenderLayer::UI);
 
@@ -46,7 +47,7 @@ Engine::Node* AddButton(Engine::SceneBuilder& builder, Engine::Vector2f pos, std
 	text->alignment = Engine::TextAlignment::Center;
 	text->pivot = pivot;
 
-	button->AddComponent<Engine::ScriptComponent>(new ButtonScript(normalTex, hoverTex, scale, rotation));
+	button->AddComponent<Engine::ScriptComponent>(new ButtonScript(normalTex, hoverTex, scale, rotation, audio));
 
 	return button;
 }
