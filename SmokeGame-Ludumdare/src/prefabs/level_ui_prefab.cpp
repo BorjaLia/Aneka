@@ -36,7 +36,8 @@ void AddLevelUI(Engine::SceneBuilder& builder)
 
 	Engine::Node* inventoryNode = builder.CreateChildNode(node, "Inventory");
 	auto* inventoryAnchor = inventoryNode->AddComponent<Engine::UIAnchorComponent>(Engine::AnchorPreset::TopRight);
-	inventoryAnchor->SetOffset(Engine::Vector2f(0.0f, 250.0f));
+	inventoryAnchor->SetOffset(Engine::Vector2f(0.0f, 330.0f));
+	inventoryNode->transform->SetScale(Engine::Vector2f(1.2f, 1.2f));
 
 	auto* handbagSprite = inventoryNode->AddComponent<Engine::SpriteComponent>(handbagTex, Engine::Pivot::RightCenter, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::UI);
 
