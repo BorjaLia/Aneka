@@ -47,6 +47,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\events\action_queue_event.h" />
     <ClInclude Include="src\events\hit_player.h" />
     <ClInclude Include="src\events\move_event.h" />
     <ClInclude Include="src\game.h" />
@@ -68,6 +69,7 @@
     <ClInclude Include="src\scripts\grid_script.h" />
     <ClInclude Include="src\scripts\mouse_script.h" />
     <ClInclude Include="src\scripts\obstacle_script.h" />
+    <ClInclude Include="src\smokes.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

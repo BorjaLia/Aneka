@@ -1,6 +1,7 @@
 #include "game_manager_script.h"
 
-#include "core/time.h"
+#include "events/action_queue_event.h"
+#include "smokes.h"
 
 GameManagerScript::GameManagerScript(std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> gridBody, Engine::Vector2f gridIter)
 {
@@ -23,40 +24,37 @@ void GameManagerScript::GetSmokeButtons()
 
 	yellowSmoke->SetOnClick([this]()
 		{
-			AddYellow();
+			AddQueueMove(SmokeType::Left);
 		});
 	greenSmoke->SetOnClick([this]()
 		{
-			AddGreen();
+			AddQueueMove(SmokeType::Right);
 		});
 	greenSmoke->SetOnClick([this]()
 		{
-			AddRed();
+			AddQueueMove(SmokeType::Jump);
 		});
 	greenSmoke->SetOnClick([this]()
 		{
-			AddBlue();
+			AddQueueMove(SmokeType::Crouch);
 		});
 }
 
-void GameManagerScript::AddYellow()
+void GameManagerScript::AddQueueMove(SmokeType type)
 {
-	moveQueue.push(SmokeType::Left);
+	moveQueue.push(type);
+	ENGINE_LOG("Pushing queue event - Game Manager");
+	QueueChangeEvent addQueueEvent(moveQueue);
+	eventBus->Publish(addQueueEvent);
 }
 
-void GameManagerScript::AddGreen()
+void GameManagerScript::OnWin()
 {
-	moveQueue.push(SmokeType::Right);
+	ENGINE_LOG("Win registered");
 }
-
-void GameManagerScript::AddRed()
+void GameManagerScript::OnLose()
 {
-	moveQueue.push(SmokeType::Crouch);
-}
-
-void GameManagerScript::AddBlue()
-{
-	moveQueue.push(SmokeType::Jump);
+	ENGINE_LOG("Loss registered");
 }
 
 void GameManagerScript::OnStart()
@@ -65,8 +63,15 @@ void GameManagerScript::OnStart()
 
 	listenerId = eventBus->Subscribe<FinishMoveEvent>([this](FinishMoveEvent& e)
 		{
-			e.handled = true;
 			ENGINE_LOG("Manager recieved finish move event");
+			
+			brotherPos = e.GetPos();
+			e.handled = true;
+
+			Engine::Application::Get().GetTimerManager().SetTimeout(3.0f, [this]()
+				{
+					pendingAction = true;
+				});
 
 		//	Engine::Node* target = nullptr;
 
@@ -111,51 +116,70 @@ void GameManagerScript::OnStart()
 	//testNode->transform->SetPosition(Engine::Vector2f(500.0f, 450.0f));
 
 	MoveEvent moveEvent(gridBody[0][0], MoveType::Walk);
-	Engine::Application::Get().GetEventBus().Publish(moveEvent);
+	eventBus->Publish(moveEvent);
 
 	//moveQueue.push(SmokeType::Jump);
 }
 
 void GameManagerScript::OnUpdate(float)
 {
-	/*for (int i = 0; i < moveQueue.size(); i++)
+	if (moveQueue.empty())
 	{
-		SmokeType currentMove = moveQueue.front();
+		OnLose();
+		return;
+	}
+
+	if (pendingAction)
+	{
+		pendingAction = false;
+
+		SmokeType type = moveQueue.front();
 		moveQueue.pop();
 
-		Engine::Node* gridNodeTowards;
-
-		Engine::Vector2f closestCell = GetClosestNode(brother->transform->GetPosition());
-		Engine::Vector2f nextCell = closestCell;
-		switch (currentMove)
+		if (type == SmokeType::Crouch)
 		{
-		case SmokeType::Left:
-			nextCell.x--;
-			gridNodeTowards = gridBody[closestCell.x - 1][closestCell.y];
-			break;
 
-		case SmokeType::Right:
-			nextCell.x++;
-			gridNodeTowards = gridBody[closestCell.x + 1][closestCell.y];
-			break;
-
-		case SmokeType::Jump:
-			nextCell.y++;
-			gridNodeTowards = gridBody[closestCell.x][closestCell.y + 1];
-			break;
-
-		default:
-			break;
 		}
+	}
 
-		if (IterExists(nextCell))
-		{
-			gridNodeTowards = gridBody[nextCell.x][nextCell.y];
+	//for (int i = 0; i < moveQueue.size(); i++)
+	//{
+	//	SmokeType currentMove = moveQueue.front();
+	//	moveQueue.pop();
 
-			MoveEvent moveEvent(gridNodeTowards, MoveType::Walk);
-			Engine::Application::Get().GetEventBus().Publish(moveEvent);
-		}
-	}*/
+	//	Engine::Node* gridNodeTowards;
+
+	//	Engine::Vector2f closestCell = GetClosestNode(brotherPos);
+	//	Engine::Vector2f nextCell = closestCell;
+	//	switch (currentMove)
+	//	{
+	//	case SmokeType::Left:
+	//		nextCell.x--;
+	//		gridNodeTowards = gridBody[closestCell.x - 1][closestCell.y];
+	//		break;
+
+	//	case SmokeType::Right:
+	//		nextCell.x++;
+	//		gridNodeTowards = gridBody[closestCell.x + 1][closestCell.y];
+	//		break;
+
+	//	case SmokeType::Jump:
+	//		nextCell.y++;
+	//		gridNodeTowards = gridBody[closestCell.x][closestCell.y + 1];
+	//		break;
+
+	//	default:
+	//		break;
+	//	}
+
+	//	if (IterExists(nextCell))
+	//	{
+	//		gridNodeTowards = gridBody[nextCell.x][nextCell.y];
+
+	//		MoveEvent moveEvent(gridNodeTowards, MoveType::Walk);
+	//		Engine::Application::Get().GetEventBus().Publish(moveEvent);
+	//	}
+	//}
 }
 
 void GameManagerScript::ReceiveMove(SmokeType move)

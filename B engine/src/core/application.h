@@ -14,6 +14,7 @@
 #include "math.h"
 #include "node.h"
 #include "core/scenes/sceneManager.h"
+#include "core/timerManager.h"
 
 namespace Engine
 {
@@ -41,6 +42,7 @@ namespace Engine
         /// Returns the builder used to construct the scene before Run().
         SceneBuilder& GetSceneBuilder() { return sceneBuilder; }
         SceneManager& GetSceneManager() { return sceneManager; } // ¡NUEVO!
+        TimerManager& GetTimerManager() { return timerManager; }
         // --- Engine system accessors ---
 
         ResourceManager* GetResourceManager() const { return resourceManager.get(); }
@@ -72,6 +74,7 @@ namespace Engine
         EventBus eventBus;
         SceneBuilder sceneBuilder;
         SceneManager sceneManager;
+        TimerManager timerManager;
 
         std::unique_ptr<Node> rootScene;
         std::unique_ptr<Node> debugNode;

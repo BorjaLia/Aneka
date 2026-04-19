@@ -115,6 +115,7 @@ namespace Engine
                 {
                     newScene->Build(sceneBuilder);
                 }
+                timerManager.ClearAll();
                 accumulator = 0.0f;
             }
 
@@ -123,7 +124,7 @@ namespace Engine
             float rawDt = renderer->GetDeltaTime();
             if (rawDt > 0.25f) rawDt = 0.25f;
             Time::Update(rawDt);
-
+            timerManager.Update(Time::GetDeltaTime());
             // FPS counter uses unscaled time so it's accurate even when paused.
             fpsTimer += Time::GetUnscaledDeltaTime();
             if (++frameCount, fpsTimer >= 1.0f)

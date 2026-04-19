@@ -31,7 +31,7 @@ private:
 	Engine::Vector2f pos;
 
 public:
-	FinishMoveEvent(Engine::Vector2f pos) {}
+	FinishMoveEvent(Engine::Vector2f pos):pos(pos) {}
 
 	Engine::Vector2f GetPos() { return pos; }
 
