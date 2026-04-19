@@ -23,7 +23,7 @@ void AddLevelUI(Engine::SceneBuilder& builder)
 	node->transform->SetPosition(center);
 	//Engine::SpriteComponent* sprite = node->AddComponent<Engine::SpriteComponent>(rm.GetTexture("res/ui_overlay.png"), Engine::Pivot::Center, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::UI);
 
-	Engine::Node* menuButton = AddButton(builder, Engine::Vector2f(), "Go  Back", "MenuButton", Engine::Vector2f(0.125f, 0.125f), rm.GetTexture("res/sprites/hoveredButton.png"), rm.GetTexture("res/sprites/button.png"), Engine::Pivot::TopLeft, 5.0f);
+	Engine::Node* menuButton = AddButton(builder, Engine::Vector2f(), "   Go  Back", "MenuButton", Engine::Vector2f(0.125f, 0.125f), rm.GetTexture("res/sprites/hoveredButton.png"), rm.GetTexture("res/sprites/button.png"), Engine::Pivot::TopLeft, 5.0f);
 	auto* anchor = menuButton->AddComponent<Engine::UIAnchorComponent>(Engine::AnchorPreset::TopLeft);
 	anchor->SetOffset(Engine::Vector2f(50.0f, 50.0f));
 
@@ -42,7 +42,7 @@ void AddLevelUI(Engine::SceneBuilder& builder)
 
 	handbagSprite->SetTargetSize({ 316.5f, 520.0f });
 
-	Engine::Node* yellowDust = AddButton(builder, Engine::Vector2f() , " ", "Inventory", Engine::Vector2f(0.3f, 0.3f), rm.GetTexture("res/sprites/YellowDust.png"), rm.GetTexture("res/sprites/YellowDust.png"), Engine::Pivot::Center, 0.0f, inventoryNode);
+	Engine::Node* yellowDust = AddButton(builder, Engine::Vector2f() , " ", "YellowDust", Engine::Vector2f(0.3f, 0.3f), rm.GetTexture("res/sprites/YellowDust.png"), rm.GetTexture("res/sprites/YellowDust.png"), Engine::Pivot::Center, 0.0f, inventoryNode);
 	auto* yellowDustAnchot = yellowDust->AddComponent<Engine::UIAnchorComponent>();
 	yellowDustAnchot->SetOffset(Engine::Vector2f(-145.0f, -60.0f));
 
@@ -51,7 +51,7 @@ void AddLevelUI(Engine::SceneBuilder& builder)
 			ENGINE_LOG("yellow dust selected");
 		});
 
-	Engine::Node* blueDust = AddButton(builder, Engine::Vector2f() , " ", "Inventory", Engine::Vector2f(0.3f, 0.3f), rm.GetTexture("res/sprites/BlueDust.png"), rm.GetTexture("res/sprites/BlueDust.png"), Engine::Pivot::Center, 0.0f, inventoryNode);
+	Engine::Node* blueDust = AddButton(builder, Engine::Vector2f() , " ", "BlueDust", Engine::Vector2f(0.3f, 0.3f), rm.GetTexture("res/sprites/BlueDust.png"), rm.GetTexture("res/sprites/BlueDust.png"), Engine::Pivot::Center, 0.0f, inventoryNode);
 	auto* blueDustAnchor = blueDust->AddComponent<Engine::UIAnchorComponent>();
 	blueDustAnchor->SetOffset(Engine::Vector2f(-145.0f, 10.0f));
 
@@ -60,7 +60,7 @@ void AddLevelUI(Engine::SceneBuilder& builder)
 			ENGINE_LOG("blue dust selected");
 		});
 
-	Engine::Node* redDust = AddButton(builder, Engine::Vector2f() , " ", "Inventory", Engine::Vector2f(0.3f, 0.3f), rm.GetTexture("res/sprites/RedDust.png"), rm.GetTexture("res/sprites/RedDust.png"), Engine::Pivot::Center, 0.0f, inventoryNode);
+	Engine::Node* redDust = AddButton(builder, Engine::Vector2f() , " ", "RedDust", Engine::Vector2f(0.3f, 0.3f), rm.GetTexture("res/sprites/RedDust.png"), rm.GetTexture("res/sprites/RedDust.png"), Engine::Pivot::Center, 0.0f, inventoryNode);
 	auto* redDustAnchor = redDust->AddComponent<Engine::UIAnchorComponent>();
 	redDustAnchor->SetOffset(Engine::Vector2f(-150.0f, 85.0f));
 
@@ -69,13 +69,37 @@ void AddLevelUI(Engine::SceneBuilder& builder)
 			ENGINE_LOG("red dust selected");
 		});
 
-	Engine::Node* greenDust = AddButton(builder, Engine::Vector2f() , " ", "Inventory", Engine::Vector2f(0.3f, 0.3f), rm.GetTexture("res/sprites/GreenDust.png"), rm.GetTexture("res/sprites/GreenDust.png"), Engine::Pivot::Center, 0.0f, inventoryNode);
+	Engine::Node* greenDust = AddButton(builder, Engine::Vector2f() , " ", "GreenDust", Engine::Vector2f(0.3f, 0.3f), rm.GetTexture("res/sprites/GreenDust.png"), rm.GetTexture("res/sprites/GreenDust.png"), Engine::Pivot::Center, 0.0f, inventoryNode);
 	auto* greenDustAnchor = greenDust->AddComponent<Engine::UIAnchorComponent>();
 	greenDustAnchor->SetOffset(Engine::Vector2f(-150.0f, 155.0f));
 
 	greenDust->GetComponent<Engine::ButtonComponent>()->SetOnClick([]()
 		{
 			ENGINE_LOG("green dust selected");
+		});
+
+	Engine::Node* movementInventoryNode = builder.CreateChildNode(node, "MovementInventory");
+	auto* movementInventoryAnchor = movementInventoryNode->AddComponent<Engine::UIAnchorComponent>(Engine::AnchorPreset::BottomLeft);
+	auto* movementSprite = movementInventoryNode->AddComponent<Engine::SpriteComponent>(rm.GetTexture("res/sprites/movement_inventory.png"), Engine::Pivot::Center, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::UI);
+	movementSprite->SetTargetSize({590.0f, 130.0f});
+	movementInventoryAnchor->SetOffset(Engine::Vector2f(300.0f, -100.0f));
+
+	Engine::Node* play = AddButton(builder, Engine::Vector2f(), " ", "Play", Engine::Vector2f(0.3f, 0.3f), rm.GetTexture("res/sprites/play.png"), rm.GetTexture("res/sprites/play.png"), Engine::Pivot::RightCenter, 0.0f, movementInventoryNode);
+	auto* playAnchor = play->AddComponent<Engine::UIAnchorComponent>();
+	playAnchor->SetOffset(Engine::Vector2f(360.0f, 0.0f));
+
+	play->GetComponent<Engine::ButtonComponent>()->SetOnClick([]()
+		{
+			ENGINE_LOG("play selected");
+		});
+
+	Engine::Node* reset = AddButton(builder, Engine::Vector2f(), " ", "Reset", Engine::Vector2f(0.3f, 0.3f), rm.GetTexture("res/sprites/reset.png"), rm.GetTexture("res/sprites/reset.png"), Engine::Pivot::RightCenter, 0.0f, movementInventoryNode);
+	auto* resetAnchor = reset->AddComponent<Engine::UIAnchorComponent>();
+	resetAnchor->SetOffset(Engine::Vector2f(440.0f, 0.0f));
+
+	reset->GetComponent<Engine::ButtonComponent>()->SetOnClick([]()
+		{
+			ENGINE_LOG("reset selected");
 		});
 
 }

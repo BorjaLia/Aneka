@@ -15,7 +15,7 @@ void BrotherScript::OnStart()
 	trs = owner->transform;
 
 	followComp = owner->GetComponent<Engine::FollowComponent>();
-	followComp->SetMode(Engine::FollowMode::Lerp);
+	followComp->SetMode(Engine::FollowMode::Linear);
 	followComp->SetLerpSpeed(speed);
 }
 
@@ -41,7 +41,15 @@ void BrotherScript::OnDestroy()
 
 void BrotherScript::DoAction(Engine::Node* target, MoveType move)
 {
+	if (!target)
+	{
+		ENGINE_WARN("NO TARGET! - Brother Script");
+		return;
+	}
+
 	followComp->SetTarget(target);
+
+	animation->SetFlipX((target->GetGlobalPosition().x >= owner->transform->GetGlobalPosition().x));
 
 	switch (move)
 	{
