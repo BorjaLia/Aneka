@@ -41,4 +41,10 @@ void StartLevel(Engine::SceneBuilder& builder)
     AddPlayer(builder,Engine::Vector2f(center .x - 250.0f,250.0f));
 
     AddCursor(builder, cam);
+
+
+    Engine::Node* gameManager = builder.CreateNode("GameManager");
+    /*Engine::ScriptComponent* scriptComponent = */gameManager->AddComponent<Engine::ScriptComponent>(new GameManagerScript);
+    //GameManagerScript* managerScript = scriptComponent->GetScript<GameManagerScript>();
+
 }

@@ -127,6 +127,9 @@
     <ClInclude Include="src\scenes\main_menu_scene.h">
       <Filter>Source\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="src\events\move_event.h">
+      <Filter>Source\Event</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">
@@ -143,6 +146,9 @@
     </Filter>
     <Filter Include="Source\Scene">
       <UniqueIdentifier>{15107ff4-a538-4205-98b3-0bd6c029922e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Event">
+      <UniqueIdentifier>{06231114-5c08-49fa-afa9-7ba95bc3b1fc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

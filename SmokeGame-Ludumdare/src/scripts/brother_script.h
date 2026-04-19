@@ -17,6 +17,9 @@ class BrotherScript : public Engine::Script
 	};
 
 private:
+	Engine::EventBus* eventBus;
+	Engine::EventListenerID listenerId;
+
 	float speed = 400.f;
 	STATE state = STATE::WALK;
 	Engine::Vector2f dir = Engine::Vector2f(0.f, 0.f);
@@ -29,5 +32,6 @@ private:
 public:
 	void OnStart() override;
 	void OnUpdate(float delta) override;
+	void OnDestroy() override;
 };
 

@@ -45,6 +45,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\events\move_event.h" />
     <ClInclude Include="src\game.h" />
     <ClInclude Include="src\prefabs\background_prefab.h" />
     <ClInclude Include="src\prefabs\brother_prefab.h" />
