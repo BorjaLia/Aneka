@@ -2,6 +2,9 @@
 
 #include <memory>
 
+#include "../src/core/components/scriptComponent.h"
+#include "scripts/grid_script.h"
+
 std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> AddGrid(Engine::SceneBuilder& builder, Engine::Vector2f pos, Engine::Vector2f dist, Engine::Vector2f iter)
 {
 	Engine::Node* grid = builder.CreateNode("Grid");
@@ -9,19 +12,20 @@ std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> AddGrid(Engine::SceneBuilde
 	grid->transform->SetPosition(pos);
 	std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> body;
 
-	body = std::make_unique<std::shared_ptr<Engine::Node * []>[]>(iter.x);
+	body = std::make_unique<std::shared_ptr<Engine::Node * []>[]>(static_cast<const size_t>(iter.x));
 
 	for (int i = 0; i < iter.x; i++)
 	{
-		body[i] = std::make_unique<Engine::Node * []>(iter.y);
+		body[i] = std::make_unique<Engine::Node * []>(static_cast<const size_t>(iter.y));
 
 		for (int j = 0; j < iter.y; j++)
 		{
 			body[i][j] = builder.CreateChildNode(grid, " " + i + j);
-			body[i][j]->transform->SetPosition(pos + Engine::Vector2f(dist.x * i, dist.y * j));
 			body[i][j]->AddComponent<Engine::ColliderComponent>(Engine::Shape(Engine::RectangleShape(dist)));
 		}
 	}
+
+	grid->AddComponent < Engine::ScriptComponent>(new GridScript(body, dist, iter));
 
 	return body;
 }

@@ -1,102 +1,65 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Source Files\Game">
-      <UniqueIdentifier>{b0ff3531-cd50-4124-bc01-1e10ebd712c0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Prefabs">
-      <UniqueIdentifier>{6d9d7691-ede7-433a-915f-fff0dcaf26bc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Scripts">
-      <UniqueIdentifier>{e9a226b9-2d50-4572-b3db-7f917b9f47fa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Prefabs\Scenes">
-      <UniqueIdentifier>{250b92ab-204e-4577-9282-c16c61a16576}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Prefabs\Scenes\Levels">
-      <UniqueIdentifier>{86325347-eb60-42eb-b487-20bb771aad3d}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\game.cpp">
-      <Filter>Source Files\Game</Filter>
+      <Filter>Source\Game</Filter>
     </ClCompile>
-    <ClCompile Include="src\main_menu_scene.cpp">
-      <Filter>Source Files\Prefabs\Scenes</Filter>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="src\level_one.cpp">
-      <Filter>Source Files\Prefabs\Scenes\Levels</Filter>
+    <ClCompile Include="src\scripts\background_script.cpp">
+      <Filter>Source\Script</Filter>
     </ClCompile>
-    <ClCompile Include="src\player.cpp">
-      <Filter>Source Files\Prefabs</Filter>
+    <ClCompile Include="src\scripts\brother_script.cpp">
+      <Filter>Source\Script</Filter>
     </ClCompile>
-    <ClCompile Include="src\prefabs\brother.cpp">
-      <Filter>Source Files\Prefabs</Filter>
+    <ClCompile Include="src\scripts\button_script.cpp">
+      <Filter>Source\Script</Filter>
     </ClCompile>
-    <ClCompile Include="src\prefabs\level_prefab.cpp">
-      <Filter>Source Files\Prefabs</Filter>
+    <ClCompile Include="src\scripts\game_manager_script.cpp">
+      <Filter>Source\Script</Filter>
     </ClCompile>
-    <ClCompile Include="src\prefabs\obstacle_prefab.cpp">
-      <Filter>Source Files\Prefabs</Filter>
+    <ClCompile Include="src\scripts\grid_script.cpp">
+      <Filter>Source\Script</Filter>
     </ClCompile>
-    <ClCompile Include="src\backgroundScript.cpp">
-      <Filter>Source Files\Scripts</Filter>
+    <ClCompile Include="src\scripts\mouse_script.cpp">
+      <Filter>Source\Script</Filter>
     </ClCompile>
-    <ClCompile Include="src\background.cpp">
-      <Filter>Source Files\Prefabs</Filter>
+    <ClCompile Include="src\prefabs\background_prefab.cpp">
+      <Filter>Source\Prefab</Filter>
     </ClCompile>
-    <ClCompile Include="src\brother_script.cpp">
-      <Filter>Source Files\Scripts</Filter>
+    <ClCompile Include="src\prefabs\brother_prefab.cpp">
+      <Filter>Source\Prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prefabs\button_prefab.cpp">
+      <Filter>Source\Prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prefabs\cursor_prefab.cpp">
+      <Filter>Source\Prefab</Filter>
     </ClCompile>
     <ClCompile Include="src\prefabs\grid_prefab.cpp">
-      <Filter>Source Files\Prefabs</Filter>
+      <Filter>Source\Prefab</Filter>
     </ClCompile>
-    <ClCompile Include="src\grid_script.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\prefabs\level_prefab.cpp">
+      <Filter>Source\Prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prefabs\level_ui_prefab.cpp">
+      <Filter>Source\Prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prefabs\obstacle_prefab.cpp">
+      <Filter>Source\Prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prefabs\player_prefab.cpp">
+      <Filter>Source\Prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\level_one.cpp">
+      <Filter>Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\main_menu_scene.cpp">
+      <Filter>Source\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\game.h">
-      <Filter>Source Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\player.h">
-      <Filter>Source Files\Prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="src\prefabs\brother.h">
-      <Filter>Source Files\Prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="src\prefabs\level_prefab.h">
-      <Filter>Source Files\Prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="src\prefabs\obstacle_prefab.h">
-      <Filter>Source Files\Prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="src\background.h">
-      <Filter>Source Files\Prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="src\main_menu_scene.h">
-      <Filter>Source Files\Prefabs\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="src\level_one.h">
-      <Filter>Source Files\Prefabs\Scenes\Levels</Filter>
-    </ClInclude>
-    <ClInclude Include="src\backgroundScript.h">
-      <Filter>Source Files\Scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="src\brother_script.h">
-      <Filter>Source Files\Scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="src\prefabs\grid_prefab.h">
-      <Filter>Source Files\Prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="src\grid_script.h" />
     <ClInclude Include="src\background.h" />
     <ClInclude Include="src\backgroundScript.h" />
     <ClInclude Include="src\brother_script.h" />
@@ -110,7 +73,82 @@
     <ClInclude Include="src\prefabs\level_prefab.h" />
     <ClInclude Include="src\prefabs\level_ui_prefab.h" />
     <ClInclude Include="src\prefabs\obstacle_prefab.h" />
-    <ClInclude Include="src\cursor.h" />
-    <ClInclude Include="src\mouse_script.h" />
+    <ClInclude Include="src\game.h">
+      <Filter>Source\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scripts\background_script.h">
+      <Filter>Source\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scripts\brother_script.h">
+      <Filter>Source\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scripts\button_script.h">
+      <Filter>Source\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scripts\game_manager_script.h">
+      <Filter>Source\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scripts\grid_script.h">
+      <Filter>Source\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scripts\mouse_script.h">
+      <Filter>Source\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="src\prefabs\background_prefab.h">
+      <Filter>Source\Prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="src\prefabs\brother_prefab.h">
+      <Filter>Source\Prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="src\prefabs\button_prefab.h">
+      <Filter>Source\Prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="src\prefabs\cursor_prefab.h">
+      <Filter>Source\Prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="src\prefabs\grid_prefab.h">
+      <Filter>Source\Prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="src\prefabs\level_prefab.h">
+      <Filter>Source\Prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="src\prefabs\level_ui_prefab.h">
+      <Filter>Source\Prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="src\prefabs\obstacle_prefab.h">
+      <Filter>Source\Prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="src\prefabs\player_prefab.h">
+      <Filter>Source\Prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\level_one.h">
+      <Filter>Source\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\main_menu_scene.h">
+      <Filter>Source\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\events\move_event.h">
+      <Filter>Source\Event</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{9eafa457-606f-48e7-ad11-ca520b2c1be2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Game">
+      <UniqueIdentifier>{a16a4681-cfc0-40b6-ab4a-986494e4e540}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Script">
+      <UniqueIdentifier>{8fbb419f-681e-47d1-b70e-342c94e09310}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Prefab">
+      <UniqueIdentifier>{af40a613-a41a-4ec1-9f79-054725b2ab97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Scene">
+      <UniqueIdentifier>{15107ff4-a538-4205-98b3-0bd6c029922e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Event">
+      <UniqueIdentifier>{06231114-5c08-49fa-afa9-7ba95bc3b1fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

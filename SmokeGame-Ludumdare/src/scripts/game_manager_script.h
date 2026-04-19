@@ -1,0 +1,33 @@
+#pragma once
+
+#include "core/scripts/script.h"
+#include "core/scenes/Scene.h"
+#include "brother_script.h"
+#include "grid_script.h"
+#include "../src/core/components/scriptComponent.h"
+#include "../src/core/components/buttonComponent.h"
+
+#include "events/move_event.h"
+
+#include <queue>
+
+class GameManagerScript : public Engine::Script
+{
+private:
+	//Engine::ScriptComponent* grid;
+	
+	Engine::ButtonComponent* yellowSmoke;
+	Engine::ButtonComponent* greenSmoke;
+	Engine::ButtonComponent* redSmoke;
+	Engine::ButtonComponent* blueSmoke;
+
+	void GetSmokeButtons();
+
+	std::queue<MoveType> moveQueue;
+
+	void OnStart() override;
+public:
+	GameManagerScript();
+
+};
+
