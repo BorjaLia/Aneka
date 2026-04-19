@@ -18,7 +18,7 @@ void AddPlayer(Engine::SceneBuilder& builder, Engine::Vector2f pos)
 
     auto* spriteNode = builder.CreateChildNode(player, "TextureNode");
 
-    spriteNode->transform->SetScale(Engine::Vector2f(0.2f, 0.2f));
+    spriteNode->transform->SetScale(Engine::Vector2f(0.4f, 0.4f));
 
     auto* sprite = spriteNode->AddComponent<Engine::AnimatedSpriteComponent>(idle_animation, Engine::Pivot::Center);
 
