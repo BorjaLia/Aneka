@@ -25,7 +25,7 @@ private:
 	Engine::EventBus* eventBus;
 	Engine::EventListenerID listenerId;
 
-	float baseSpeed = 400.f;
+	float baseSpeed = 4.f;
 	float speed = baseSpeed;
 
 	State state = State::Walk;
