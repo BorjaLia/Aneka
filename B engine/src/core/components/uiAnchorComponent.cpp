@@ -81,8 +81,6 @@ namespace Engine
         ));
         owner->transform->UpdateTransform();
 
-        // EL LOG DEFINITIVO: Ahora sabremos EXACTAMENTE quién está hablando
-        ENGINE_LOG("[" << owner->name << "] AnchorX: " << anchor.x << " | FinalX: " << finalGlobalPos.x << " | LocalX: " << owner->transform->GetPosition().x);
     }
 
     void UIAnchorComponent::Start()
