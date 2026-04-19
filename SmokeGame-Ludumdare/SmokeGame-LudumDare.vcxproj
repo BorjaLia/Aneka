@@ -40,6 +40,7 @@
     <ClCompile Include="src\scripts\grid_script.cpp" />
     <ClCompile Include="src\scripts\mouse_script.cpp" />
     <ClCompile Include="src\scripts\obstacle_script.cpp" />
+    <ClCompile Include="src\scripts\props_setter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\B engine\B engine.vcxproj">
@@ -69,6 +70,7 @@
     <ClInclude Include="src\scripts\grid_script.h" />
     <ClInclude Include="src\scripts\mouse_script.h" />
     <ClInclude Include="src\scripts\obstacle_script.h" />
+    <ClInclude Include="src\scripts\props_setter.h" />
     <ClInclude Include="src\smokes.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

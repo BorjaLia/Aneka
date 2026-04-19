@@ -6,5 +6,5 @@
 class LevelOne : public Engine::IScene
 {
 public:
-    void Build(Engine::SceneBuilder& builder) override;
+    void Build(Engine::SceneBuilder& builder);
 };

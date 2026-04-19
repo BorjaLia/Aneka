@@ -17,7 +17,6 @@ void ObstacleScript::OnStart()
 				HitPlayer hitPlayer(owner);
 
 				eventBus.Publish(hitPlayer);
-				ENGINE_LOG("SUI");
 			}
 		});
 }
