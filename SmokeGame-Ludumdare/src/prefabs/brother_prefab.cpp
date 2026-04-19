@@ -1,5 +1,6 @@
 #include "brother_prefab.h"
 
+#include "../src/core/components/followComponent.h"
 #include "../src/core/components/spriteComponent.h"
 #include "../src/core/components/animatedSpriteComponent.h"
 #include "../src/core/components/colliderComponent.h"
@@ -26,6 +27,7 @@ void AddBrother(Engine::SceneBuilder& builder, Engine::Vector2f pos)
 
     sprite->AddAnimationGrid("Walk",0,0,8,670,1100,0.125f);
 
+    brother->AddComponent<Engine::FollowComponent>();
 	brother->AddComponent<Engine::ScriptComponent>(new BrotherScript);
 
     //sprite->Play("Walk");

@@ -15,6 +15,10 @@ void BrotherScript::OnStart()
 
 	animation = owner->FindChild("TextureNode")->GetComponent<Engine::AnimatedSpriteComponent>();
 	trs = owner->transform;
+
+	followComp = owner->GetComponent<Engine::FollowComponent>();
+	followComp->SetMode(Engine::FollowMode::Lerp);
+	followComp->SetLerpSpeed(speed);
 }
 
 void BrotherScript::OnUpdate(float)
@@ -34,14 +38,44 @@ void BrotherScript::OnDestroy()
 
 void BrotherScript::Move(float delta)
 {
-	if (dir.x != 0.f || dir.y != 0.f)
+	if (state == STATE::WALK)
 	{
 		trs->SetPosition(trs->GetPosition() + dir * (speed * delta));
 	}
 }
 
+void BrotherScript::DoAction(Engine::Node* end, STATE state)
+{
+	this->state = state;
+	if (this->state != STATE::CROUCH && this->state != STATE::WAIT)
+	{
+		followComp->SetTarget(end);
+		followComp->SetStarted(true);
+	}
+	else
+	{
+		followComp->SetStarted(false);
+	}
+}
+
 void BrotherScript::PlayAnim()
 {
+	if (dir.x != 0.f || dir.y != 0.f)
+	{
+		if (dir.y >= 0.f)
+		{
+			state = STATE::JUMP;
+		}
+		else if (dir.y < 0.f)
+		{
+			state = STATE::AIR;
+		}
+		else if (state != STATE::CROUCH)
+		{
+			state = STATE::WALK;
+		}
+	}
+
 	if (!animation) return;
 	switch (state)
 	{

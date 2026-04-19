@@ -37,6 +37,7 @@ void StartLevel(Engine::SceneBuilder& builder)
 
 	//floor->AddComponent<Engine::SpriteComponent>(rm.GetTexture("res/sprites/plant2.png"));
 
+    AddGrid(builder, Engine::Vector2f(100.f,100.f), Engine::Vector2f(150.f,150.f), Engine::Vector2f(1,1));
     AddBrother(builder,Engine::Vector2f(250.0f,450.0f));
     AddPlayer(builder,Engine::Vector2f(center .x - 250.0f,250.0f));
 
