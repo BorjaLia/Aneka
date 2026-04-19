@@ -55,14 +55,11 @@
     <ClCompile Include="src\brother_script.cpp">
       <Filter>Source Files\Scripts</Filter>
     </ClCompile>
-    <ClCompile Include="src\prefabs\level_ui_prefab.cpp">
+    <ClCompile Include="src\prefabs\grid_prefab.cpp">
       <Filter>Source Files\Prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="src\button_script.cpp">
-      <Filter>Source Files\Scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="src\button.cpp">
-      <Filter>Source Files\Prefabs</Filter>
+    <ClCompile Include="src\grid_script.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -96,14 +93,24 @@
     <ClInclude Include="src\brother_script.h">
       <Filter>Source Files\Scripts</Filter>
     </ClInclude>
-    <ClInclude Include="src\prefabs\level_ui_prefab.h">
+    <ClInclude Include="src\prefabs\grid_prefab.h">
       <Filter>Source Files\Prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="src\button_script.h">
-      <Filter>Source Files\Scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="src\button.h">
-      <Filter>Source Files\Prefabs</Filter>
-    </ClInclude>
+    <ClInclude Include="src\grid_script.h" />
+    <ClInclude Include="src\background.h" />
+    <ClInclude Include="src\backgroundScript.h" />
+    <ClInclude Include="src\brother_script.h" />
+    <ClInclude Include="src\button.h" />
+    <ClInclude Include="src\button_script.h" />
+    <ClInclude Include="src\game.h" />
+    <ClInclude Include="src\level_one.h" />
+    <ClInclude Include="src\main_menu_scene.h" />
+    <ClInclude Include="src\player.h" />
+    <ClInclude Include="src\prefabs\brother.h" />
+    <ClInclude Include="src\prefabs\level_prefab.h" />
+    <ClInclude Include="src\prefabs\level_ui_prefab.h" />
+    <ClInclude Include="src\prefabs\obstacle_prefab.h" />
+    <ClInclude Include="src\cursor.h" />
+    <ClInclude Include="src\mouse_script.h" />
   </ItemGroup>
 </Project>

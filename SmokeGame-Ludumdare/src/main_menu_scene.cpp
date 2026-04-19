@@ -14,6 +14,7 @@
 
 #include "background.h"
 #include "button.h"
+#include "cursor.h"
 
 #include "core/debug.h"
 
@@ -24,16 +25,19 @@ void MainMenuScene::Build(Engine::SceneBuilder& builder)
 
 	Engine::Font* font = rm.GetFont("res/fonts/ReemKufiFunRegular.ttf", 48);
 
-	AddBackground(builder,Engine::RenderLayer::UI);
+	AddBackground(builder);
 
-	/*Engine::Node* camNode = */builder.CreateNode("MenuCamera");
+	Engine::Vector2f center = app.GetWindow()->GetSize() / 2;
+
+	Engine::Node* camNode = builder.CreateNode("MenuCamera");
+	camNode->transform->SetPosition(center);
+	auto* cam = camNode->AddComponent<Engine::CameraComponent>();
 
 	Engine::Texture2D titleTex = rm.GetTexture("res/sprites/aneka.png");
 
 	Engine::Node* title = builder.CreateNode("TitleText");
 	auto* sprite = title->AddComponent <Engine::SpriteComponent>(titleTex, Engine::Pivot::Center, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::UI);
 	sprite->SetTargetSize({ 750.0f, 600.0f });
-	Engine::Vector2f center = app.GetWindow()->GetSize() / 2;
 
 	title->transform->SetPosition(center + Engine::Vector2f(0.0f, -230.0f));
 
@@ -56,4 +60,6 @@ void MainMenuScene::Build(Engine::SceneBuilder& builder)
 		{
 			Engine::Application::Get().Shutdown();
 		});
+
+	AddCursor(builder, cam);
 }

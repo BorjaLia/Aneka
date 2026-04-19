@@ -10,7 +10,7 @@ int game()
     if (!app.Initialize({ 1920, 1080 }, "Aneka")) return -1;
 
 
-    app.GetSceneManager().LoadScene(std::make_unique<MainMenuScene>());
+    app.GetSceneManager().LoadScene(std::make_unique<LevelOne>());
 
     app.Run();
     app.Shutdown();
