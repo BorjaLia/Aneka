@@ -24,6 +24,7 @@ private:
 	bool playedHoveredSound = false;
 
 	void UpdateSprites();
+	void UpdateCampfire();
 
 public:
 

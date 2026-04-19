@@ -45,6 +45,35 @@ void UiPowdersScript::UpdateSprites()
 	}
 }
 
+void UiPowdersScript::UpdateCampfire()
+{
+	if (smokes.empty()) return;
+
+	SmokeType currentSmoke = smokes.front();
+	smokes.pop();
+
+	switch (currentSmoke)
+	{
+	case SmokeType::None:
+		break;
+	case SmokeType::Left:
+		break;
+	case SmokeType::Right:
+		break;
+	case SmokeType::Jump:
+		break;
+	case SmokeType::Crouch:
+		break;
+	default:
+		break;
+	}
+
+	Engine::Application::Get().GetTimerManager().SetTimeout(1.0f, [this]()
+		{
+			UpdateCampfire();
+		});
+}
+
 void UiPowdersScript::OnStart()
 {
 
@@ -55,6 +84,10 @@ void UiPowdersScript::OnStart()
 			this->smokes = e.GetSmokeQueue();
 			e.handled = true;
 			UpdateSprites();
+			if (e.GetDone())
+			{
+
+			}
 		});
 }
 

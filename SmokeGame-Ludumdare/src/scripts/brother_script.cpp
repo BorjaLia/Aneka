@@ -3,7 +3,7 @@
 
 void BrotherScript::Idle()
 {
-	animation->SetFlipX(false);
+	//animation->SetFlipX(false);
 
 	animation->Play("Idle");
 	ENGINE_LOG("Brother is Idle");
@@ -12,10 +12,11 @@ void BrotherScript::Idle()
 
 void BrotherScript::Walk()
 {
-	followComp->SetTarget(target);
-
-	animation->SetFlipX(!(target->GetGlobalPosition().x >= owner->transform->GetGlobalPosition().x));
-
+	if (target)
+	{
+		followComp->SetTarget(target);
+		animation->SetFlipX(!(target->GetGlobalPosition().x >= owner->transform->GetGlobalPosition().x));
+	}
 	this->moving = true;
 
 	animation->Play("Walk");
@@ -26,6 +27,14 @@ void BrotherScript::Walk()
 
 void BrotherScript::Jump()
 {
+	if (target)
+	{
+		height++;
+		followComp->SetTarget(target);
+		animation->SetFlipX(!(target->GetGlobalPosition().x >= owner->transform->GetGlobalPosition().x));
+	}
+	this->moving = true;
+
 	animation->Play("Jump");
 	ENGINE_LOG("Brother is Jumping");
 	animation->speedMultiplier = 1.0f;
@@ -36,10 +45,26 @@ void BrotherScript::Crouch()
 	animation->Play("Crouch");
 	ENGINE_LOG("Brother is Crouching");
 	animation->speedMultiplier = 1.0f;
+
+	Engine::Application::Get().GetTimerManager().SetTimeout(0.2f, [this]()
+		{
+			ENGINE_LOG("Brother publishesd finished move event");
+			moving = false;
+			FinishMoveEvent finishMoveEvent(owner->transform->GetGlobalPosition(), height != 0);
+			Engine::Application::Get().GetEventBus().Publish(finishMoveEvent);
+		});
 }
 
 void BrotherScript::Fall()
 {
+	if (target)
+	{
+		height--;
+		followComp->SetTarget(target);
+		animation->SetFlipX(!(target->GetGlobalPosition().x >= owner->transform->GetGlobalPosition().x));
+	}
+	this->moving = true;
+
 	animation->Play("Fall");
 	ENGINE_LOG("Brother is Falling");
 	animation->speedMultiplier = 1.0f;
@@ -57,7 +82,7 @@ void BrotherScript::Death()
 	Engine::Application::Get().GetTimerManager().SetTimeout(0.3f, [this]()
 		{
 			Engine::Node* heaven = Engine::Application::Get().GetSceneBuilder().CreateChildNode(this->owner, "Heaven");
-			heaven->transform->SetPosition(Engine::Vector2f(20.0f,100.0f));
+			heaven->transform->SetPosition(Engine::Vector2f(20.0f, 100.0f));
 			this->speed = 5.0f;
 			this->owner->GetComponent<Engine::FollowComponent>()->SetTarget(heaven);
 		});
@@ -93,7 +118,7 @@ void BrotherScript::OnUpdate(float)
 	if ((target->GetGlobalPosition() - owner->transform->GetGlobalPosition()).MagnitudeSquared() <= 5.0f)
 	{
 		Idle();
-		FinishMoveEvent finishMoveEvent(owner->transform->GetGlobalPosition());
+		FinishMoveEvent finishMoveEvent(owner->transform->GetGlobalPosition(), height != 0);
 		ENGINE_LOG("Brother publishesd finished move event");
 		followComp->SetMode(Engine::FollowMode::Linear);
 		moving = false;
@@ -109,14 +134,6 @@ void BrotherScript::OnDestroy()
 	}
 }
 
-//void BrotherScript::Move(float delta)
-//{
-//	if (state == State::Walk)
-//	{
-//		trs->SetPosition(trs->GetPosition() + dir * (speed * delta));
-//	}
-//}
-
 void BrotherScript::DoAction(Engine::Node* target, MoveType move)
 {
 	this->target = target;
@@ -125,6 +142,7 @@ void BrotherScript::DoAction(Engine::Node* target, MoveType move)
 	{
 		ENGINE_WARN("NO TARGET! - Brother Script");
 	}
+
 
 	switch (move)
 	{
@@ -140,13 +158,16 @@ void BrotherScript::DoAction(Engine::Node* target, MoveType move)
 	case MoveType::Crouch:
 		Crouch();
 		break;
+	case MoveType::Fall:
+		Fall();
+		break;
 	case MoveType::Death:
 		Death();
-
 		break;
 	default:
 		break;
 	}
+	lastMove = move;
 }
 
 //void BrotherScript::PlayAnim()
