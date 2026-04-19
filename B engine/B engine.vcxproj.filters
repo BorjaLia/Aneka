@@ -163,6 +163,9 @@
     <ClCompile Include="src\core\scenes\sceneManager.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\timerManager.cpp">
+      <Filter>Source Files\Time</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\types.h">
@@ -314,6 +317,9 @@
     </ClInclude>
     <ClInclude Include="src\core\scenes\sceneManager.h">
       <Filter>Source Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\timerManager.h">
+      <Filter>Source Files\Time</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -44,6 +44,7 @@
     <ClCompile Include="src\core\sceneBuilder.cpp" />
     <ClCompile Include="src\core\scenes\sceneManager.cpp" />
     <ClCompile Include="src\core\time.cpp" />
+    <ClCompile Include="src\core\timerManager.cpp" />
     <ClCompile Include="src\input\raylibInput.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\physics\physics.cpp" />
@@ -92,6 +93,7 @@
     <ClInclude Include="src\core\scenes\sceneManager.h" />
     <ClInclude Include="src\core\scripts\script.h" />
     <ClInclude Include="src\core\time.h" />
+    <ClInclude Include="src\core\timerManager.h" />
     <ClInclude Include="src\core\types.h" />
     <ClInclude Include="src\input\IInput.h" />
     <ClInclude Include="src\input\keyCodes.h" />

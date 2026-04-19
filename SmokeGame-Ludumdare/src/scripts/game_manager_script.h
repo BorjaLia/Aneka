@@ -34,9 +34,10 @@ private:
 	Engine::ButtonComponent* redSmoke;
 	Engine::ButtonComponent* blueSmoke;
 
-	Engine::Node* brother;
 	std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> gridBody;
 	Engine::Vector2f gridIter;
+
+	Engine::Vector2f brotherPos;
 
 	float startTime = 0.0f;
 	float actionInterval = 0.0f;

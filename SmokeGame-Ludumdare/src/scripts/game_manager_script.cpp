@@ -66,7 +66,14 @@ void GameManagerScript::OnStart()
 	listenerId = eventBus->Subscribe<FinishMoveEvent>([this](FinishMoveEvent& e)
 		{
 			e.handled = true;
+			brotherPos = e.GetPos();
+
 			ENGINE_LOG("Manager recieved finish move event");
+
+			Engine::Application::Get().GetTimerManager().SetTimeout(3.0f, []()
+				{
+					ENGINE_LOG("Manager ready to send event");
+				});
 
 		//	Engine::Node* target = nullptr;
 
@@ -118,44 +125,44 @@ void GameManagerScript::OnStart()
 
 void GameManagerScript::OnUpdate(float)
 {
-	/*for (int i = 0; i < moveQueue.size(); i++)
-	{
-		SmokeType currentMove = moveQueue.front();
-		moveQueue.pop();
+	//for (int i = 0; i < moveQueue.size(); i++)
+	//{
+	//	SmokeType currentMove = moveQueue.front();
+	//	moveQueue.pop();
 
-		Engine::Node* gridNodeTowards;
+	//	Engine::Node* gridNodeTowards;
 
-		Engine::Vector2f closestCell = GetClosestNode(brother->transform->GetPosition());
-		Engine::Vector2f nextCell = closestCell;
-		switch (currentMove)
-		{
-		case SmokeType::Left:
-			nextCell.x--;
-			gridNodeTowards = gridBody[closestCell.x - 1][closestCell.y];
-			break;
+	//	Engine::Vector2f closestCell = GetClosestNode(brotherPos);
+	//	Engine::Vector2f nextCell = closestCell;
+	//	switch (currentMove)
+	//	{
+	//	case SmokeType::Left:
+	//		nextCell.x--;
+	//		gridNodeTowards = gridBody[closestCell.x - 1][closestCell.y];
+	//		break;
 
-		case SmokeType::Right:
-			nextCell.x++;
-			gridNodeTowards = gridBody[closestCell.x + 1][closestCell.y];
-			break;
+	//	case SmokeType::Right:
+	//		nextCell.x++;
+	//		gridNodeTowards = gridBody[closestCell.x + 1][closestCell.y];
+	//		break;
 
-		case SmokeType::Jump:
-			nextCell.y++;
-			gridNodeTowards = gridBody[closestCell.x][closestCell.y + 1];
-			break;
+	//	case SmokeType::Jump:
+	//		nextCell.y++;
+	//		gridNodeTowards = gridBody[closestCell.x][closestCell.y + 1];
+	//		break;
 
-		default:
-			break;
-		}
+	//	default:
+	//		break;
+	//	}
 
-		if (IterExists(nextCell))
-		{
-			gridNodeTowards = gridBody[nextCell.x][nextCell.y];
+	//	if (IterExists(nextCell))
+	//	{
+	//		gridNodeTowards = gridBody[nextCell.x][nextCell.y];
 
-			MoveEvent moveEvent(gridNodeTowards, MoveType::Walk);
-			Engine::Application::Get().GetEventBus().Publish(moveEvent);
-		}
-	}*/
+	//		MoveEvent moveEvent(gridNodeTowards, MoveType::Walk);
+	//		Engine::Application::Get().GetEventBus().Publish(moveEvent);
+	//	}
+	//}
 }
 
 void GameManagerScript::ReceiveMove(SmokeType move)
