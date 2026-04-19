@@ -13,7 +13,7 @@ Engine::Node* AddButton(Engine::SceneBuilder& builder, Engine::Vector2f pos, std
 	auto& rm = *app.GetResourceManager();
 
 	Engine::Texture2D buttonTex = normalTex;
-	Engine::Font* font = rm.GetFont("res/fonts/ReemKufiFunRegular.ttf", 200);
+	Engine::Font* font = rm.GetFont("res/fonts/Skranji-Regular.ttf", 200);
 
 	Engine::Node* button = nullptr;
 
@@ -41,7 +41,7 @@ Engine::Node* AddButton(Engine::SceneBuilder& builder, Engine::Vector2f pos, std
 	button->AddComponent<Engine::ButtonComponent>(Engine::RectangleShape(Engine::Vector2f(0.0f, 0.0f)), Engine::RenderLayer::UI);
 
 	auto* textNode = builder.CreateChildNode(button, "ButtonText");
-	auto* text = textNode->AddComponent<Engine::TextComponent>(font, buttonText, 48.0f, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::UI);
+	auto* text = textNode->AddComponent<Engine::TextComponent>(font, buttonText, 48.0f, Engine::Color(87, 62, 41, 255), Engine::RenderLayer::UI);
 	text->alignment = Engine::TextAlignment::Center;
 	text->pivot = pivot;
 
