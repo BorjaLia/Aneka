@@ -26,7 +26,10 @@ void GameManagerScript::OnStart()
 		ENGINE_ERROR("Smoke button not found! - Game manager");
 	}
 
-	MoveEvent moveEvent(Engine::Application::Get().GetRootScene(), MoveType::Walk);
+	Engine::Node* testNode = Engine::Application::Get().GetSceneBuilder().CreateNode();
+	testNode->transform->SetPosition(Engine::Vector2f(500.0f, 450.0f));
+
+	MoveEvent moveEvent(testNode, MoveType::Jump);
 	Engine::Application::Get().GetEventBus().Publish(moveEvent);
 }
 GameManagerScript::GameManagerScript()

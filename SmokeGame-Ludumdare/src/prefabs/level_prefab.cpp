@@ -43,7 +43,6 @@ void StartLevel(Engine::SceneBuilder& builder)
 
     AddCursor(builder, cam);
 
-
     Engine::Node* gameManager = builder.CreateNode("GameManager");
     /*Engine::ScriptComponent* scriptComponent = */gameManager->AddComponent<Engine::ScriptComponent>(new GameManagerScript);
     //GameManagerScript* managerScript = scriptComponent->GetScript<GameManagerScript>();
