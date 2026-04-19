@@ -11,6 +11,7 @@
 #include "core/components/textComponent.h"
 #include "core/components/spriteComponent.h"
 #include "core/components/buttonComponent.h"
+#include "core/components/audioComponent.h"
 
 #include "background.h"
 #include "button.h"
@@ -24,6 +25,8 @@ void MainMenuScene::Build(Engine::SceneBuilder& builder)
 	auto& rm = *app.GetResourceManager();
 
 	//Engine::Font* font = rm.GetFont("res/fonts/ReemKufiFunRegular.ttf", 48);
+
+	Engine::Node* mainMenuMusic = builder.CreateNode("MainMenuMusic");
 
 	AddBackground(builder);
 
@@ -60,6 +63,12 @@ void MainMenuScene::Build(Engine::SceneBuilder& builder)
 		{
 			Engine::Application::Get().Shutdown();
 		});
+
+	auto* music = mainMenuMusic->AddComponent<Engine::AudioComponent>(rm.GetAudioClip("res/audio/main_menu.mp3"), true, true);
+
+	Engine::AudioPlayParams params = music->GetParams();
+	params.volume = 0.3f;
+	music->SetParams(params);
 
 	AddCursor(builder, cam);
 }
