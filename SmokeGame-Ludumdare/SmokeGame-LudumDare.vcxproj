@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\events\hit_player.cpp" />
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\prefabs\background_prefab.cpp" />
@@ -38,6 +39,7 @@
     <ClCompile Include="src\scripts\game_manager_script.cpp" />
     <ClCompile Include="src\scripts\grid_script.cpp" />
     <ClCompile Include="src\scripts\mouse_script.cpp" />
+    <ClCompile Include="src\scripts\obstacle_script.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\B engine\B engine.vcxproj">
@@ -46,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\events\action_queue_event.h" />
+    <ClInclude Include="src\events\hit_player.h" />
     <ClInclude Include="src\events\move_event.h" />
     <ClInclude Include="src\game.h" />
     <ClInclude Include="src\prefabs\background_prefab.h" />
@@ -65,6 +68,7 @@
     <ClInclude Include="src\scripts\game_manager_script.h" />
     <ClInclude Include="src\scripts\grid_script.h" />
     <ClInclude Include="src\scripts\mouse_script.h" />
+    <ClInclude Include="src\scripts\obstacle_script.h" />
     <ClInclude Include="src\smokes.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
