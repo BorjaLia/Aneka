@@ -31,6 +31,7 @@
     <ClCompile Include="src\prefabs\level_ui_prefab.cpp" />
     <ClCompile Include="src\prefabs\obstacle_prefab.cpp" />
     <ClCompile Include="src\prefabs\player_prefab.cpp" />
+    <ClCompile Include="src\scenes\credits.cpp" />
     <ClCompile Include="src\scenes\level_one.cpp" />
     <ClCompile Include="src\scenes\main_menu_scene.cpp" />
     <ClCompile Include="src\scripts\background_script.cpp" />
@@ -60,6 +61,7 @@
     <ClInclude Include="src\prefabs\level_ui_prefab.h" />
     <ClInclude Include="src\prefabs\obstacle_prefab.h" />
     <ClInclude Include="src\prefabs\player_prefab.h" />
+    <ClInclude Include="src\scenes\credits.h" />
     <ClInclude Include="src\scenes\level_one.h" />
     <ClInclude Include="src\scenes\main_menu_scene.h" />
     <ClInclude Include="src\scripts\background_script.h" />
