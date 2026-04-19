@@ -200,6 +200,7 @@ namespace Engine
     {
         if (audio)  audio->Shutdown();
         if (window) window->Shutdown();
+        isRunning = false;
     }
 
     void Application::ToggleDebugMode()
