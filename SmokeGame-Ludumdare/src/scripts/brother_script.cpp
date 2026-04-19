@@ -1,4 +1,5 @@
 #include "brother_script.h"
+#include "events/hit_player.h"
 
 void BrotherScript::Idle()
 {
@@ -46,6 +47,11 @@ void BrotherScript::OnStart()
 			ENGINE_LOG("Brother recieved event");
 			DoAction(e.GetTarget(), e.GetMoveType());
 			e.handled = true;
+		});
+
+	listenerId = eventBus->Subscribe<HitPlayer>([this](Engine::Node* enemy, HitType hit)
+		{
+			ENGINE_LOG("ASD");
 		});
 
 	animation = owner->FindChild("TextureNode")->GetComponent<Engine::AnimatedSpriteComponent>();

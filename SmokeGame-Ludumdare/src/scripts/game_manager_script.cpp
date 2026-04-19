@@ -84,7 +84,28 @@ void GameManagerScript::AddQueueMove(SmokeType type)
 	}
 
 	moveQueue.push(type);
-	ENGINE_LOG("Pushing queue event - Game Manager");
+
+	switch (type)
+	{
+	case SmokeType::None:
+		ENGINE_LOG("Pushing " << "None" << " queue event - Game Manager");
+		break;
+	case SmokeType::Left:
+		ENGINE_LOG("Pushing " << "Left" << " queue event - Game Manager");
+		break;
+	case SmokeType::Right:
+		ENGINE_LOG("Pushing " << "Right" << " queue event - Game Manager");
+		break;
+	case SmokeType::Jump:
+		ENGINE_LOG("Pushing " << "Jump" << " queue event - Game Manager");
+		break;
+	case SmokeType::Crouch:
+		ENGINE_LOG("Pushing " << "Crouch" << " queue event - Game Manager");
+		break;
+	default:
+		break;
+	}
+
 	QueueChangeEvent addQueueEvent(moveQueue);
 	eventBus->Publish(addQueueEvent);
 

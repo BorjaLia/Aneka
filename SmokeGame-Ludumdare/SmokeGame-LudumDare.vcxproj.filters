@@ -1,19 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\game.cpp">
-      <Filter>Source\Game</Filter>
-    </ClCompile>
     <ClCompile Include="src\main.cpp">
       <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prefabs\background_prefab.cpp">
+      <Filter>Source\Prefab</Filter>
     </ClCompile>
     <ClCompile Include="src\scripts\background_script.cpp">
       <Filter>Source\Script</Filter>
     </ClCompile>
+    <ClCompile Include="src\prefabs\brother_prefab.cpp">
+      <Filter>Source\Prefab</Filter>
+    </ClCompile>
     <ClCompile Include="src\scripts\brother_script.cpp">
       <Filter>Source\Script</Filter>
     </ClCompile>
+    <ClCompile Include="src\prefabs\button_prefab.cpp">
+      <Filter>Source\Prefab</Filter>
+    </ClCompile>
     <ClCompile Include="src\scripts\button_script.cpp">
+      <Filter>Source\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prefabs\grid_prefab.cpp">
+      <Filter>Source\Prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prefabs\player_prefab.cpp">
+      <Filter>Source\Prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prefabs\obstacle_prefab.cpp">
+      <Filter>Source\Prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prefabs\level_ui_prefab.cpp">
+      <Filter>Source\Prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prefabs\level_prefab.cpp">
+      <Filter>Source\Prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\credits.cpp">
+      <Filter>Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prefabs\cursor_prefab.cpp">
+      <Filter>Source\Prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game.cpp">
+      <Filter>Source\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scripts\ui_inventory_script.cpp">
       <Filter>Source\Script</Filter>
     </ClCompile>
     <ClCompile Include="src\scripts\game_manager_script.cpp">
@@ -25,52 +58,22 @@
     <ClCompile Include="src\scripts\mouse_script.cpp">
       <Filter>Source\Script</Filter>
     </ClCompile>
-    <ClCompile Include="src\prefabs\background_prefab.cpp">
-      <Filter>Source\Prefab</Filter>
-    </ClCompile>
-    <ClCompile Include="src\prefabs\brother_prefab.cpp">
-      <Filter>Source\Prefab</Filter>
-    </ClCompile>
-    <ClCompile Include="src\prefabs\button_prefab.cpp">
-      <Filter>Source\Prefab</Filter>
-    </ClCompile>
-    <ClCompile Include="src\prefabs\cursor_prefab.cpp">
-      <Filter>Source\Prefab</Filter>
-    </ClCompile>
-    <ClCompile Include="src\prefabs\grid_prefab.cpp">
-      <Filter>Source\Prefab</Filter>
-    </ClCompile>
-    <ClCompile Include="src\prefabs\level_prefab.cpp">
-      <Filter>Source\Prefab</Filter>
-    </ClCompile>
-    <ClCompile Include="src\prefabs\level_ui_prefab.cpp">
-      <Filter>Source\Prefab</Filter>
-    </ClCompile>
-    <ClCompile Include="src\prefabs\obstacle_prefab.cpp">
-      <Filter>Source\Prefab</Filter>
-    </ClCompile>
-    <ClCompile Include="src\prefabs\player_prefab.cpp">
-      <Filter>Source\Prefab</Filter>
-    </ClCompile>
-    <ClCompile Include="src\scenes\level_one.cpp">
-      <Filter>Source\Scene</Filter>
+    <ClCompile Include="src\scripts\obstacle_script.cpp">
+      <Filter>Source\Script</Filter>
     </ClCompile>
     <ClCompile Include="src\scenes\main_menu_scene.cpp">
       <Filter>Source\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="src\scripts\ui_inventory_script.cpp">
-      <Filter>Source\Script</Filter>
-    </ClCompile>
-    <ClCompile Include="src\events\hit_player.cpp" />
-    <ClCompile Include="src\scripts\obstacle_script.cpp">
-      <Filter>Source\Script</Filter>
+    <ClCompile Include="src\scenes\level_one.cpp">
+      <Filter>Source\Scene</Filter>
     </ClCompile>
     <ClCompile Include="src\events\hit_player.cpp">
       <Filter>Source\Event</Filter>
     </ClCompile>
-    <ClCompile Include="src\scenes\credits.cpp">
-      <Filter>Source\Scene</Filter>
+    <ClCompile Include="src\scripts\props_setter.cpp">
+      <Filter>Source\Script</Filter>
     </ClCompile>
+    <ClCompile Include="src\scripts\props_setter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\events\action_queue_event.h" />
@@ -95,7 +98,6 @@
     <ClInclude Include="src\scripts\mouse_script.h" />
     <ClInclude Include="src\scripts\obstacle_script.h" />
     <ClInclude Include="src\smokes.h" />
-    <ClInclude Include="src\scripts\props_setter.h" />
     <ClInclude Include="src\prefabs\obstacle_prefab.h" />
     <ClInclude Include="src\game.h">
       <Filter>Source\Game</Filter>
@@ -103,10 +105,43 @@
     <ClInclude Include="src\scripts\background_script.h">
       <Filter>Source\Script</Filter>
     </ClInclude>
+    <ClInclude Include="src\prefabs\brother_prefab.h">
+      <Filter>Source\Prefab</Filter>
+    </ClInclude>
     <ClInclude Include="src\scripts\brother_script.h">
       <Filter>Source\Script</Filter>
     </ClInclude>
+    <ClInclude Include="src\prefabs\button_prefab.h">
+      <Filter>Source\Prefab</Filter>
+    </ClInclude>
     <ClInclude Include="src\scripts\button_script.h">
+      <Filter>Source\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="src\prefabs\grid_prefab.h">
+      <Filter>Source\Prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="src\prefabs\player_prefab.h">
+      <Filter>Source\Prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="src\prefabs\obstacle_prefab.h">
+      <Filter>Source\Prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="src\prefabs\level_ui_prefab.h">
+      <Filter>Source\Prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="src\prefabs\level_prefab.h">
+      <Filter>Source\Prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\credits.h">
+      <Filter>Source\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\prefabs\cursor_prefab.h">
+      <Filter>Source\Prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game.h">
+      <Filter>Source\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scripts\ui_inventory_script.h">
       <Filter>Source\Script</Filter>
     </ClInclude>
     <ClInclude Include="src\scripts\game_manager_script.h">
@@ -118,76 +153,48 @@
     <ClInclude Include="src\scripts\mouse_script.h">
       <Filter>Source\Script</Filter>
     </ClInclude>
-    <ClInclude Include="src\prefabs\background_prefab.h">
-      <Filter>Source\Prefab</Filter>
-    </ClInclude>
-    <ClInclude Include="src\prefabs\brother_prefab.h">
-      <Filter>Source\Prefab</Filter>
-    </ClInclude>
-    <ClInclude Include="src\prefabs\button_prefab.h">
-      <Filter>Source\Prefab</Filter>
-    </ClInclude>
-    <ClInclude Include="src\prefabs\cursor_prefab.h">
-      <Filter>Source\Prefab</Filter>
-    </ClInclude>
-    <ClInclude Include="src\prefabs\grid_prefab.h">
-      <Filter>Source\Prefab</Filter>
-    </ClInclude>
-    <ClInclude Include="src\prefabs\level_prefab.h">
-      <Filter>Source\Prefab</Filter>
-    </ClInclude>
-    <ClInclude Include="src\prefabs\level_ui_prefab.h">
-      <Filter>Source\Prefab</Filter>
-    </ClInclude>
-    <ClInclude Include="src\prefabs\obstacle_prefab.h">
-      <Filter>Source\Prefab</Filter>
-    </ClInclude>
-    <ClInclude Include="src\prefabs\player_prefab.h">
-      <Filter>Source\Prefab</Filter>
-    </ClInclude>
-    <ClInclude Include="src\scenes\level_one.h">
-      <Filter>Source\Scene</Filter>
+    <ClInclude Include="src\scripts\obstacle_script.h">
+      <Filter>Source\Script</Filter>
     </ClInclude>
     <ClInclude Include="src\scenes\main_menu_scene.h">
       <Filter>Source\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="src\events\move_event.h">
-      <Filter>Source\Event</Filter>
+    <ClInclude Include="src\scenes\level_one.h">
+      <Filter>Source\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\events\hit_player.h">
       <Filter>Source\Event</Filter>
     </ClInclude>
-    <ClInclude Include="src\smokes.h">
-      <Filter>Source</Filter>
+    <ClInclude Include="src\events\move_event.h">
+      <Filter>Source\Event</Filter>
     </ClInclude>
-    <ClInclude Include="src\scripts\ui_inventory_script.h">
-      <Filter>Source\Script</Filter>
-    </ClInclude>
-    <ClInclude Include="src\scripts\obstacle_script.h">
+    <ClInclude Include="src\scripts\props_setter.h">
       <Filter>Source\Script</Filter>
     </ClInclude>
     <ClInclude Include="src\events\action_queue_event.h">
       <Filter>Source\Event</Filter>
     </ClInclude>
+    <ClInclude Include="src\scenes\credits.h" />
+    <ClInclude Include="src\scripts\props_setter.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">
-      <UniqueIdentifier>{9eafa457-606f-48e7-ad11-ca520b2c1be2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Game">
-      <UniqueIdentifier>{a16a4681-cfc0-40b6-ab4a-986494e4e540}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Script">
-      <UniqueIdentifier>{8fbb419f-681e-47d1-b70e-342c94e09310}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Prefab">
-      <UniqueIdentifier>{af40a613-a41a-4ec1-9f79-054725b2ab97}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Scene">
-      <UniqueIdentifier>{15107ff4-a538-4205-98b3-0bd6c029922e}</UniqueIdentifier>
+      <UniqueIdentifier>{cd7abf83-b25a-4ee4-998a-60f7b8e1cfeb}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\Event">
-      <UniqueIdentifier>{06231114-5c08-49fa-afa9-7ba95bc3b1fc}</UniqueIdentifier>
+      <UniqueIdentifier>{3d6d02a4-3815-4f26-8b82-6ad40521f29a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Prefab">
+      <UniqueIdentifier>{5ce61f4d-819a-4dcf-a0cc-39fd6a710221}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Scene">
+      <UniqueIdentifier>{30b5777b-d057-4407-be08-32b29ddeb331}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Script">
+      <UniqueIdentifier>{feb6c352-b504-487d-8505-ec958f1b8831}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Game">
+      <UniqueIdentifier>{cd2703f5-6e7b-4137-8dbe-d1b251c1e576}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
