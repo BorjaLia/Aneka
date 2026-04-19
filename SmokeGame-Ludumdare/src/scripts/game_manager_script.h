@@ -27,11 +27,15 @@ private:
 	Engine::ButtonComponent* redSmoke;
 	Engine::ButtonComponent* blueSmoke;
 
+	Engine::ButtonComponent* playButton;
+	Engine::ButtonComponent* resetButton;
+
 	std::shared_ptr<std::shared_ptr<Engine::Node* []>[]> gridBody;
 	Engine::Vector2f gridIter;
 
 	Engine::Vector2f brotherPos;
 
+	bool startActions = false;
 	bool pendingAction = false;
 
 	void GetSmokeButtons();

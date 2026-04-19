@@ -48,7 +48,7 @@ void MainMenuScene::Build(Engine::SceneBuilder& builder)
 
 	playButton->GetComponent<Engine::ButtonComponent>()->SetOnClick([]()
 		{
-			Engine::Application::Get().GetSceneManager().LoadScene(std::make_unique<LevelOne>());
+			Engine::Application::Get().LoadScene<LevelOne>();
 		});
 
 	Engine::Node* creditsButton = AddButton(builder, center + Engine::Vector2f(0.0f, 150.0f), "Credits", "CreditsButton", Engine::Vector2f(0.2f, 0.2f), rm.GetTexture("res/sprites/hoveredButton.png"), rm.GetTexture("res/sprites/button.png"), rm.GetAudioClip("res/audio/button_click.wav"), Engine::Pivot::Center,

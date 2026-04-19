@@ -11,16 +11,33 @@ GameManagerScript::GameManagerScript(std::shared_ptr<std::shared_ptr<Engine::Nod
 
 void GameManagerScript::GetSmokeButtons()
 {
-	Engine::Node* ui = owner->FindChild("UI");
-	if (!ui) return;
-
-	Engine::Node* inventory = ui->FindChild("Inventory");;
-	if (!inventory) return;
+	Engine::Node* uiNode = owner->GetParent()->FindChild("UI");
+	if (!uiNode)
+	{
+		ENGINE_LOG("NO UI");
+		return;
+	}
+	Engine::Node* inventory = uiNode->FindChild("Inventory");
+	if (!inventory)
+	{
+		ENGINE_LOG("NO INVENTORY");
+		return;
+	}
 
 	yellowSmoke = inventory->FindChild("YellowDust")->GetComponent<Engine::ButtonComponent>();
 	greenSmoke = inventory->FindChild("GreenDust")->GetComponent<Engine::ButtonComponent>();
 	redSmoke = inventory->FindChild("RedDust")->GetComponent<Engine::ButtonComponent>();
 	blueSmoke = inventory->FindChild("BlueDust")->GetComponent<Engine::ButtonComponent>();
+	
+	Engine::Node* controls = uiNode->FindChild("MovementInventory");
+	if (!controls)
+	{
+		ENGINE_LOG("NO CONTROLS");
+		return;
+	}
+
+	playButton = controls->FindChild("Play")->GetComponent<Engine::ButtonComponent>();
+	resetButton = controls->FindChild("Reset")->GetComponent<Engine::ButtonComponent>();
 
 	yellowSmoke->SetOnClick([this]()
 		{
@@ -30,13 +47,27 @@ void GameManagerScript::GetSmokeButtons()
 		{
 			AddQueueMove(SmokeType::Right);
 		});
-	greenSmoke->SetOnClick([this]()
+	redSmoke->SetOnClick([this]()
 		{
 			AddQueueMove(SmokeType::Jump);
 		});
-	greenSmoke->SetOnClick([this]()
+	blueSmoke->SetOnClick([this]()
 		{
 			AddQueueMove(SmokeType::Crouch);
+		});
+
+	playButton->SetOnClick([this]()
+		{
+			startActions = true;
+			playButton->SetOnClick([this]()
+				{
+				});
+		});
+	resetButton->SetOnClick([this]()
+		{
+			ENGINE_LOG("Reset called");
+
+			Engine::Application::Get().ReloadCurrentScene();
 		});
 }
 
@@ -50,11 +81,11 @@ void GameManagerScript::AddQueueMove(SmokeType type)
 
 void GameManagerScript::OnWin()
 {
-	ENGINE_LOG("Win registered");
+	//ENGINE_LOG("Win registered");
 }
 void GameManagerScript::OnLose()
 {
-	ENGINE_LOG("Loss registered");
+	//ENGINE_LOG("Loss registered");
 }
 
 void GameManagerScript::OnStart()
