@@ -35,6 +35,7 @@ namespace Engine
 
         ::HideCursor();
         ::SetExitKey(KEY_NULL);
+        ::SetConfigFlags(FLAG_WINDOW_RESIZABLE);
 
         // Validamos si el SO nos dio la ventana
         if (!::IsWindowReady())
