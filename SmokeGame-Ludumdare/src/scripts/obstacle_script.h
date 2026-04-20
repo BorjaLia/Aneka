@@ -8,7 +8,7 @@ class ObstacleScript : public Engine::Script
 {
 private:
 	Engine::TriggerAreaComponent* collider;
-	Engine::EventBus eventBus;
+	Engine::EventBus* eventBus;
 	Engine::EventListenerID eventId;
 	Engine::Node* self;
 

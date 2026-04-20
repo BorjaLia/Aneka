@@ -61,11 +61,12 @@ void GameManagerScript::GetSmokeButtons()
 
 	playButton->SetOnClick([this]()
 		{
+			int size = moveQueue.size();
 			ENGINE_LOG("Play called - showing smokes");
 			QueueChangeEvent addQueueEvent(moveQueue,true);
 			eventBus->Publish(addQueueEvent);
 			
-			Engine::Application::Get().GetTimerManager().SetTimeout(moveQueue.size() * 0.3f, [this]()
+			Engine::Application::Get().GetTimerManager().SetTimeout(4.0f, [this]()
 				{
 					ENGINE_LOG("Finished showing smokes");
 					startActions = true;
@@ -148,25 +149,9 @@ void GameManagerScript::OnStart()
 {
 	eventBus = &Engine::Application::Get().GetEventBus();
 
-	listenerId = eventBus->Subscribe<FinishMoveEvent>([this](FinishMoveEvent& e)
+	listenerId2 = eventBus->Subscribe<HitPlayer>([this](HitPlayer& e)
 		{
-			ENGINE_LOG("Manager recieved finish move event");
-
-			brotherPos = e.GetPos();
-			onAir = e.OnAir();
-
-			e.handled = true;
-
-			Engine::Application::Get().GetTimerManager().SetTimeout(1.0f, [this]()
-				{
-					pendingAction = true;
-				});
-
-		});
-
-	listenerId = eventBus->Subscribe<HitPlayer>([this](HitPlayer& e)
-		{
-			switch (e.GetType())
+			switch (e.GetHitType())
 			{
 			case HitType::Death:
 				OnLose();
@@ -179,6 +164,22 @@ void GameManagerScript::OnStart()
 				break;
 			}
 		});
+
+	listenerId = eventBus->Subscribe<FinishMoveEvent>([this](FinishMoveEvent& e)
+		{
+			ENGINE_LOG("Manager recieved finish move event");
+	
+			brotherPos = e.GetPos();
+			onAir = e.OnAir();
+	
+			e.handled = true;
+	
+			Engine::Application::Get().GetTimerManager().SetTimeout(1.0f, [this]()
+				{
+					pendingAction = true;
+				});
+		});
+	
 
 	GetSmokeButtons();
 

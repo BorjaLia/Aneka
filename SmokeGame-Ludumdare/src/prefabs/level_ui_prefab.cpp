@@ -7,6 +7,7 @@
 #include "core/components/uiAnchorComponent.h"
 #include "core/components/buttonComponent.h"
 #include "core/components/scriptComponent.h"
+#include "core/components/animatedSpriteComponent.h"
 
 #include "scripts/ui_inventory_script.h"
 
@@ -117,7 +118,18 @@ void AddLevelUI(Engine::SceneBuilder& builder)
 			ENGINE_LOG("reset selected");
 		});
 
+	Engine::Texture2D smokeSheet = rm.GetTexture("res/sprites/smoke_sheet.png");
+
 	Engine::Node* powders = builder.CreateChildNode(movementInventoryNode, "Powders");
+	Engine::Node* smoke = builder.CreateChildNode(powders, "Smoke");
+	smoke->transform->SetPosition(Engine::Vector2f(1300.0f, -200.0f));
+	smoke->transform->SetScale(Engine::Vector2f(0.3f, 0.3f));
+	auto* smokeAnim = smoke->AddComponent<Engine::AnimatedSpriteComponent>(smokeSheet,Engine::Pivot::Center, Engine::Color(255, 255, 255, 255), Engine::RenderLayer::UI);
+
+	smokeAnim->AddAnimationGrid("Green", 0, 0, 4, 925, 660, 3.0f,false);
+	smokeAnim->AddAnimationGrid("Red", 0, 1, 4, 925, 660, 3.0f, false);
+	smokeAnim->AddAnimationGrid("Blue", 0, 2, 4, 925, 660, 3.0f, false);
+	smokeAnim->AddAnimationGrid("Yellow", 0, 3, 4, 925, 660, 3.0f, false);
 
 	powders->transform->SetPosition(Engine::Vector2f(-260.0f, 0.0f));
 

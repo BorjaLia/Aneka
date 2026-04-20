@@ -1,10 +1,10 @@
-#include "floor1_prefab.h"
+#include "../src/instantRes/floor1_prefab.h"
 
 #include "../src/core/components/spriteComponent.h"
 #include "../src/core/components/colliderComponent.h"
 #include "../src/core/components/scriptComponent.h"
 
-Engine::Node* AddFloor(Engine::Node* props, Engine::SceneBuilder& builder, std::string name, Engine::Texture2D tex, Engine::Vector2f pos, Engine::Vector2f size, bool hurt)
+Engine::Node* AddFloor1(Engine::Node* props, Engine::SceneBuilder& builder, std::string name, Engine::Texture2D tex, Engine::Vector2f pos, Engine::Vector2f size, bool hurt)
 {
 	Engine::Node* node = builder.CreateChildNode(props, name);
 

@@ -2,6 +2,9 @@
 
 #include "events/action_queue_event.h"
 
+#include "core/components/animatedSpriteComponent.h"
+
+
 UiPowdersScript::UiPowdersScript()
 {
 }
@@ -12,32 +15,35 @@ void UiPowdersScript::UpdateSprites()
 
 	for (auto& child : owner->GetChildren())
 	{
-		Engine::Texture2D tex;
+		if (child->name == "Smoke") continue;
 
-		if (smokes.empty()) return;
-		SmokeType currentSmoke = smokes.front();
-		smokes.pop();
+		Engine::Texture2D tex = rm->GetTexture("res/sprites/empty.png");
 
-		switch (currentSmoke)
+		if (!smokes.empty())
 		{
-		case SmokeType::None:
-			tex = rm->GetWhitePixel();
-			break;
-		case SmokeType::Left:
-			tex = rm->GetTexture("res/sprites/BlueDust.png");
-			break;
-		case SmokeType::Right:
-			tex = rm->GetTexture("res/sprites/RedDust.png");
-			break;
-		case SmokeType::Jump:
-			tex = rm->GetTexture("res/sprites/GreenDust.png");
-			break;
-		case SmokeType::Crouch:
-			tex = rm->GetTexture("res/sprites/YellowDust.png");
-			break;
-		default:
-			break;
+			SmokeType currentSmoke = smokes.front();
+			smokes.pop();
+
+			switch (currentSmoke)
+			{
+			case SmokeType::Left:
+				tex = rm->GetTexture("res/sprites/BlueDust.png");
+				break;
+			case SmokeType::Right:
+				tex = rm->GetTexture("res/sprites/RedDust.png");
+				break;
+			case SmokeType::Jump:
+				tex = rm->GetTexture("res/sprites/GreenDust.png");
+				break;
+			case SmokeType::Crouch:
+				tex = rm->GetTexture("res/sprites/YellowDust.png");
+				break;
+			case SmokeType::None:
+			default:
+				break;
+			}
 		}
+
 		if (auto* sprite = child->GetComponent<Engine::SpriteComponent>())
 		{
 			sprite->SetTexture(tex);
@@ -47,8 +53,15 @@ void UiPowdersScript::UpdateSprites()
 
 void UiPowdersScript::UpdateCampfire()
 {
-	if (smokes.empty()) return;
+	float animTime = smokeAmount;
 
+	Engine::AnimatedSpriteComponent* anim = owner->FindChild("Smoke")->GetComponent<Engine::AnimatedSpriteComponent>();
+	anim->speedMultiplier = animTime;
+	if (smokes.empty())
+	{
+		anim->texture = Engine::Application::Get().GetResourceManager()->GetTexture("res/sprites/empty.png");
+		return;
+	}
 	SmokeType currentSmoke = smokes.front();
 	smokes.pop();
 
@@ -57,12 +70,16 @@ void UiPowdersScript::UpdateCampfire()
 	case SmokeType::None:
 		break;
 	case SmokeType::Left:
+		anim->Play("Blue");
 		break;
 	case SmokeType::Right:
+		anim->Play("Red");
 		break;
 	case SmokeType::Jump:
+		anim->Play("Green");
 		break;
 	case SmokeType::Crouch:
+		anim->Play("Yellow");
 		break;
 	default:
 		break;
@@ -81,13 +98,18 @@ void UiPowdersScript::OnStart()
 
 	listenerId = eventBus->Subscribe<QueueChangeEvent>([this](QueueChangeEvent& e)
 		{
-			this->smokes = e.GetSmokeQueue();
-			e.handled = true;
-			UpdateSprites();
 			if (e.GetDone())
 			{
-
+				this->smokes = e.GetSmokeQueue();
+				smokeAmount = this->smokes.size();
+				UpdateCampfire();
 			}
+			else
+			{
+				this->smokes = e.GetSmokeQueue();
+				UpdateSprites();
+			}
+			e.handled = true;
 		});
 }
 

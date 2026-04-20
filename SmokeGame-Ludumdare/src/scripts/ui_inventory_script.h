@@ -21,6 +21,8 @@ private:
 
 	float rotation;
 
+	int smokeAmount = 0;
+
 	bool playedHoveredSound = false;
 
 	void UpdateSprites();

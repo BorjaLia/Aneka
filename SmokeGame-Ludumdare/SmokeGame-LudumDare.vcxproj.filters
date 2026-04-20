@@ -71,11 +71,20 @@
       <Filter>Source\Event</Filter>
     </ClCompile>
     <ClCompile Include="src\scripts\props_setter.cpp" />
-    <ClCompile Include="src\prefabs\floor1_prefab.cpp">
-      <Filter>Source\Prefab</Filter>
-    </ClCompile>
     <ClCompile Include="src\scripts\props_setter.cpp">
       <Filter>Source\Prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="src\instantRes\floor1_prefab.cpp">
+      <Filter>Source\InstantRes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\instantRes\floor3_prefab.cpp">
+      <Filter>Source\InstantRes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\instantRes\floor4_prefab.cpp">
+      <Filter>Source\InstantRes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\instantRes\floor2_prefab.cpp">
+      <Filter>Source\InstantRes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -179,8 +188,17 @@
     </ClInclude>
     <ClInclude Include="src\scenes\credits.h" />
     <ClInclude Include="src\scripts\props_setter.h" />
-    <ClInclude Include="src\prefabs\floor1_prefab.h">
-      <Filter>Source\Prefab</Filter>
+    <ClInclude Include="src\instantRes\floor1_prefab.h">
+      <Filter>Source\InstantRes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\instantRes\floor3_prefab.h">
+      <Filter>Source\InstantRes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\instantRes\floor4_prefab.h">
+      <Filter>Source\InstantRes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\instantRes\floor2_prefab.h">
+      <Filter>Source\InstantRes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -201,6 +219,9 @@
     </Filter>
     <Filter Include="Source\Game">
       <UniqueIdentifier>{cd2703f5-6e7b-4137-8dbe-d1b251c1e576}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\InstantRes">
+      <UniqueIdentifier>{7e6d7ec7-d689-4c43-acba-eab397f1ccac}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
