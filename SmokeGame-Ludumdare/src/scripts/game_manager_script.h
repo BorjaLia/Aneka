@@ -21,6 +21,7 @@ private:
 	
 	Engine::EventBus* eventBus;
 	Engine::EventListenerID listenerId;
+	Engine::EventListenerID listenerId2;
 
 	Engine::ButtonComponent* yellowSmoke;
 	Engine::ButtonComponent* greenSmoke;

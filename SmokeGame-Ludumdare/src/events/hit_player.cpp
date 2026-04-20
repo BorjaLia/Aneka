@@ -1,6 +1,6 @@
 #include "events/hit_player.h"
 
-HitPlayer::HitPlayer(Engine::Node* enemy,HitType type): enemy(enemy),type(type)
+HitPlayer::HitPlayer(Engine::Node* enemy, HitType type): type(type)
 {
 }
 
@@ -9,7 +9,7 @@ Engine::Node* HitPlayer::GetEnemy()
 	return enemy;
 }
 
-HitType HitPlayer::GetType()
+HitType HitPlayer::GetHitType()
 {
 	return type;
 }

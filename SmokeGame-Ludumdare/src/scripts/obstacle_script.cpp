@@ -8,15 +8,15 @@ void ObstacleScript::OnStart()
 {
 	collider = owner->GetComponent<Engine::TriggerAreaComponent>();
 	self = owner->GetParent();
-	eventBus = Engine::Application::Get().GetEventBus();
+	eventBus = &Engine::Application::Get().GetEventBus();
 
 	collider->ConnectTriggerEnter([this](Engine::Node* other)
 		{
 			if (other->name == "Brother")
 			{
-				HitPlayer hitPlayer(owner,HitType::Death);
+				HitPlayer hitPlayer(owner, HitType::Death);
 
-				eventBus.Publish(hitPlayer);
+				eventBus->Publish(hitPlayer);
 				owner->GetComponent<Engine::TriggerAreaComponent>()->SetActive(false);
 				ENGINE_LOG("Hit: " << owner->name);
 			}
