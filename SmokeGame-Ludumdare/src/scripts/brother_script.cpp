@@ -4,7 +4,7 @@
 void BrotherScript::Idle()
 {
 	//animation->SetFlipX(false);
-
+	if (height != 0) return;
 	animation->Play("Idle");
 	ENGINE_LOG("Brother is Idle");
 	animation->speedMultiplier = 1.0f;
@@ -140,6 +140,7 @@ void BrotherScript::DoAction(Engine::Node* target, MoveType move)
 		ENGINE_WARN("NO TARGET! - Brother Script");
 	}
 
+	owner->GetComponent<Engine::ColliderComponent>()->SetActive(height == 0);
 
 	switch (move)
 	{
