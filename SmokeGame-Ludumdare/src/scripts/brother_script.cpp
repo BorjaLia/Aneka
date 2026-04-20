@@ -72,6 +72,7 @@ void BrotherScript::Fall()
 
 void BrotherScript::Death()
 {
+	alive = false;
 	animation->SetActive(false);
 	Engine::Node* deathSprite = owner->FindChild("DeathSprite");
 	deathSprite->transform->SetPosition(owner->transform->GetPosition());
@@ -110,7 +111,7 @@ void BrotherScript::OnStart()
 
 void BrotherScript::OnUpdate(float)
 {
-	if (!moving) return;
+	if (!moving || !alive) return;
 	if ((target->GetGlobalPosition() - owner->transform->GetGlobalPosition()).MagnitudeSquared() <= 5.0f)
 	{
 		Idle();

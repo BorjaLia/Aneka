@@ -54,6 +54,7 @@ void UiPowdersScript::UpdateSprites()
 void UiPowdersScript::UpdateCampfire()
 {
 	float animTime = smokeAmount;
+	float timePerSmoke = 3.0f / smokeAmount;
 
 	Engine::AnimatedSpriteComponent* anim = owner->FindChild("Smoke")->GetComponent<Engine::AnimatedSpriteComponent>();
 	anim->speedMultiplier = animTime;
@@ -85,7 +86,7 @@ void UiPowdersScript::UpdateCampfire()
 		break;
 	}
 
-	Engine::Application::Get().GetTimerManager().SetTimeout(1.0f, [this]()
+	Engine::Application::Get().GetTimerManager().SetTimeout(timePerSmoke, [this]()
 		{
 			UpdateCampfire();
 		});

@@ -61,7 +61,6 @@ void GameManagerScript::GetSmokeButtons()
 
 	playButton->SetOnClick([this]()
 		{
-			int size = moveQueue.size();
 			ENGINE_LOG("Play called - showing smokes");
 			QueueChangeEvent addQueueEvent(moveQueue,true);
 			eventBus->Publish(addQueueEvent);

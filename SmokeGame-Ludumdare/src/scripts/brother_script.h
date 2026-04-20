@@ -28,6 +28,8 @@ private:
 	float baseSpeed = 250.0f;
 	float speed = baseSpeed;
 
+	bool alive = true;
+
 	bool moving = false;
 	int height = 0;
 
