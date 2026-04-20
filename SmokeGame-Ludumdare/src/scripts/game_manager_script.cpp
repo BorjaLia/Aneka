@@ -169,7 +169,7 @@ void GameManagerScript::OnStart()
 			switch (e.GetType())
 			{
 			case HitType::Death:
-				//OnLose();
+				OnLose();
 				break;
 
 			case HitType::Win:
@@ -202,8 +202,14 @@ void GameManagerScript::OnUpdate(float)
 
 	if (pendingAction)
 	{
-		if (onAir)
+		/*if (onAir)
 		{
+			SmokeType type = moveQueue.front();
+			if (type == SmokeType::Left || type == SmokeType::Right)
+			{
+				moveQueue.pop();
+			}
+
 			Engine::Node* gridNodeTowards;
 
 			Engine::Vector2f closestCell = GetClosestNode(brotherPos);
@@ -226,7 +232,7 @@ void GameManagerScript::OnUpdate(float)
 			}
 			pendingAction = false;
 			return;
-		}
+		}*/
 
 		if (moveQueue.empty())
 		{
@@ -236,7 +242,6 @@ void GameManagerScript::OnUpdate(float)
 		pendingAction = false;
 
 		SmokeType type = moveQueue.front();
-		moveQueue.pop();
 
 		MoveType moveType;
 
@@ -244,6 +249,26 @@ void GameManagerScript::OnUpdate(float)
 
 		Engine::Vector2f closestCell = GetClosestNode(brotherPos);
 		Engine::Vector2f nextCell = closestCell;
+
+		if (!(onAir && (type == SmokeType::Left || type == SmokeType::Right)))
+		{
+			moveQueue.pop();
+		}
+		else if(onAir)
+		{
+			nextCell.y--;
+			switch (type)
+			{
+			case SmokeType::Left:
+				nextCell.x--;
+				break;
+
+			case SmokeType::Right:
+				nextCell.x++;
+				break;
+			}
+		}
+
 		switch (type)
 		{
 		case SmokeType::Left:
@@ -258,7 +283,7 @@ void GameManagerScript::OnUpdate(float)
 
 		case SmokeType::Jump:
 			moveType = MoveType::Jump;
-			nextCell.y++;
+			if(!onAir) nextCell.y++;
 			break;
 		case SmokeType::Crouch:
 			moveType = MoveType::Crouch;
@@ -277,6 +302,7 @@ void GameManagerScript::OnUpdate(float)
 		}
 		else
 		{
+			ENGINE_LOG("[ITER NOT FOUND]");
 			Engine::Application::Get().GetTimerManager().SetTimeout(0.5f, [this]()
 				{
 					pendingAction = true;
