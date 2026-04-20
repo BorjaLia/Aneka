@@ -16,7 +16,7 @@ Engine::Node* AddObstacle(Engine::Node* props, Engine::SceneBuilder& builder, st
 
 	Engine::Node* node = builder.CreateChildNode(props, name);
 
-	node->AddComponent<Engine::ScriptComponent>(new ObstacleScript);
+	auto * ob = node->AddComponent<Engine::ScriptComponent>(new ObstacleScript);
 
 	node->transform->SetPosition(pos);
 	Engine::SpriteComponent* sprite = node->AddComponent<Engine::SpriteComponent>(tex, Engine::Pivot::Center);
@@ -24,6 +24,7 @@ Engine::Node* AddObstacle(Engine::Node* props, Engine::SceneBuilder& builder, st
 	sprite->SetTargetSize(size);
 
 	node->AddComponent<Engine::TriggerAreaComponent>(Engine::RectangleShape{ {120.0f, 120.0f} }, Engine::Vector2f(0.0f), false);
+
 
 	return node;
 }

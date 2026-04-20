@@ -14,7 +14,16 @@ void ObstacleScript::OnStart()
 		{
 			if (other->name == "Brother")
 			{
-				HitPlayer hitPlayer(owner, HitType::Death);
+				HitType type;
+				if (hurt)
+				{
+					type = HitType::Death;
+				}
+				else
+				{
+					type = HitType::Win;
+				}
+				HitPlayer hitPlayer(owner, type);
 
 				eventBus->Publish(hitPlayer);
 				owner->GetComponent<Engine::TriggerAreaComponent>()->SetActive(false);

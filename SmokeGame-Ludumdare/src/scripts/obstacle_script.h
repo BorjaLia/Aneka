@@ -12,9 +12,9 @@ private:
 	Engine::EventListenerID eventId;
 	Engine::Node* self;
 
-	bool hurt = false;
 
 public:
+	bool hurt = false;
 	void OnStart() override;
 	void OnUpdate(float) override;
 	void OnDestroy() override;

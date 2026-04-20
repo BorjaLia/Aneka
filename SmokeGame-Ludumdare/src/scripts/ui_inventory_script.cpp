@@ -53,16 +53,18 @@ void UiPowdersScript::UpdateSprites()
 
 void UiPowdersScript::UpdateCampfire()
 {
-	float animTime = smokeAmount;
-	float timePerSmoke = 3.0f / smokeAmount;
-
 	Engine::AnimatedSpriteComponent* anim = owner->FindChild("Smoke")->GetComponent<Engine::AnimatedSpriteComponent>();
-	anim->speedMultiplier = animTime;
+
 	if (smokes.empty())
 	{
 		anim->texture = Engine::Application::Get().GetResourceManager()->GetTexture("res/sprites/empty.png");
 		return;
 	}
+
+	float timePerSmoke = 3.0f / smokeAmount;
+
+	anim->speedMultiplier = 3.0f * timePerSmoke * smokeAmount;
+
 	SmokeType currentSmoke = smokes.front();
 	smokes.pop();
 
