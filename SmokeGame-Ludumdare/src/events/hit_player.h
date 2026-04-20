@@ -17,7 +17,7 @@ private:
 public:
 	HitPlayer(Engine::Node* enemy, HitType type);
 	Engine::Node* GetEnemy();
-	HitType GetType();
+	HitType GetHitType();
 
 	const char* GetName() const override;
 };
