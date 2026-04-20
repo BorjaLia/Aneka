@@ -33,6 +33,8 @@ private:
 	bool moving = false;
 	int height = 0;
 
+	Engine::Vector2f deathPos;
+
 	MoveType lastMove = MoveType::Idle;
 	State state = State::Idle;
 

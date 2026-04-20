@@ -80,13 +80,19 @@ void BrotherScript::Death()
 	animation->Play("Death");
 	ENGINE_LOG("Brother is Dead :(");
 
-	animation->speedMultiplier = 1.0f;
 	alive = false;
-	Engine::Application::Get().GetTimerManager().SetTimeout(0.6f, [this]()
+	this->speed = 0;
+	animation->speedMultiplier = 1.0f;
+
+	deathPos = this->owner->transform->GetPosition();
+	Engine::Application::Get().GetTimerManager().SetTimeout(0.7f, [this]()
 		{
-			Engine::Node* heaven = Engine::Application::Get().GetSceneBuilder().CreateChildNode(this->owner, "Heaven");
-			heaven->transform->SetPosition(Engine::Vector2f(0.0f, 100.0f));
-			this->speed = 5.0f;
+			this->owner->transform->SetPosition(deathPos);
+			//ENGINE_LOG(this->owner->transform->GetPosition());
+			Engine::Node* heaven = Engine::Application::Get().GetSceneBuilder().CreateNode("Heaven");
+			heaven->transform->SetPosition(deathPos + Engine::Vector2f(0.0f, 500.0f));
+			this->speed = 2.5f;
+			ENGINE_LOG(heaven->transform->GetPosition());
 			this->owner->GetComponent<Engine::FollowComponent>()->SetTarget(heaven);
 		});
 }
