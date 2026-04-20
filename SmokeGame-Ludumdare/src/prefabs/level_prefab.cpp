@@ -28,7 +28,7 @@ void StartLevel(Engine::SceneBuilder& builder)
 
     Engine::Node* camNode = builder.CreateNode("MainView");
 
-    Engine::CameraComponent* cam = camNode->AddComponent<Engine::CameraComponent>(app.GetInput());
+    Engine::CameraComponent* cam = camNode->AddComponent<Engine::CameraComponent>();
 
     Engine::Vector2f center = app.GetWindow()->GetSize();
     camNode->transform->SetPosition(center/2.0f);
