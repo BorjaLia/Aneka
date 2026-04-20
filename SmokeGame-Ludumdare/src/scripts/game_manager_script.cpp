@@ -61,11 +61,12 @@ void GameManagerScript::GetSmokeButtons()
 
 	playButton->SetOnClick([this]()
 		{
+			int size = moveQueue.size();
 			ENGINE_LOG("Play called - showing smokes");
 			QueueChangeEvent addQueueEvent(moveQueue,true);
 			eventBus->Publish(addQueueEvent);
 			
-			Engine::Application::Get().GetTimerManager().SetTimeout(moveQueue.size() * 0.3f, [this]()
+			Engine::Application::Get().GetTimerManager().SetTimeout(4.0f, [this]()
 				{
 					ENGINE_LOG("Finished showing smokes");
 					startActions = true;
@@ -169,7 +170,7 @@ void GameManagerScript::OnStart()
 			switch (e.GetType())
 			{
 			case HitType::Death:
-				//OnLose();
+				OnLose();
 				break;
 
 			case HitType::Win:
