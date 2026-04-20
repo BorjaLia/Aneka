@@ -16,7 +16,7 @@ Engine::Node* AddObstacle(Engine::Node* props, Engine::SceneBuilder& builder, st
 
 	Engine::Node* node = builder.CreateChildNode(props, name);
 
-	auto * ob = node->AddComponent<Engine::ScriptComponent>(new ObstacleScript);
+	auto * ob = node->AddComponent<Engine::ScriptComponent>(new ObstacleScript(hurt));
 
 	node->transform->SetPosition(pos);
 	Engine::SpriteComponent* sprite = node->AddComponent<Engine::SpriteComponent>(tex, Engine::Pivot::Center);

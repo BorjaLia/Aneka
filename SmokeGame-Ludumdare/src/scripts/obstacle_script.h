@@ -13,8 +13,12 @@ private:
 	Engine::Node* self;
 
 
-public:
 	bool hurt = false;
+public:
+	ObstacleScript(bool hurt) :hurt(hurt) {}
+
+	bool isHurt() { return hurt; }
+
 	void OnStart() override;
 	void OnUpdate(float) override;
 	void OnDestroy() override;

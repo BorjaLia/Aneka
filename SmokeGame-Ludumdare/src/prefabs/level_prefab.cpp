@@ -68,7 +68,7 @@ void StartLevel(Engine::SceneBuilder& builder)
 
    
     AddObstacle(props, builder, "o1", rm.GetTexture("res/sprites/cactus.png"), Engine::Vector2f(0.f, 0.f), scaler, true);
-    AddObstacle(props, builder, "o2", rm.GetTexture("res/sprites/cactus.png"), Engine::Vector2f(0.f, 0.f), scaler, true);
+    AddObstacle(props, builder, "o2", rm.GetTexture("res/sprites/cactus.png"), Engine::Vector2f(0.f, 0.f), scaler, false);
     AddObstacle(props, builder, "o3", rm.GetTexture("res/sprites/cactus.png"), Engine::Vector2f(0.f, 0.f), scaler, true);
 
     //AddFloor2(props, builder, "f2", rm.GetTexture("res/sprites/floor2.png"), Engine::Vector2f(0.f, 0.f), Engine::Vector2f(132.f,125.f ), true);

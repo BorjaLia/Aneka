@@ -138,7 +138,7 @@ void GameManagerScript::OnLose()
 	gameEnded = true;
 	MoveEvent moveEvent(nullptr, MoveType::Death);
 	Engine::Application::Get().GetEventBus().Publish(moveEvent);
-	Engine::Application::Get().GetTimerManager().SetTimeout(2.5f, [this]()
+	Engine::Application::Get().GetTimerManager().SetTimeout(3.5f, [this]()
 		{
 			Engine::Application::Get().ReloadCurrentScene();
 		});

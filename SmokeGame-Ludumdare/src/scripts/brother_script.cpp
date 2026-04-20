@@ -73,17 +73,19 @@ void BrotherScript::Fall()
 void BrotherScript::Death()
 {
 	alive = false;
-	animation->SetActive(false);
-	Engine::Node* deathSprite = owner->FindChild("DeathSprite");
-	deathSprite->transform->SetPosition(owner->transform->GetPosition());
-	animation = deathSprite->GetComponent<Engine::AnimatedSpriteComponent>();
+	//animation->SetActive(false);
+	//Engine::Node* deathSprite = owner->FindChild("DeathSprite");
+	//deathSprite->transform->SetPosition(owner->transform->GetPosition());
+	//animation = deathSprite->GetComponent<Engine::AnimatedSpriteComponent>();
 	animation->Play("Death");
 	ENGINE_LOG("Brother is Dead :(");
+
 	animation->speedMultiplier = 1.0f;
-	Engine::Application::Get().GetTimerManager().SetTimeout(0.3f, [this]()
+	alive = false;
+	Engine::Application::Get().GetTimerManager().SetTimeout(0.6f, [this]()
 		{
 			Engine::Node* heaven = Engine::Application::Get().GetSceneBuilder().CreateChildNode(this->owner, "Heaven");
-			heaven->transform->SetPosition(Engine::Vector2f(20.0f, 100.0f));
+			heaven->transform->SetPosition(Engine::Vector2f(0.0f, 100.0f));
 			this->speed = 5.0f;
 			this->owner->GetComponent<Engine::FollowComponent>()->SetTarget(heaven);
 		});
@@ -141,6 +143,13 @@ void BrotherScript::DoAction(Engine::Node* target, MoveType move)
 	}
 
 	owner->GetComponent<Engine::ColliderComponent>()->SetActive(height == 0);
+	if (target)
+	{
+		if (target->GetGlobalPosition().y < this->trs->GetGlobalPosition().y - 20.0f)
+		{
+			height--;
+		}
+	}
 
 	switch (move)
 	{
